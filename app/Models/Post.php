@@ -9,7 +9,7 @@ use App\Models\Language;
 
 class Post extends Model {
 
-    protected $fillable = ['slug', 'image', 'thumbnail', 'status'];
+    protected $fillable = ['slug', 'image', 'thumbnail', 'status','blog_id'];
 
     use HasFactory;
 
@@ -21,12 +21,15 @@ class Post extends Model {
         return $this->morphMany(Translate::class, 'translateable');
     }
 
-    public function currentTranslate() {
-        $lang = app()->getLocale();
-        $lang_id = Language::where('code', $lang)->pluck('id')->first();
-        if ($lang_id) {
-            return $this->morphMany(Translate::class, 'translateable')->where('language_id', $lang_id);
-        }
+     
+    public function currentTranslate()
+    {
+        $lang    = app()->getLocale();    
+        $lang_id = Language::where('code',$lang)->pluck('id')->first();        
+       
+        if($lang_id){
+            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
+        }        
     }
 
 }

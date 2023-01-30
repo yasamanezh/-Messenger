@@ -9,12 +9,12 @@ use App\Models\Translate;
 
 class Blog extends Model
 {
-    protected $fillable = ['slug','status' ];
+    protected $fillable = ['slug','status','blog_id' ];
     
     use HasFactory;
     
     public function posts(){       
-        return $this->belongsToMany(Post::class);
+        return $this->hasMany(Post::class);
     }
     
      public function translate()
@@ -30,7 +30,7 @@ class Blog extends Model
         $lang_id = Language::where('code',$lang)->pluck('id')->first();        
        
         if($lang_id){
-            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id);            
+            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
         }        
     }
   

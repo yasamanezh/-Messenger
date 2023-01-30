@@ -23,10 +23,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    const ROLE_ADMIN = 'admin';
+    const ROLE_EMPLOYEE = 'Employee';
+    const ROLE_USER = 'user';
+
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'role',
+        'status'
     ];
 
     /**
@@ -58,4 +65,46 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+     public function getPermission()
+    {
+        return Permission::with('roles')->get();
+    }
+
+    public function isAdmin()
+    {
+        if ($this->role !== self::ROLE_ADMIN) {
+            return false;
+        }
+        return true;
+    }
+
+    public function isAdminHamkar()
+    {
+        if ($this->role == 'user') {
+            return false;
+        }
+            return true;
+
+    }
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRoles($role)
+    {
+
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+        return !!$role->intersect($this->roles)->count();
+
+    }
+    
+      public function AdminPanel()
+    {
+        return $this->role === self::ROLE_ADMIN || $this->role === self::ROLE_EMPLOYEE ? true : false;
+    }
 }

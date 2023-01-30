@@ -12,4 +12,8 @@ interface IBase {
     public function update($id,$data,$translate);
     public function getLanguage();
     public function find($id);
+    public function getCurrentTitle($id);
+    public function get();
+     public function first();
+    
 }

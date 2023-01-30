@@ -11,20 +11,34 @@ class Menu extends Model {
 
     use HasFactory;
 
-    protected $fillable = ['slug', 'parent', 'type'];
+    protected $fillable = ['slug', 'parent', 'type','sort','status'];
 
-    public function translate() {
+     public function translate()
+    {
         return $this->morphMany(Translate::class, 'translateable');
     }
-
-    public function currentTranslate() {
-        $lang = app()->getLocale();
-        $lang_id = Language::where('code', $lang)->pluck('id')->first();
-
-
-        if ($lang_id) {
-            return $this->morphMany(Translate::class, 'translateable')->where('language_id', $lang_id);
-        }
+    
+   
+    
+    public function currentTranslate()
+    {
+        $lang    = app()->getLocale();
+        
+        $lang_id = Language::where('code',$lang)->pluck('id')->first();        
+       
+        if($lang_id){
+            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
+        }        
     }
+    public function customTranslate($lang)
+    {
+
+        $lang_id = Language::where('code',$lang)->pluck('id')->first();        
+       
+        if($lang_id){
+            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
+        }        
+    }
+    
 
 }

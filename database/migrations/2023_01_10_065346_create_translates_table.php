@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->integer('language_id')->nullable();
+            $table->json('meta')->nullable();
             $table->morphs('translateable');
             $table->timestamps();
         });

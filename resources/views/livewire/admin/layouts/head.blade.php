@@ -17,13 +17,15 @@
     <link href="{{asset('admin/css/skins.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/dark-style.css')}}" rel="stylesheet">
     <link href="{{asset('admin/css/colors/default.css')}}" rel="stylesheet">
+    
+    <!-- Internal Summernote css-->
+    <link rel="stylesheet" href="{{asset('admin/plugins/summernote/summernote-bs4.css')}}">
+
 
     <!-- Color css-->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{{asset('admin/css/colors/color.css')}}">
 
-    <!-- Select2 css -->
-    <link href="{{asset('admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-
+  
     <!-- Internal Quill css-->
    
     <style>
@@ -40,5 +42,36 @@
 
     <livewire:styles/>
     <!-- Scripts -->
-    <script src="{{asset('js/app.js')}}" defer></script>
+    
+   <script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>
+     <!-- Internal Summernote js-->
+    <script src="{{asset('admin/plugins/summernote/summernote-bs4.js')}}"></script>
+
+    <script>
+       // Define function to open filemanager window
+        var lfm = function (options, cb) {
+            var route_prefix = (options && options.prefix) ? options.prefix : '/laravel-filemanager';
+            window.open(route_prefix + '?type=' + options.type || 'image', 'FileManager', 'width=900,height=600');
+            window.SetUrl = cb;
+        };
+
+        // Define LFM summernote button
+        var LFMButton = function (context) {
+            var ui = $.summernote.ui;
+            var button = ui.button({
+                contents: '<i class="note-icon-picture"></i> ',
+                tooltip: 'Insert image with filemanager',
+                click: function () {
+
+                    lfm({type: 'image', prefix: '/laravel-filemanager'}, function (lfmItems, path) {
+                        lfmItems.forEach(function (lfmItem) {
+                            context.invoke('insertImage', lfmItem.url);
+                        });
+                    });
+
+                }
+            });
+            return button.render();
+        };
+    </script>
 </div>

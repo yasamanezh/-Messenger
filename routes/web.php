@@ -2,13 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
- Route::get('/admin/blogs', App\Http\Livewire\Admin\Blog\Index::class)->name('admin.blogs');
- Route::get('/admin/blog/add', App\Http\Livewire\Admin\Blog\Add::class)->name('admin.blog.add');
- Route::get('/admin/blog/edit/{id}', App\Http\Livewire\Admin\Blog\Edit::class)->name('admin.blog.edit');
+Route::get('/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('front.home');
 
- 
- 
- Route::middleware([
+
+Route::middleware(['App\Http\Middleware\setfactor'])->group(function () {
+
+    Route::get('{language}/', [\App\Http\Controllers\Front\HomeController::class, 'index'])->name('front.home.language');
+});
+
+Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
@@ -17,3 +19,4 @@ use Illuminate\Support\Facades\Route;
         return view('dashboard');
     })->name('dashboard');
 });
+

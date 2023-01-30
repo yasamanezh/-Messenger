@@ -1,6 +1,5 @@
 <div>
 
-   <script src="{{asset('admin/plugins/jquery/jquery.min.js')}}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
 
     <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>

@@ -6,8 +6,9 @@ use App\Repositories\Contract\IBase;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Language;
 use App\Models\Translate;
+use App\Models\Translation;
 use Illuminate\Support\Facades\DB;
-use App\Models\Blog;
+
 
 use Exception;
 
@@ -90,15 +91,26 @@ class BaseRepository implements IBase {
             $item = $this->getModelClass()->create($data);
             $item->translate()->createMany($translate);
         DB::commit();
+        return $item->id;
     }
 
     public function getLanguage() {
-         return Language::where('status',1)->get();
+         $langs=Translation::with('language')->get();
+         return $langs;
     }
 
     public function find($id) {
         
        return $this->getModelClass()->with('translate')->findOrFail($id);
+    }
+       public function first() {
+        
+       return $this->getModelClass()->with('translate')->first();
+    }
+     
+   public function getCurrentTitle($id) {
+      
+       return $this->find($id)->currentTranslate()->title;
     }
    
     public function update($id,$data, $translate) {
@@ -116,8 +128,13 @@ class BaseRepository implements IBase {
             
 
         }
+       
             
         
+    }
+    
+    public function get() {
+        return $this->getModelClass()->get();
     }
 
 }
