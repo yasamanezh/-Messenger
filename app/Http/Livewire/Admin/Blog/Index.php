@@ -29,6 +29,7 @@ class Index extends Component {
              abort(403);
             
         } 
+        
     }
 
     public function getInterface() {

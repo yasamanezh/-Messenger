@@ -4,78 +4,39 @@ namespace App\Http\Livewire\Admin\Module\Featur\Option;
 
 use Livewire\Component;
 use App\Repositories\Contract\IModuleOption;
-use App\Repositories\Contract\ILog;
-
+use App\Traits\Admin\CreateSettinges;
 
 class Add extends Component {
-
-     public $description, $title,$sort,$icon,$languages;
-    public $typePage  = 'feature  module option ';
     
+    use CreateSettinges;
 
-   protected $rules = [ 
-        "sort"           => "required|integer",
-        "icon"           => "required|string",
-        "description"    => "required|array|min:1",
-        "description.*"  => "required|string|min:3",
-        "title"          => "required|array|min:1",
-        "title.*"        => "required|string|min:3",
+    public $short_content, $title, $sort, $icon, $languages;
+    public $typePage = 'Feature Keys ';
+    public $Translateparams = ['title', 'short_content'];
+    public $IndexRoute = 'admin.feature.options';
+    public $gate = 'design';
+    
+    protected $rules = [
+        "sort" => "required|integer",
+        "icon" => "required|string",
+        "short_content" => "nullable",
+        "short_content.en" => "nullable|string|min:3",
+        "title" => "required|array|min:1",
+        "title.en" => "required|string|min:3",
     ];
-    
-    public function createLog($data) {
-        
-        return  app()->make(ILog::class)->create($data);
-    }
-       
-     public function getItems() {
+
+    public function getItems() {
         return [
-            'type'   => 'feature',
-            'sort'   => $this->sort,
-            'image'   => $this->icon,
-           ];   
+            'type' => 'feature',
+            'sort' => $this->sort,
+            'image' => $this->icon,
+            'status'=>1
+        ];
     }
-    
+
     public function mount() {
-        
-        $this->languages = $this->getInterface()->getLanguage();
-     
-    }
- 
-    public function getTranslate() {
-        
-        $translations =[];
-        foreach ($this->languages as $lan) {
-           
-            $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
-            $this->description[$lan->language->code] ? $content = $this->description[$lan->language->code] : $content = '';
 
-            $translations[] = [
-                'title'            => $title,
-                'short_content'    => $content,
-                'language_id'      => $lan->language->id
-            ];
-        }
-        return $translations;
-        
-    }
-    
-    public function saveInfo() {
-        
-        $this->validate();
-        $translates  = $this->getTranslate();
-        $items       = $this->getItems();
-        
-        $this->getInterface()->create($items,$translates);
- 
-        
-        $this->createLog([
-           'user_id'     => auth()->user()->id, 
-           'actionType'  => 'create '. $this->typePage, 
-           'url'         =>$this->typePage , 
-        ]);
-
-       return (redirect(route('admin.feature.options')))->with('sucsess', 'sucsess');
-       
+         $this->starterDate($this->Translateparams);
     }
 
     public function getInterface() {

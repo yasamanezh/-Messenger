@@ -9,7 +9,7 @@ use App\Models\{ModuleOption,Attach};
 
 class Module extends Model
 {
-    protected $fillable=['file1','fille2','type','meta'];
+    protected $fillable=['file1','fille2','type','meta','more_link'];
     
     use HasFactory;
 
@@ -32,8 +32,16 @@ class Module extends Model
             return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
         }        
     }
-    
-        public function attach() {
+     public function customTranslate($lang)
+    {
+
+        $lang_id = Language::where('code',$lang)->pluck('id')->first();        
+       
+        if($lang_id){
+            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
+        }        
+    }
+    public function attach() {
         return $this->morphMany(Attach::class, 'attacheable');
     }
 }

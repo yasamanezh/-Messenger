@@ -12,5 +12,5 @@
     <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/style.css')}}">
     <title>Pakap - App & SaaS Software Landing Page HTML Template</title>
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="{{asset('front/ltr/assets/img/favicon.png')}}">
 </div>

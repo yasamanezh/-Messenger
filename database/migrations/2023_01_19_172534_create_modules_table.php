@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('file1')->nullable();
             $table->string('file2')->nullable();
+            $table->string('more_link')->nullable();
             $table->enum('type',['download','top_page','video','about','feature','screenshot','client','pack','blog']);
             $table->json('meta')->nullable();
             $table->timestamps();

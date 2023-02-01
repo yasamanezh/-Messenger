@@ -4,24 +4,42 @@ namespace App\Http\Livewire\Admin\Module\Counter;
 
 use Livewire\Component;
 use App\Repositories\Contract\IModuleOption;
-use App\Repositories\Contract\ILog;
+use App\Traits\Admin\UpdateSettinges;
 
 class Edit extends Component {
 
-    public $description, $title, $sort, $icon, $languages, $option_id;
-    public $typePage = 'counter module ';
+    use UpdateSettinges;
+
+    public $short_content, $title, $sort, $icon, $languages, $module_id;
+
+    public $typePage         = 'Counter Module';
+    public $Translateparams  =['title','short_content'];
+    public $IndexRoute       = 'admin.module.counters';
+    public $gate             ='design';
+    
     protected $rules = [
         "sort" => "required|integer",
         "icon" => "required|string",
-        "description" => "required|array|min:1",
-        "description.*" => "required|string|min:3",
+        "short_content" => "required|array|min:1",
+        "short_content.en" => "required|string|min:3",
         "title" => "required|array|min:1",
-        "title.*" => "required|string|min:3",
+        "title.en" => "required|string|min:3",
     ];
 
-    public function createLog($data) {
+    public function mount($id) {
+        $data = $this->getInterface()->find($id);
+        $this->starterDate($data, $this->Translateparams);
+        if ($data) { 
+            $this->module_id = $id;
+            $this->sort = $data->sort;
+            $this->icon = $data->image;
+        }
+       
+    }
 
-        return app()->make(ILog::class)->create($data);
+    public function getInterface() {
+        
+        return app()->make(IModuleOption::class);
     }
 
     public function getItems() {
@@ -30,70 +48,6 @@ class Edit extends Component {
             'sort' => $this->sort,
             'image' => $this->icon,
         ];
-    }
-
-    public function mount($id) {
-
-        $data = $this->getInterface()->find($id);
-
-        $this->languages = $this->getInterface()->getLanguage();
-        foreach ($this->languages as $value) {
-            $this->title[$value->language->code] = '';
-            $this->description[$value->language->code] = '';
-        }
-        if ($data) {
-            $this->option_id = $id;
-            $this->sort = $data->sort;
-            $this->icon = $data->image;
-            foreach ($this->languages as $value) {
-                $code = $data->translate()->where('language_id', $value->id)->first();
-                if ($code) {
-
-                    $this->title[$value->language->code] = $code->title;
-                    $this->description[$value->language->code] = $code->short_content;
-                }
-            }
-        }
-    }
-
-    public function getTranslate() {
-
-        $translations = [];
-        foreach ($this->languages as $lan) {
-
-            $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
-            $this->description[$lan->language->code] ? $content = $this->description[$lan->language->code] : $content = '';
-
-            $translations[] = [
-                'title' => $title,
-                'short_content' => $content,
-                'language_id' => $lan->language->id
-            ];
-        }
-        return $translations;
-    }
-
-    public function saveInfo() {
-
-        $this->validate();
-        $translates = $this->getTranslate();
-        $items = $this->getItems();
-
-        $this->getInterface()->update($this->option_id, $items, $translates);
-
-
-        $this->createLog([
-            'user_id' => auth()->user()->id,
-            'actionType' => 'create ' . $this->typePage,
-            'url' => $this->typePage,
-        ]);
-
-        return (redirect(route('admin.module.counters')))->with('sucsess', 'sucsess');
-    }
-
-    public function getInterface() {
-
-        return app()->make(IModuleOption::class);
     }
 
     public function render() {

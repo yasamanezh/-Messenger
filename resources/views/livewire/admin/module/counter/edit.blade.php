@@ -59,14 +59,14 @@
                                         <div  wire:ignore.self class="tab-pane fade show active" id="general" role="tabpanel">
                                             
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> sort:</label>
+                                                <label class="col-md-3 form-label"> sort: <span class="tx-danger">*</span> </label>
                                                 <div class="col-md-9">
                                                     <input type="text" placeholder="sort" class="form-control @error('sort') is-invalid @enderror"  wire:model.defer="sort">
                                                     @error('sort') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
                                              <div class="form-group row">
-                                                <label class="col-md-3 form-label"> icon: </label>
+                                                <label class="col-md-3 form-label"> icon: <span class="tx-danger">*</span> </label>
                                                 <div class="col-md-9">
                                                     <input type="text" placeholder="icon " class="form-control @error('icon') is-invalid @enderror"  wire:model.defer="icon">
                                                     @error('icon') <div class="invalid-feedback">  {{ $message }} </div> @enderror
@@ -78,7 +78,7 @@
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">*</span></label>
+                                                <label class="col-md-3 form-label"> title: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
@@ -87,10 +87,10 @@
                                             
                                             <div class="form-group">
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
+                                                    <label class="form-label col-sm-3">description: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
                                                     <div class="col-sm-9">
-                                                        <textarea wire:model.defer="description.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
-                                                        @error('description')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                        <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
+                                                        @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
                                                     </div>
                                                 </div>
                                             </div>

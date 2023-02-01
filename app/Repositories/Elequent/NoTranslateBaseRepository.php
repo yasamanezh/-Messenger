@@ -81,13 +81,12 @@ class NoTranslateBaseRepository implements INoTranslateBase {
         
        return $this->getModelClass()->findOrFail($id);
     }
+    
      public function first() {
         
        return $this->getModelClass()->first();
     }
-    
-   
-   
+
     public function update($id,$data) {            
         $item = $this->getModelClass()->find($id);
         $item ->update($data); 

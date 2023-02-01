@@ -3,6 +3,7 @@
 namespace App\Repositories\Elequent;
 use App\Repositories\Contract\IMenu;
 use App\Models\Menu;
+use App\Models\Translate;
 use App\Repositories\Elequent\BaseRepository;
 
 class MenuRepository extends BaseRepository implements IMenu {
@@ -10,6 +11,14 @@ class MenuRepository extends BaseRepository implements IMenu {
     public function model() {
         
         return Menu::class;        
+    }
+    public function translationModel() {
+
+        return Translate::class;
+    }
+
+    public function hasTranslation() {
+        return true;
     }
 
 }

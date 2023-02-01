@@ -11,6 +11,31 @@ class ModuleOptionRepository extends BaseRepository implements IModuleOption {
     public function firstByType($param) {
          return $this->getModelClass()->with('translate')->where('type',$param)->first();
     }
+    public function getByType($param,$status=null) {
+        if($status=null){
+            return $this->getModelClass()->with('translate')->where('type',$param)->orderBy('sort')->get();
+        }
+         
+        else{
+            return $this->getModelClass()->with('translate')->where('type',$param)->where('status',1)->orderBy('sort')->get();
+        }
+       
+    }
+    
+    
+       public function skipTake($param,$skip,$take) {
+        
+          return $this->getModelClass()->with('translate')
+                  ->where('type',$param)
+                  ->where('status',1)
+                  ->orderBy('sort')
+                  ->skip($skip)
+                  ->take($take)
+                  ->get();
+       
+    }
+    
+     
         
     public function model() {
         
@@ -30,5 +55,12 @@ class ModuleOptionRepository extends BaseRepository implements IModuleOption {
             }
         );
     }
+    public function translationModel() {
 
+        return Translate::class;
+    }
+
+    public function hasTranslation() {
+        return true;
+    }
 }

@@ -10,6 +10,7 @@
 
    <body>
         <livewire:front.layout.menu />
+       
         @yield('body')
         <div class="go-top"><i class="ri-arrow-up-s-line"></i></div>
         <livewire:front.layout.footer />

@@ -4,9 +4,7 @@ namespace App\Repositories\Elequent;
 
 use App\Repositories\Contract\IBase;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Language;
-use App\Models\Translate;
-use App\Models\Translation;
+use App\Models\{Language,Translation};
 use Illuminate\Support\Facades\DB;
 
 
@@ -15,8 +13,11 @@ use Exception;
 class BaseRepository implements IBase {
 
     protected $model;
+    protected $translationModel ;
     public    $lang_id;
     public    $param = '';
+    public    $haveTranslate = false;
+   
 
     public function getModelClass() {
 
@@ -30,6 +31,10 @@ class BaseRepository implements IBase {
     public function __construct() {
         
         $this->model = $this->getModelClass();
+        if($this->hasTranslation()){
+            $this->haveTranslate  = true;
+          $this->translationModel = app()->make($this->translationModel()); 
+        }
     }
 
     public function currentLanquage() {
@@ -48,11 +53,11 @@ class BaseRepository implements IBase {
         return $mulitiSelect;
     }
 
-    public function all($search) {
+    public function all($search='') {
 
         $Model = $this->model();
         $this->param = $search;
-        return Translate::with('translateable')->whereHasMorph('translateable', [$Model], function (Builder $query) {
+        return  $this->translationModel->with('translateable')->whereHasMorph('translateable', [$Model], function (Builder $query) {
                 $query->where('language_id', $this->currentLanquage())
                 ->where('title', 'LIKE', "%{$this->param}%");
             }
@@ -103,7 +108,8 @@ class BaseRepository implements IBase {
         
        return $this->getModelClass()->with('translate')->findOrFail($id);
     }
-       public function first() {
+    
+    public function first() {
         
        return $this->getModelClass()->with('translate')->first();
     }
@@ -129,8 +135,6 @@ class BaseRepository implements IBase {
 
         }
        
-            
-        
     }
     
     public function get() {

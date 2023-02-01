@@ -132,7 +132,6 @@ return [
     'uppercase' => 'The :attribute must be uppercase.',
     'url' => 'The :attribute must be a valid URL.',
     'ulid' => 'The :attribute must be a valid ULID.',
-    'uuid' => 'The :attribute must be a valid UUID.',
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
@@ -140,24 +139,18 @@ return [
     ],
     'attributes' => [
         'title' => [
-            'en' => 'english title',
+            '*' => 'english title',
         ],
         'description' => [
-            'en' => 'english description',
+            '*' => ' description',
         ],
         'short_description' => [
-            'en' => 'english short description',
+            '*' => 'short description',
         ],
         'meta_title' => [
-            'en' => 'english meta title',
+            '*' => 'meta title',
         ],
-        'meta_keyword' => [
-            'en' => 'english meta keyword',
-        ],
-        'meta_description' => [
-            'en' => 'english meta description',
-        ],
-
-        'daf_lang' => 'default language',
+        'meta_keyword' => 'meta keyword',
+        'meta_description' => 'meta description',
     ],
 ];

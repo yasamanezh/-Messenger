@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Elequent;
 use App\Repositories\Contract\IPack;
-use App\Models\{Pack,Option};
+use App\Models\{Pack,Option,Translate};
 use App\Repositories\Elequent\BaseRepository;
 
 class PackRepository extends BaseRepository implements IPack {
@@ -29,6 +29,14 @@ class PackRepository extends BaseRepository implements IPack {
     public function syncOption($id, $datas) {
         $pack = $this->find($id);
         $pack->options()->sync($datas);
+    }
+    public function translationModel() {
+
+        return Translate::class;
+    }
+
+    public function hasTranslation() {
+        return true;
     }
 
 }

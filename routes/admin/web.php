@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     });
 
     //=======================================> //feature options//
-    Route::group(['prefix' => 'modules/feature/options'], function() {
+    Route::group(['prefix' => 'modules/feature/keys'], function() {
         Route::get('/', App\Http\Livewire\Admin\Module\Featur\Option\Index::class)->name('admin.feature.options');
         Route::get('/add', App\Http\Livewire\Admin\Module\Featur\Option\Add::class)->name('admin.feature.option.add');
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Module\Featur\Option\Edit::class)->name('admin.feature.option.edit');

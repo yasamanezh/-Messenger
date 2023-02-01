@@ -3,8 +3,10 @@
 namespace App\Repositories\Elequent;
 
 use App\Repositories\Contract\ISetting;
-use App\Models\Setting;
-
+use App\Models\{
+    Setting,
+    Translate
+};
 use App\Repositories\Elequent\BaseRepository;
 
 class SettingRepository extends BaseRepository implements ISetting {
@@ -14,5 +16,14 @@ class SettingRepository extends BaseRepository implements ISetting {
         return Setting::class;
     }
 
+    public function translationModel() {
+
+        return Translate::class;
+    }
+
+    public function hasTranslation() {
+        
+        return true;
+    }
 
 }

@@ -1,18 +1,18 @@
 <div>
-    @section('title',__('Edit Download Module'))
+    @section('title',__('Add Feature Key'))
     <div class="container-fluid">
         <div class="inner-body">
             <div class="page-header">
                 <div>
-                    <h2 class="main-content-title tx-24 mg-b-5">Edit Download Module</h2><br>
+                    <h2 class="main-content-title tx-24 mg-b-5">Add Feature Key</h2><br>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.modules')}}">Modules</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> Edit Download Module</li>
+                        <li class="breadcrumb-item active" aria-current="page">Add Feature Key</li>
                     </ol>
                 </div>
                 <div>
-                    <a data-toggle="tooltip" href="{{route('admin.posts')}}" class="btn btn-warning text-white"  data-original-title="back">
+                    <a data-toggle="tooltip" href="{{route('admin.feature.options')}}" class="btn btn-warning text-white"  data-original-title="back">
                         <i class="fa fa-backward"></i>
                     </a>
                     <button class="btn btn-primary my-2 btn-icon-text"  form="formInfo"  wire:loading.attr="disabled"  wire:loading.remove wire:target="saveInfo"> 
@@ -30,7 +30,7 @@
                     <div class="card custom-card">
                         <div class="card-body">
                             <div>
-                                <h6 class="main-content-label mb-1">Edit Download Module</h6>
+                                <h6 class="main-content-label mb-1">Add Feature Key</h6>
                                 <p class="text-muted card-sub-title">It is necessary to fill in the fields marked with (*)</p>
                             </div>
                             <form id="formInfo" wire:submit.prevent="saveInfo()" role="form" >
@@ -78,7 +78,7 @@
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">*</span></label>
+                                                <label class="col-md-3 form-label"> title: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
@@ -87,10 +87,10 @@
                                             
                                             <div class="form-group">
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
+                                                    <label class="form-label col-sm-3">description: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
                                                     <div class="col-sm-9">
-                                                        <textarea wire:model.defer="description.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
-                                                        @error('description')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                        <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
+                                                        @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
                                                     </div>
                                                 </div>
                                             </div>

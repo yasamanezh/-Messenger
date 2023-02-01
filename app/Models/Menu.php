@@ -22,7 +22,9 @@ class Menu extends Model {
     
     public function currentTranslate()
     {
-        $lang    = app()->getLocale();
+       
+           $lang    = app()->getLocale(); 
+      
         
         $lang_id = Language::where('code',$lang)->pluck('id')->first();        
        

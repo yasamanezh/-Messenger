@@ -18,19 +18,7 @@
                         <ul class="navbar-nav">
                             @foreach($menus as $menu)                          
                             <li class="nav-item">
-                                
-                                <a href="#" class="dropdown-toggle nav-link">{{$this->getTitle($menu)}}</a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item"><a href="about-simple.html" class="nav-link">About Simple{{$this->haveChild($menu->id)}}</a></li>
-                                    <li class="nav-item"><a href="about-modern.html" class="nav-link">About Modern</a></li>
-                                    <li class="nav-item"><a href="#" class="dropdown-toggle nav-link">Features</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item"><a href="features-1.html" class="nav-link">Features 1</a></li>
-                                            <li class="nav-item"><a href="features-2.html" class="nav-link">Features 2</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                               
+                                <a href="#" class="dropdown-toggle nav-link">{{$this->getTitle($menu)}}</a>   
                             </li>
                             @endforeach
                         </ul>
