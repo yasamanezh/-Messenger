@@ -122,15 +122,48 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            
+                                             <div class="form-group" wire:ignore>
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
+                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
                                                     <div class="col-sm-9">
-                                                        <textarea wire:model.defer="content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
-                                                        @error('content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                        <textarea  rows="10" class="form-control summernote-editor " id="summernote-editor{{$language->language->code}}" 
+                                                                    wire:model.defer="content.{{$language->language->code}}"
+                                                                  autocomplete="off">{!! $content[$language->language->code] !!}</textarea>
+
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            @push('jsBeforCustomJs')
+
+                                            <script>
+
+                                                $('#summernote-editor' + "{{$language->language->code}}").summernote({
+
+                                                toolbar: [
+                                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                                ['font', ['strikethrough', 'superscript', 'subscript']],
+                                                ['fontsize', ['fontsize']],
+                                                ['color', ['color']],
+                                                ['para', ['ul', 'ol', 'paragraph']],
+                                                ['height', ['height']],
+                                                ['view', ['fullscreen', 'codeview', 'help']],
+                                                ['popovers', ['lfm']],
+                                                ],
+                                                        buttons: {
+                                                        lfm: LFMButton
+                                                        },
+                                                        height: 200,
+                                                        callbacks: {
+                                                        onChange: function (contents, $editable) {
+                                                        @this.set("content." + "{{$language->language->code}}", contents);
+                                                        }
+                                                        },
+                                                });
+
+                                            </script>
+                                            @endpush
                                             
                                         </div>
                                         @endforeach

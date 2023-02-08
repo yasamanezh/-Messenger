@@ -24,6 +24,10 @@ class Translate extends Model
     {
         return $this->morphTo()->where('type','client');
     }
+     public function translateableBySlug($slug)
+    {
+        return $this->morphTo()->where('status',1)->where('slug',$slug);
+    }
     
      
     

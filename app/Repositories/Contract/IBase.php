@@ -12,8 +12,13 @@ interface IBase {
     public function update($id,$data,$translate);
     public function getLanguage();
     public function find($id);
+    public function findBySlug($slug);
     public function getCurrentTitle($id);
     public function get();
-     public function first();
+    public function first();
+    public function getEnables();
+    public function takeByEnable($count); 
+    public function PaginateEnables($count,$slug =null) ;
+    
     
 }

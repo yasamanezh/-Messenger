@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Front\Module;
 
+use App\Repositories\Contract\IModuleOption;
 use Livewire\Component;
 use App\Traits\Module;
 
@@ -12,6 +13,8 @@ class Customer extends Component
     public function render()
     { 
         $module = $this->getInterface()->firstByType('client');
-        return view('livewire.front.module.customer', compact('module'));
+        $users =   app()->make(IModuleOption::class)->getByType('client',true);
+ 
+        return view('livewire.front.module.customer', compact('module','users'));
     }
 }

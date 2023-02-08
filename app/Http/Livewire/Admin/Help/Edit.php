@@ -4,87 +4,90 @@ namespace App\Http\Livewire\Admin\Help;
 
 use Livewire\Component;
 use Illuminate\Validation\Rule;
-use App\Repositories\Contract\{ILog,IHelp};
+use App\Repositories\Contract\{
+    ILog,
+    IHelp
+};
 
+class Edit extends Component {
 
-class Edit extends Component
-{
-    public $help_id,$status, $title, $languages;
-    public $typePage  = 'faq category';
-    
+    public $help_id, $status, $title, $languages, $parent,$slug;
+    public $typePage = 'faq category';
     protected $rules = [
-        'status'             => 'required|integer|min:0|max:1',
-        "title"              => "required|array|min:1",
-        "title.*"            => "required|string|min:3",
+        'status' => 'required|integer|min:0|max:1',
+        'parent' => 'required',
+        "title" => "required|array|min:1",
+        "title.en" => "required|string|min:3",
     ];
+
     public function createLog($data) {
-        
-        return  app()->make(ILog::class)->create($data);
-    }
-    
-    public function getCurrentTitle() {
-        
-       return $this->getInterface()->getCurrentTitle($this->help_id); 
+
+        return app()->make(ILog::class)->create($data);
     }
 
-        
+    public function getCurrentTitle() {
+
+        return $this->getInterface()->getCurrentTitle($this->help_id);
+    }
+
     public function getItems() {
         return [
             'status' => $this->status,
+            'parent' => $this->parent,
+            'slug' => $this->slug
         ];
-        
     }
-    
-    public function mount($id) {
-        
-        $data            = $this->getInterface()->find($id);
-        $this->languages = $this->getInterface()->getLanguage();
-        $this->status    = $data->status;
-        $this->help_id   = $id;
 
-        
+    public function mount($id) {
+
+        $data = $this->getInterface()->find($id);
+        $this->languages = $this->getInterface()->getLanguage();
+        $this->status = $data->status;
+        $this->parent = $data->parent;
+        $this->slug = $data->slug;
+        $this->help_id = $id;
+
+
         foreach ($this->languages as $value) {
-            $code = $data->translate()->where('language_id',$value->language->id)->first();
-            if($code){
-                $this->title[$value->language->code]            = $code->title  ;
-            }else{
-                $this->title[$value->language->code]            = ''  ;
+            $code = $data->translate()->where('language_id', $value->language->id)->first();
+            if ($code) {
+                $this->title[$value->language->code] = $code->title;
+            } else {
+                $this->title[$value->language->code] = '';
             }
         }
     }
- 
+
     public function getTranslate() {
-        
-        $translations =[];
+
+        $translations = [];
         foreach ($this->languages as $lan) {
-          
+
             $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
 
             $translations[] = [
-                'title'            => $title,
-                'language_id'      => $lan->language->id
+                'title' => $title,
+                'language_id' => $lan->language->id
             ];
         }
         return $translations;
-        
     }
-    
-    public function saveInfo() {
-        
-        $this->validate();
 
-        $translates  = $this->getTranslate();
-        $items       = $this->getItems();
-        
+    public function saveInfo() {
+
+        $this->validate();
+       
+        $translates = $this->getTranslate();
+        $items = $this->getItems();
+
         $this->createLog([
-           'user_id'     => auth()->user()->id, 
-           'actionType'  => 'edit '. $this->typePage, 
-           'url'         => $this->getInterface()->getCurrentTitle($this->help_id), 
+            'user_id' => auth()->user()->id,
+            'actionType' => 'edit ' . $this->typePage,
+            'url' => $this->getInterface()->getCurrentTitle($this->help_id),
         ]);
 
-        $this->getInterface()->update($this->help_id,$items,$translates);
+        $this->getInterface()->update($this->help_id, $items, $translates);
         return (redirect(route('admin.helps')))->with('sucsess', 'sucsess');
-       
     }
 
     public function getInterface() {
@@ -93,6 +96,8 @@ class Edit extends Component
     }
 
     public function render() {
-        return view('livewire.admin.help.edit')->layout('layouts.admin');
+        $parents = app()->make(IHelp::class)->get();
+        return view('livewire.admin.help.edit', compact('parents'))->layout('layouts.admin');
     }
+
 }

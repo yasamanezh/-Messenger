@@ -3,12 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 
-Route::group(['prefix' => 'laravel-filemanager'], function () {
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+	
+Route::group(['prefix' => '/laravel-filemanager'], function () {
     UniSharp\LaravelFilemanager\Lfm::routes();
 });
-Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
-
     Route::prefix('languages')->group(function () {
         Route::get('/', [LanguageController::class, 'index'])->name('translations_ui.index');
         Route::prefix('phrases')->group(function () {
@@ -31,7 +31,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
         Route::get('/add', App\Http\Livewire\Admin\Post\Add::class)->name('admin.post.add');
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Post\Edit::class)->name('admin.post.edit');
     });
+    //======================================= > //comment//
+    Route::group(['prefix' => 'comments'], function() {
+        Route::get('/', App\Http\Livewire\Admin\Comment\Index::class)->name('admin.comments');
+        Route::get('/edit/{id}', App\Http\Livewire\Admin\Comment\Edit::class)->name('admin.comment.edit');
+    });
 
+    
     //======================================= > //users//
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', \App\Http\Livewire\Admin\Users\Index::class)->name('admin.users');
@@ -100,6 +106,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
         Route::get('/weblog', App\Http\Livewire\Admin\Module\Blog::class)->name('admin.module.blog');
         Route::get('/', App\Http\Livewire\Admin\Module\Index::class)->name('admin.modules');
         Route::get('/feature', App\Http\Livewire\Admin\Module\Featur\Index::class)->name('admin.module.feature');
+        Route::get('/feature2', App\Http\Livewire\Admin\Module\Feature2::class)->name('admin.module.feature2');
     });
 
     //=======================================> //feature options//
@@ -129,4 +136,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
         Route::get('/add', App\Http\Livewire\Admin\Menu\Add::class)->name('admin.menu.add');
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Menu\Edit::class)->name('admin.menu.edit');
     });
+    Route::group(['prefix' => 'work-lists'], function() {
+        Route::get('/', App\Http\Livewire\Admin\Module\Work\Index::class)->name('admin.works');
+        Route::get('/add', App\Http\Livewire\Admin\Module\Work\Add::class)->name('admin.work.add');
+        Route::get('/edit/{id}', App\Http\Livewire\Admin\Module\Work\Edit::class)->name('admin.work.edit');
+    });
+        Route::group(['prefix' => 'contacts'], function() {
+        Route::get('/', App\Http\Livewire\Admin\Contact\Index::class)->name('admin.contacts');
+        Route::get('/show/{id}', App\Http\Livewire\Admin\Contact\Show::class)->name('admin.contact.show');
+    });
+    
+     Route::group(['prefix' => 'pages'], function() {
+        Route::get('/', App\Http\Livewire\Admin\Module\Page\Index::class)->name('admin.pages');
+        Route::get('/custome/add', App\Http\Livewire\Admin\Module\Page\All\Add::class)->name('admin.page.add');
+        Route::get('/custome/edit/{id}', App\Http\Livewire\Admin\Module\Page\All\Edit::class)->name('admin.page.edit');
+        Route::get('/contact', App\Http\Livewire\Admin\Module\Page\Contact::class)->name('admin.page.contact');
+        Route::get('/about', App\Http\Livewire\Admin\Module\Page\About::class)->name('admin.page.about');
+        Route::get('/faq', App\Http\Livewire\Admin\Module\Page\Faq::class)->name('admin.page.faq');
+        Route::get('/feature', App\Http\Livewire\Admin\Module\Page\Feature::class)->name('admin.page.feature');
+        Route::get('/how-to-work', App\Http\Livewire\Admin\Module\Page\Work::class)->name('admin.page.work');
+      
+    });
+    
+    Route::get('/footer', App\Http\Livewire\Admin\Footer\Index::class)->name('admin.footer');
+
 });

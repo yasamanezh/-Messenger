@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->nullable();
             $table->tinyInteger('status')->dafault('0');
+               $table->json('archive')->nullable();
             $table->timestamps();
         });
     }

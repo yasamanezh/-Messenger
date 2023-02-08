@@ -34,6 +34,10 @@ class PackRepository extends BaseRepository implements IPack {
 
         return Translate::class;
     }
+    
+    public function getPacks() {
+        return $this->getModelClass()->where('status',1)->orderBy('sort')->get();
+    }
 
     public function hasTranslation() {
         return true;

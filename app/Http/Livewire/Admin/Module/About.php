@@ -4,7 +4,9 @@ namespace App\Http\Livewire\Admin\Module;
 
 use Livewire\Component;
 use App\Traits\Admin\UpdateModule;
-
+use App\Repositories\Contract\{
+    ILog
+};
 
 class About extends Component {
 
@@ -29,10 +31,7 @@ class About extends Component {
         "more_text"        => "nullable",
     ];
 
-    public function createLog($data) {
-
-        return app()->make(ILog::class)->create($data);
-    }
+    
 
     public function getItems() {
         if ($this->uploadImage) {

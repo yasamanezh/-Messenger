@@ -27,7 +27,7 @@
             </li>
             
 
-            <li class="nav-item  @if(Request::routeIs('admin.blog.edit') || Request::routeIs('admin.blogs') || Request::routeIs('admin.blog.add') || Request::routeIs('admin.posts') || Request::routeIs('admin.post.add') || Request::routeIs('admin.post.edit')) active @endif">
+            <li class="nav-item  @if(Request::routeIs('admin.comments') || Request::routeIs('admin.comment.eit') || Request::routeIs('admin.blog.edit') || Request::routeIs('admin.blogs') || Request::routeIs('admin.blog.add') || Request::routeIs('admin.posts') || Request::routeIs('admin.post.add') || Request::routeIs('admin.post.edit')) active @endif">
                 <a class="nav-link with-sub" href="#">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
@@ -42,6 +42,10 @@
                     <li class="nav-sub-item @if(Request::routeIs('admin.posts') || Request::routeIs('admin.post.add') || Request::routeIs('admin.post.edit')) active @endif">
                         <a class="nav-sub-link" href="{{route('admin.posts')}}">Posts</a>
                     </li>
+                     <li class="nav-sub-item @if(Request::routeIs('admin.comments') || Request::routeIs('admin.comment.eit') ) active @endif">
+                        <a class="nav-sub-link" href="{{route('admin.comments')}}">Comments</a>
+                    </li>
+                    
 
                 </ul>
             </li>
@@ -92,12 +96,28 @@
                     <span class="sidemenu-label">Home Page</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">
+            <li class="nav-item  @if(Request::routeIs('admin.pages')) active @endif">
+                <a class="nav-link" href="{{route('admin.pages')}}">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i class="ti-palette sidemenu-icon"></i>
                     <span class="sidemenu-label">All Pages</span>
+                </a>
+            </li>
+           <li class="nav-item  @if(Request::routeIs('admin.footer')) active @endif">
+                <a class="nav-link" href="{{route('admin.footer')}}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="ti-palette sidemenu-icon"></i>
+                    <span class="sidemenu-label">footer</span>
+                </a>
+            </li>
+             <li class="nav-item @if(Request::routeIs('admin.menus')) active @endif ">
+                <a class="nav-link" href="{{route('admin.menus')}}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i  class="ti-package sidemenu-icon"></i>
+                    <span class="sidemenu-label">menu</span>
                 </a>
             </li>
 
@@ -118,14 +138,15 @@
                     <span class="sidemenu-label">Social</span>
                 </a>
             </li>
-            <li class="nav-item @if(Request::routeIs('admin.menus')) active @endif ">
-                <a class="nav-link" href="{{route('admin.menus')}}">
+             <li class="nav-item @if(Request::routeIs('admin.contacts')) active @endif ">
+                <a class="nav-link" href="{{route('admin.contacts')}}">
                     <span class="shape1"></span>
                     <span class="shape2"></span>
                     <i  class="ti-package sidemenu-icon"></i>
-                    <span class="sidemenu-label">menu</span>
+                    <span class="sidemenu-label">Contacts</span>
                 </a>
             </li>
+           
             <li class="nav-header"><span class="nav-label">users</span></li>
             <li class="nav-item  @if(Request::routeIs('admin.users') || Request::routeIs('admin.user.add') || Request::routeIs('admin.user.edit')) active @endif">
                 <a class="nav-link" href="{{route('admin.users')}}">

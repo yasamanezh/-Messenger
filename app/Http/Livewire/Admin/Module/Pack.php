@@ -25,10 +25,7 @@ class Pack extends Component
         "more_text.en"          => "nullable|string|min:3",
     ];
     
-    public function createLog($data) {
-        
-        return  app()->make(ILog::class)->create($data);
-    }
+  
        
      public function getItems() {
          

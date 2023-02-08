@@ -11,7 +11,7 @@ class Counter extends Component
     
     public function render()
     {
-         $module = $this->getInterface()->firstByType('download');
-        return view('livewire.front.module.counter');
+        $modules = $this->getOptionInterface('counter');
+        return view('livewire.front.module.counter',compact('modules'));
     }
 }

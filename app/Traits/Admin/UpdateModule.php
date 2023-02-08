@@ -35,7 +35,7 @@ trait UpdateModule {
                         if (is_array($param)) {
                             foreach ($param as $value1) {
                                 $meta = json_decode($code->meta, true);
-                                if ($meta && $meta[$value1]) {
+                                if ($meta && isset($meta[$value1])) {
                                     $this->$value1[$value->language->code] = $meta[$value1];
                                 }
                             }
@@ -95,7 +95,6 @@ trait UpdateModule {
     public function saveData() {
         $translates = $this->getTranslate($this->Translateparams);
         $items = $this->getItems();
-
         if ($this->is_module) {
             $this->getInterface()->update($this->module_id, $items, $translates);
             if ($this->typePage == 'screen module') {
@@ -115,7 +114,7 @@ trait UpdateModule {
             'url' => $this->typePage,
         ]);
     }
-
+    public $descript=[];
     public function saveInfo() {
 
         if (Gate::allows('edit_' . $this->gate)) {

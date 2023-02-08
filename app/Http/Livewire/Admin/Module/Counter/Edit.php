@@ -10,10 +10,10 @@ class Edit extends Component {
 
     use UpdateSettinges;
 
-    public $short_content, $title, $sort, $icon, $languages, $module_id;
+    public $short_content, $title, $sort, $icon, $languages, $module_id,$content;
 
     public $typePage         = 'Counter Module';
-    public $Translateparams  =['title','short_content'];
+    public $Translateparams  =['title','short_content','content'];
     public $IndexRoute       = 'admin.module.counters';
     public $gate             ='design';
     
@@ -21,7 +21,9 @@ class Edit extends Component {
         "sort" => "required|integer",
         "icon" => "required|string",
         "short_content" => "required|array|min:1",
-        "short_content.en" => "required|string|min:3",
+        "short_content.en" => "required|integer",
+        "content"    => "required|array|min:1",
+        "content.en" => "required|string",
         "title" => "required|array|min:1",
         "title.en" => "required|string|min:3",
     ];

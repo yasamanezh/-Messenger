@@ -63,7 +63,7 @@ class BaseRepository implements IBase {
             }
         );
     }
-
+  
     public function chanseStatus($param) {
 
         $item = $this->getModelClass()->findOrFail($param);
@@ -109,6 +109,11 @@ class BaseRepository implements IBase {
        return $this->getModelClass()->with('translate')->findOrFail($id);
     }
     
+    public function findBySlug($slug) {
+        
+       return $this->getModelClass()->with('translate')->where('slug',$slug)->first();
+    }
+    
     public function first() {
         
        return $this->getModelClass()->with('translate')->first();
@@ -117,6 +122,7 @@ class BaseRepository implements IBase {
    public function getCurrentTitle($id) {
       
        return $this->find($id)->currentTranslate()->title;
+    
     }
    
     public function update($id,$data, $translate) {
@@ -140,5 +146,24 @@ class BaseRepository implements IBase {
     public function get() {
         return $this->getModelClass()->get();
     }
+    
+    public function getEnables() {
+        return $this->getModelClass()->where('status',1)->get();
+    }
+    
+    public function PaginateEnables($count,$slug =null) {
+        if($slug){
+            return $this->getModelClass()->where('status',1)->where('slug',$slug)->paginate($count);
+        }
+        else{
+            return $this->getModelClass()->where('status',1)->paginate($count);
+        }
+    }
+    
+      public function takeByEnable($count) {
+        return $this->getModelClass()->where('status',1)->take($count)->get();
+    }
+     
+    
 
 }

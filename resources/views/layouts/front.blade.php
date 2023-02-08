@@ -5,15 +5,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <livewire:front.layout.head />
+        
     @livewireStyles
    </head>
-
    <body>
         <livewire:front.layout.menu />
        
-        @yield('body')
+        {{$slot}}
         <div class="go-top"><i class="ri-arrow-up-s-line"></i></div>
-        <livewire:front.layout.footer />
+        <livewire:front.layout.script />
         @livewireScripts
     </body>
 

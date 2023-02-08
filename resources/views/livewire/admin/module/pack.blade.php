@@ -37,13 +37,19 @@
                                 <div id="wizard3" class="wizard clearfix vertical">
                                     <div class="steps clearfix boder-none" >
                                         <ul class="item1-links nav nav-tabs  mb-0 boder-none ">
-                                            
+                                            <li class="nav-item dir-ltr" >
+                                                <a  wire:ignore data-target="#general" class="nav-link active  pl-0" data-toggle="tab" role="tablist">
+                                                    <span class="current-info audible">current step: </span>
+                                                    <span class="number">1</span> 
+                                                    <span class="title">General</span>
+                                                </a>
+                                            </li>
                                             
                                             @foreach($languages as $key=>$language)
                                             <li class="nav-item dir-ltr">
-                                                <a   wire:ignore data-target="#language{{$language->id}}" class="nav-link pl-0 @if($loop->first) active  @endif" data-toggle="tab" role="tablist" >
+                                                <a   wire:ignore data-target="#language{{$language->id}}" class="nav-link pl-0" data-toggle="tab" role="tablist" >
                                                     <span class="current-info audible">current step: </span>
-                                                    <span class="number">{{$key+1}}</span> 
+                                                    <span class="number">{{$key+2}}</span> 
                                                     <span class="title">{{$language->language->name}}</span>
                                                 </a>
                                             </li>
@@ -51,9 +57,19 @@
                                         </ul>
                                     </div>
                                     <div class="content clearfix tab-content mh-260" id="myTabContent"> 
-                                        
+                                         <div  wire:ignore.self class="tab-pane fade show active" id="general" role="tabpanel">
+                                           
+                                             <div class="form-group row">
+                                                <label class="col-md-3 form-label"> see more buttom link:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="see more buttom link " class="form-control @error('more_link') is-invalid @enderror"  wire:model.defer="more_link">
+                                                    @error('more_link') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
                                         @foreach($languages as $language)
-                                        <div wire:ignore.self class="tab-pane fade @if($loop->first) active show @endif " id="language{{$language->id}}" role="tabpanel">
+                                        <div wire:ignore.self class="tab-pane fade" id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> title:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
                                                 <div class="col-md-9">
@@ -79,8 +95,8 @@
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">short description:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
                                                     <div class="col-sm-9">
-                                                        <textarea wire:model.defer="short_description.{{$language->language->code}}" rows="5" placeholder="short description" class="form-control"></textarea>
-                                                        @error('short_description')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                        <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="short description" class="form-control"></textarea>
+                                                        @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
 
                                                     </div>
                                                 </div>

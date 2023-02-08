@@ -1,4 +1,4 @@
-<div>
+
     <div class="app-btn-box">
         <a href="#" class="applestore-btn" target="_blank">
             <img src="{{asset('front/ltr/assets/img/apple-store.png')}}" alt="image">
@@ -13,4 +13,4 @@
             <span>{{__('messages.Google Play')}}</span>
         </a>
     </div>
-</div>
+

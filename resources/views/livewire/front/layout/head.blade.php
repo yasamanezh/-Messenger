@@ -1,16 +1,30 @@
 <div>
     <!-- Link of CSS files -->
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/aos.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/odometer.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/remixicon.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/magnific-popup.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/meanmenu.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/swiper-bundle.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('front/'.$dir.'/assets/css/style.css')}}">
+    @if($dir == 'rtl')
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/odometer.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/remixicon.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/magnific-popup.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/meanmenu.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/rtl/assets/css/style.css')}}">
+    @else
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/aos.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/odometer.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/remixicon.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/magnific-popup.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/meanmenu.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/swiper-bundle.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front/ltr/assets/css/style.css')}}">
+    @endif
     <title>Pakap - App & SaaS Software Landing Page HTML Template</title>
     <link rel="icon" type="image/png" href="{{asset('front/ltr/assets/img/favicon.png')}}">
 </div>

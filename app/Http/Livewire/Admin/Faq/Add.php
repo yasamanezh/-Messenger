@@ -20,9 +20,9 @@ class Add extends Component {
         'category' => 'required|exists:helps,id',
         'status' => 'required|integer|min:0|max:1',
         "description" => "required|array|min:1",
-        "description.*" => "required|string|min:3",
+        "description.en" => "required|string|min:3",
         "title" => "required|array|min:1",
-        "title.*" => "required|string|min:3",
+        "title.en" => "required|string|min:3",
     ];
 
     public function createLog($data) {

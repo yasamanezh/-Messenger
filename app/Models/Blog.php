@@ -4,35 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Language;
-use App\Models\Translate;
+use App\Traits\Model\Translations;
 
 class Blog extends Model
 {
-    protected $fillable = ['slug','status','blog_id' ];
+    use Translations;
+    protected $fillable = ['slug','status','blog_id' ,'archive'];
     
     use HasFactory;
     
     public function posts(){       
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class,'blog_id');
+    }
+     public function activePosts(){       
+        return $this->hasMany(Post::class,'blog_id')->where('status',1);
     }
     
-     public function translate()
-    {
-        return $this->morphMany(Translate::class, 'translateable');
-    }
     
-   
-    
-    public function currentTranslate()
-    {
-        $lang    = app()->getLocale();
-        $lang_id = Language::where('code',$lang)->pluck('id')->first();        
-       
-        if($lang_id){
-            return $this->morphMany(Translate::class, 'translateable')->where('language_id',$lang_id)->first();            
-        }        
-    }
   
     
 }

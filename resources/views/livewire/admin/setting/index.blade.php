@@ -11,9 +11,7 @@
                     </ol>
                 </div>
                 <div>
-                    <a data-toggle="tooltip" href="{{route('admin.posts')}}" class="btn btn-warning text-white"  data-original-title="back">
-                        <i class="fa fa-backward"></i>
-                    </a>
+                    
                     <button class="btn btn-primary my-2 btn-icon-text"  form="formInfo"  wire:loading.attr="disabled"  wire:loading.remove wire:target="saveInfo"> 
                         save
                     </button>                   
@@ -23,6 +21,7 @@
                 </div>
             </div>
             @include('livewire.admin.layouts.error')
+            @include('livewire.admin.layouts.message')
             @if($success)
             <div class="alert alert-success">
                 <ul>
@@ -70,14 +69,14 @@
                                                 <div class="col-sm-9">
                                                     @if($uploadLogo)
                                                     <img src="{{ $uploadLogo->temporaryUrl() }}"
-                                                         style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
+                                                         style="width: 300px;height:60px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
                                                          id="picture1">
                                                     @elseif(isset($data->logo) && !empty($data->logo))
                                                     <img id="picture1"
-                                                         style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
+                                                         style="width:300px;height:60px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
                                                          src="/storage/{{ $data->logo}}">
                                                     @else
-                                                    <img id="picture1"  style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;" src="{{ asset('admin/img/uploadicon.png')}}">
+                                                    <img id="picture1"  style="width:300px;height:60px;padding: 10px;border:2px dashed #ddd;cursor: pointer;" src="{{ asset('admin/img/uploadicon.png')}}">
 
                                                     @endif
                                                     <br>
@@ -107,14 +106,14 @@
                                                 <div class="col-sm-9">
                                                     @if($uploadIcon)
                                                     <img src="{{ $uploadIcon->temporaryUrl() }}"
-                                                         style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
+                                                         style="width: 100px;height:100px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
                                                          id="picture">
                                                     @elseif(isset($data->icon) && !empty($data->icon))
                                                     <img id="picture"
-                                                         style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
+                                                         style="width: 100px;height:100px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
                                                          src="/storage/{{ $data->icon}}">
                                                     @else
-                                                    <img id="picture"  style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;" src="{{ asset('admin/img/uploadicon.png')}}">
+                                                    <img id="picture"  style="width: 100px;height:100px;padding: 10px;border:2px dashed #ddd;cursor: pointer;" src="{{ asset('admin/img/uploadicon.png')}}">
 
                                                     @endif
                                                     <br>
@@ -139,6 +138,38 @@
                                                     @error('data.location') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> phone1: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="phone1" class="form-control @error('data.phone1') is-invalid @enderror"  wire:model.defer="data.phone1">
+                                                    @error('data.phone1') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> phone2: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="phone2" class="form-control @error('data.phone2') is-invalid @enderror"  wire:model.defer="data.phone2">
+                                                    @error('data.phone2') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> email1: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="email1" class="form-control @error('data.email1') is-invalid @enderror"  wire:model.defer="data.email1">
+                                                    @error('data.email1') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                              <div class="form-group row">
+                                                <label class="col-md-3 form-label"> email2: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="email1" class="form-control @error('data.email2') is-invalid @enderror"  wire:model.defer="data.email2">
+                                                    @error('data.email2') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            
+                                            
+                                            
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> email parameter: </label>
                                                 <div class="col-md-9">
@@ -182,12 +213,21 @@
 
                                             <div class="form-group">
                                                 <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">address: </label>
+                                                    <div class="col-sm-9">
+                                                        <textarea wire:model.defer="content.{{$language->language->code}}" rows="5" placeholder="address" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row row-sm">
                                                     <label class="form-label col-sm-3">Meta description: </label>
                                                     <div class="col-sm-9">
                                                         <textarea wire:model.defer="meta_description.{{$language->language->code}}" rows="5" placeholder="Meta description" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">Meta keywords: </label>

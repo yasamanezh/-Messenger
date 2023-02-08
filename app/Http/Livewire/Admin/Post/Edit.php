@@ -13,17 +13,17 @@ use App\Repositories\Contract\{
 
 class Edit extends Component {
 
-    public $post_id, $slug, $description, $uploadImage, $img, $status, $title, $meta_keyword, $meta_title, $meta_description, $languages;
+    public $post_id, $slug, $related = [], $description, $uploadImage, $img, $status, $title, $meta_keyword, $meta_title, $meta_description, $languages;
     public $typePage = 'posts';
     protected $rules = [
-        'category'           => 'required|exists:blogs,id',
-        'status'             => 'required|integer|min:0|max:1',
-        "description"        => "required|array|min:1",
-        "description.en"     => "required|string|min:3",
-        "title"              => "required|array|min:1",
-        "title.en"           => "required|string|min:3",
-        "meta_keyword.*"     => "nullable|string|min:3",
-        "meta_title.*"       => "nullable|string|min:3",
+        'category' => 'required|exists:blogs,id',
+        'status' => 'required|integer|min:0|max:1',
+        "description" => "required|array|min:1",
+        "description.en" => "required|string|min:3",
+        "title" => "required|array|min:1",
+        "title.en" => "required|string|min:3",
+        "meta_keyword.*" => "nullable|string|min:3",
+        "meta_title.*" => "nullable|string|min:3",
         "meta_description.*" => "nullable|string|min:3",
     ];
 
@@ -45,24 +45,33 @@ class Edit extends Component {
     }
 
     public function getItems() {
+        $comma_separated = implode(",", $this->related);
+
         if ($this->uploadImage) {
             return [
                 'slug' => $this->slug,
                 'status' => $this->status,
                 'image' => $this->uploadImage(),
                 'blog_id' => $this->category,
+                'archive' => json_encode($this->archive),
+                'related' => $comma_separated
             ];
         } else {
             return [
                 'slug' => $this->slug,
                 'status' => $this->status,
                 'blog_id' => $this->category,
+                'archive' => json_encode($this->archive),
+                'related' => $comma_separated,
             ];
         }
     }
 
+    public $archive;
+
     public function mount($id) {
-    if (!Gate::allows('show_post')) {
+        $now = [now()->format('M Y')];
+        if (!Gate::allows('show_post')) {
             abort(403);
         }
         $data = $this->getInterface()->find($id);
@@ -74,14 +83,23 @@ class Edit extends Component {
         $this->slug = $data->slug;
         $this->image = $data->image;
         $this->category = $data->blog_id;
-
-
+        if ($data->related) {
+            $related = explode(',', $data->related);
+            foreach ($related as $value) {
+                array_push($this->related, $value);
+            }
+        }
+        $this->archive = json_decode($data->archive);
+        if (!in_array(now()->format('M Y'), json_decode($data->archive))) {
+            $this->archive = array_merge(json_decode($data->archive), $now);
+        }
         foreach ($this->languages as $value) {
             $this->title[$value->language->code] = '';
             $this->description[$value->language->code] = '';
             $this->meta_title[$value->language->code] = '';
             $this->meta_keyword[$value->language->code] = '';
             $this->meta_description[$value->language->code] = '';
+
             $code = $data->translate()->where('language_id', $value->language->id)->first();
             if ($code) {
                 $this->title[$value->language->code] = $code->title;
@@ -160,7 +178,8 @@ class Edit extends Component {
 
     public function render() {
         $categories = app()->make(iBlog::class)->get();
-        return view('livewire.admin.post.edit', compact('categories'))->layout('layouts.admin');
+        $posts = app()->make(IPost::class)->get();
+        return view('livewire.admin.post.edit', compact('categories', 'posts'))->layout('layouts.admin');
     }
 
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->integer('sort')->nullable();
             $table->tinyInteger('status')->nullable();
-            $table->enum('type',['feature','counter','client']);
+            $table->enum('type',['feature','counter','client','How_to_work']);
             $table->timestamps();
         });
     }

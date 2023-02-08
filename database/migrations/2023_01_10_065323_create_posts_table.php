@@ -18,8 +18,11 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->string('thumbnail')->nullable();
+            $table->string('related')->nullable();
             $table->tinyInteger('status')->dafault('0');
+            $table->json('archive')->nullable();
             $table->unsignedBigInteger('blog_id');
+            $table->unsignedBigInteger('userid');
             $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

@@ -10,7 +10,7 @@
                             <p>{{$this->getTranslate('content',$module)}}</p>
                             <div class="btn-box">
                                 <livewire:front.module.free-trial />
-                                <a href="{{$module->more_link}}" class="link-btn">{{$this->getTranslate('more_text',$module,'true')}}</a>
+                                <a href="{{$lang}}/{{$module->more_link}}" class="link-btn">{{$this->getTranslate('more_text',$module,'true')}}</a>
                             </div>
                         </div>
                     </div>

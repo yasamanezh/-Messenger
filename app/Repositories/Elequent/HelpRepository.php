@@ -20,5 +20,16 @@ class HelpRepository extends BaseRepository implements IHelp {
     public function hasTranslation() {
         return true;
     }
+    public function parentsCategory() {
+       return $this->getModelClass()->where('status',1)->where('parent',0)->get();
+    }
+     public function allCategory() {
+       return $this->getModelClass()->where('status',1)->where('parent','<>',0)->get();
+    }
+    
+    
+    public function childrenCategory($id) {
+        return $this->getModelClass()->where('status',1)->where('parent',$id)->get();
+    }
 
 }

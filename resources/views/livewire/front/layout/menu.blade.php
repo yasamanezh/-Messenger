@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="pakap-responsive-menu">
                     <div class="logo">
-                        <a href="index.html"><img src="assets/img/black-logo.png" alt="logo"></a>
+                        <a href="index.html"><img src="{{asset('front/ltr/assets/img/black-logo.png')}}" alt="logo"></a>
                     </div>
                 </div>
             </div>
@@ -13,7 +13,7 @@
         <div class="pakap-nav">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="index.html"><img src="assets/img/black-logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="index.html"><img src="{{asset('front/ltr/assets/img/black-logo.png')}}" alt="logo"></a>
                     <div class="collapse navbar-collapse mean-menu">
                         <ul class="navbar-nav">
                             @foreach($menus as $menu)                          

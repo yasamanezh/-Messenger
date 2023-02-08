@@ -4,16 +4,15 @@ namespace App\Http\Livewire\Admin\Module\Counter;
 
 use Livewire\Component;
 use App\Repositories\Contract\IModuleOption;
-
 use App\Traits\Admin\CreateSettinges;
 
 
 class Add extends Component {
     
     use CreateSettinges;
-    public $short_content, $title,$sort,$icon,$languages;
+    public $short_content, $title,$sort,$icon,$languages,$content;
     public $typePage         = 'Counter Module';
-    public $Translateparams  =['title','short_content'];
+    public $Translateparams  =['title','short_content','content'];
     public $IndexRoute       = 'admin.module.counters';
     public $gate             ='design';
 
@@ -21,7 +20,9 @@ class Add extends Component {
         "sort"           => "required|integer",
         "icon"           => "required|string",
         "short_content"    => "required|array|min:1",
-        "short_content.en" => "required|string|min:3",
+        "short_content.en" => "required|integer",
+        "content"    => "required|array|min:1",
+        "content.en" => "required|string",
         "title"          => "required|array|min:1",
         "title.en"       => "required|string|min:3",
     ];

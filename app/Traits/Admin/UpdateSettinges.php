@@ -17,7 +17,6 @@ trait UpdateSettinges {
              foreach ($params as $param) {
                 if (is_array($param)) {
                     foreach ($param as $value1) {
-                        
                         $this->$value1[$value->language->code] = '';
                     }
                 } else {
@@ -97,9 +96,12 @@ trait UpdateSettinges {
     public function saveData() {
         $translates = $this->getTranslate($this->Translateparams);
         $items = $this->getItems();
+        if($this->module_id){
+            $this->getInterface()->update($this->module_id, $items, $translates);
+        }else{
+            $this->getInterface()->create( $items, $translates);
 
-        $this->getInterface()->update($this->module_id, $items, $translates);
-
+        }
         $this->createLog([
             'user_id' => auth()->user()->id,
             'actionType' => 'update ' . $this->typePage,
@@ -108,6 +110,7 @@ trait UpdateSettinges {
     }
 
     public function saveInfo() {
+
       
         if (Gate::allows('edit_' . $this->gate)) {
             $this->validate();

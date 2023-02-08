@@ -3,15 +3,16 @@
         <div class="feedback-wrap-area ptb-100">
             <div class="container">
                 <div class="section-title">
-                    <span class="sub-title">CLIENT REVIEWS</span>
-                    <h2>What Our Customer Say About Us</h2>
+                    <span class="sub-title">{{$this->getTranslate('title',$module)}}</span>
+                    <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                 </div>
                 <div class="feedback-swiper-wrap-slides swiper-container">
                     <div class="swiper-wrapper">
+                        @foreach($users as $user)
                         <div class="swiper-slide">
                             <div class="single-feedback-wrap-item">
                                 <div class="rating">
-                                    <h5>Theme Customization</h5>
+                                    <h5>{{$this->getTranslate('title',$user)}}</h5>
                                     <div>
                                         <i class="ri-star-fill"></i>
                                         <i class="ri-star-fill"></i>
@@ -20,62 +21,19 @@
                                         <i class="ri-star-fill"></i>
                                     </div>
                                 </div>
-                                <p>‘Kiedo is the best digital agency in our area As a midsize software developent company we combine the best of both worlds. We have the focus and speed of the small it outsurcing companies.’</p>
+                                <p>‘{{$this->getTranslate('short_content',$module)}}’</p>
                                 <div class="client-info">
-                                    <img src="assets/img/user/user1.jpg" alt="user">
+                                    <img src="storage/{{$user->image}}" alt="user">
                                     <div class="title">
-                                        <h3>Deanna Hodges</h3>
-                                        <span>Spotify Developer</span>
+                                        <h3>{{$this->getTranslate('name',$user,'true')}}</h3>
+                                        <span>{{$this->getTranslate('job',$user,'true')}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
 
-                        <div class="swiper-slide">
-                            <div class="single-feedback-wrap-item">
-                                <div class="rating">
-                                    <h5>Theme Customization</h5>
-                                    <div>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                    </div>
-                                </div>
-                                <p>‘Kiedo is the best digital agency in our area As a midsize software developent company we combine the best of both worlds. We have the focus and speed of the small it outsurcing companies.’</p>
-                                <div class="client-info">
-                                    <img src="assets/img/user/user2.jpg" alt="user">
-                                    <div class="title">
-                                        <h3>Deanna Hodges</h3>
-                                        <span>Spotify Developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-slide">
-                            <div class="single-feedback-wrap-item">
-                                <div class="rating">
-                                    <h5>Theme Customization</h5>
-                                    <div>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                        <i class="ri-star-fill"></i>
-                                    </div>
-                                </div>
-                                <p>‘Kiedo is the best digital agency in our area As a midsize software developent company we combine the best of both worlds. We have the focus and speed of the small it outsurcing companies.’</p>
-                                <div class="client-info">
-                                    <img src="assets/img/user/user3.jpg" alt="user">
-                                    <div class="title">
-                                        <h3>Deanna Hodges</h3>
-                                        <span>Spotify Developer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- Add Pagination -->
                     <div class="swiper-button-next" data-aos="fade-right"></div>

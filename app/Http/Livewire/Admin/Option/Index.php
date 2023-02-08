@@ -17,7 +17,8 @@ class Index extends Component {
     protected $queryString = ['search'];
     protected $paginationTheme = 'bootstrap';
     public $typePage = 'package option';
-    public $gate     = '';
+    public $editeroute = 'admin.pack.option.edit';
+    public $gate     = 'option';
 
     public function mount() {
         if (!Gate::allows('show_option')) {
@@ -31,34 +32,6 @@ class Index extends Component {
     }
     
   
-
-    public function deleteAll() {
-        if (Gate::allows('delete_option')) {
-            $this->deleteAllSetting();
-        } else {
-            $this->dispatchBrowserEvent('hide-form');
-            $this->emit('toast', 'warning', 'permission denied !');
-        }
-    }
-
-    public function delete() {
-        if (Gate::allows('delete_option')) {
-             $this->deleteAllSetting();
-            
-        } else {
-            $this->dispatchBrowserEvent('hide-delete-modal');
-            $this->emit('toast', 'warning', 'permission denied !');
-        }
-    }
-
-    public function changeStatus($id) {
-        if (Gate::allows('edit_option')) {
-            $this->statusSetting($id);
-        } else {
-            $this->emit('toast', 'warning', 'permission denied !');
-        }
-    }
-
     public function render(IOption $option) {
 
         $datas = $this->readyToLoad ? $option->all($this->search)

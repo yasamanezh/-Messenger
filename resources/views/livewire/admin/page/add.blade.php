@@ -78,7 +78,21 @@
                                                     @enderror
                                                 </div>
                                             </div>
-
+                                            <div class="form-group">
+                                                <div class="row row-sm">
+                                                    <label class="col-sm-3 form-label">Related Post: </label>
+                                                    <div class="col-md-9">
+                                                        <x-inputs.select2 wire:model.defer="related" id="related"
+                                                                          placeholder=" selected">
+                                                            @foreach ($posts as $key => $value)
+                                                            <option value="{{ $value->id }}">
+                                                                {{ $value->currentTranslate()->title }}
+                                                            </option>
+                                                            @endforeach
+                                                        </x-inputs.select2>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> slug: <span class="tx-danger">*</span></label>
                                                 <div class="col-md-9">
@@ -126,8 +140,8 @@
                                                     <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
                                                     <div class="col-sm-9">
                                                         <textarea  rows="10" class="form-control summernote-editor " id="summernote-editor{{$language->language->code}}" 
-                                                                    wire:model.defer="description.{{$language->language->code}}"
-                                                                  autocomplete="off"></textarea>
+                                                                   wire:model.defer="description.{{$language->language->code}}"
+                                                                   autocomplete="off"></textarea>
 
                                                     </div>
                                                 </div>
@@ -199,5 +213,18 @@
             </div>
         </div>
     </div>
-
+    @push('jsBeforCustomJs')
+<!-- Select2 -->
+<script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#related').select2({
+                theme: 'bootstrap4',
+            }).on('change', function () {
+                @this.
+                set('related', $('#related').val());
+            })
+        })
+    </script>
+@endpush
 </div>

@@ -74,7 +74,11 @@
                             @if($item->translateable->type != 'feature')  @continue @endif
                             @elseif($typePage =='clients')
                             @if($item->translateable->type != 'client')  @continue @endif
+                            @elseif($typePage =='How to work')
+                            @if($item->translateable->type != 'How_to_work')  @continue @endif
                             @endif
+                            
+                            
                             <tr role="row">
                                 <td>
                                     <label class="ckbox" >

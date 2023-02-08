@@ -10,12 +10,13 @@ use App\Repositories\Contract\{
 
 class Add extends Component {
 
-    public $status, $title, $languages;
+    public $status, $title, $languages, $parent,$slug;
     public $typePage = 'faq category';
     protected $rules = [
-        'status' => 'required|integer|min:0|max:1',
+
+        'parent' => 'required',
         "title" => "required|array|min:1",
-        "title.*" => "required|string|min:3",
+        "title.en" => "required|string|min:3",
     ];
 
     public function createLog($data) {
@@ -42,6 +43,8 @@ class Add extends Component {
     public function getItems() {
         return [
             'status' => $this->status,
+            'parent' => $this->parent,
+            'slug' => $this->slug
         ];
     }
 
@@ -75,8 +78,8 @@ class Add extends Component {
     }
 
     public function render() {
-
-        return view('livewire.admin.help.add')->layout('layouts.admin');
+        $parents = app()->make(IHelp::class)->get();
+        return view('livewire.admin.help.add',compact('parents'))->layout('layouts.admin');
     }
 
 }

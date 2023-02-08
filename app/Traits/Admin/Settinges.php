@@ -107,7 +107,7 @@ trait Settinges {
     }
     
      public function deleteAll() {
-        if (Gate::allows('delete'.$this->gate)) {
+        if (Gate::allows('delete_'.$this->gate)) {
             $this->deleteAllSetting();
             $this->dispatchBrowserEvent('hide-form');
         } else {

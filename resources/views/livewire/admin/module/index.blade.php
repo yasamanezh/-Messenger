@@ -45,6 +45,7 @@
                                     <a href="{{route('admin.module.top')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-folder"></i> top page </a>
                                     <a href="{{route('admin.module.feature')}}" class="btn ripple btn-light btn-lg btn-block"> <i class="fe fe-link"></i> feature</a>
                                     <a href="{{route('admin.module.about')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-users"></i>about </a>
+                                    <a href="{{route('admin.module.feature2')}}" class="btn ripple btn-light btn-lg btn-block"> <i class="fe fe-link"></i> feature2</a>
                                     <a href="{{route('admin.module.screen')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-briefcase"></i> screen</a>
                                     <a href="{{route('admin.module.video')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-airplay"></i> video </a>
                                     <a href="{{route('admin.module.counters')}}" class="btn ripple btn-light btn-lg btn-block"> <i class="fa fa-check"></i>Counters </a>

@@ -4,16 +4,24 @@ namespace App\Http\Livewire\Front\Layout;
 
 use Livewire\Component;
 use App\Models\Language;
+use App\Repositories\Contract\IFooter;
+use App\Traits\{
 
+    Translate
+};
 class Footer extends Component
 {
+    use Translate;
+    public $multiLanguage;
+    public function mount($language ) {
+        
+        $this->multiLanguage = $language;
+    }
     public function render()
     {
-        $lang     = app()->getLocale();
-        $directon = Language::where('code',$lang)->first();
-        $directon->rtl ? $dir = 'rtl' : $dir = 'ltr';
+        $footer = app()->make(IFooter::class)->first();
         
-        return view('livewire.front.layout.footer', compact('dir'));
+        return view('livewire.front.layout.footer', compact('footer'));
 
     }
 }

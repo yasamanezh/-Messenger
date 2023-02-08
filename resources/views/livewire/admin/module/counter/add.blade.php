@@ -87,10 +87,19 @@
                                             
                                             <div class="form-group">
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
+                                                    <label class="form-label col-sm-3">count : @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
                                                     <div class="col-sm-9">
                                                         <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
                                                         @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">description: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
+                                                    <div class="col-sm-9">
+                                                        <textarea wire:model.defer="content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
+                                                        @error('content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
                                                     </div>
                                                 </div>
                                             </div>

@@ -19,9 +19,9 @@ class Add extends Component {
         'status' => 'required|integer|min:0|max:1',
         'price' => 'required|integer|min:0',
         "description" => "nullable|array|min:1",
-        "description.*" => "nullable|string|min:3",
+        "description.en" => "nullable|string|min:3",
         "title" => "required|array|min:1",
-        "title.*" => "required|string|min:3",
+        "title.en" => "required|string|min:3",
     ];
 
     public function createLog($data) {
@@ -39,7 +39,7 @@ class Add extends Component {
 
             $translations[] = [
                 'title' => $title,
-                'content' => $title,
+                'content' => $content,
                 'language_id' => $lan->language->id
             ];
         }
@@ -92,6 +92,7 @@ class Add extends Component {
 
     public function render() {
         $Alloption = app()->make(IOption::class)->get();
+        
 
         return view('livewire.admin.package.add', compact('Alloption'))->layout('layouts.admin');
     }

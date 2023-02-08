@@ -11,6 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
+ 
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
@@ -19,6 +20,11 @@ return new class extends Migration
             $table->string('icon')->nullable();
             $table->string('location')->nullable();
             $table->string('daf_lang')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone1')->nullable();
+            $table->string('phone2')->nullable();
+            $table->string('email1')->nullable();
+            $table->string('email2')->nullable();
             $table->string('mail_parameter')->nullable();
             $table->string('mail_username')->nullable();
             $table->string('mail_password')->nullable();

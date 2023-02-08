@@ -17,7 +17,6 @@ class Add extends Component {
     public $gate             ='design';
     protected $rules = [
         "sort" => "required|integer",
-        "image" => "required|image",
         "short_content" => "required|array|min:1",
         "short_content.en" => "required|string|min:3",
         "title" => "required|array|min:1",

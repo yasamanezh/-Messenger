@@ -22,5 +22,10 @@ class FaqRepository extends BaseRepository implements IFaq {
     public function hasTranslation() {
         return true;
     }
+    
+    public function getFaqs($id) {
+        return $this->getModelClass()->where('status',1)->where('help_id',$id)->get();
+
+    }
 
 }

@@ -16,7 +16,7 @@
                     </div> 
                     <div class="col-lg-6 col-md-12">
                         <div class="new-app-main-banner-wrap-image" data-aos="fade-left" data-aos-duration="2000">
-                            <img src="storage/{{$module->file1}}" alt="image">
+                            <img src="storage/{{$module->file1}}" alt="{{$this->getTranslate('title',$module)}}">
 
                             <div class="wrap-image-shape-1">
                                 <img src="{{asset('front/ltr/assets/img/more-home/banner/shape-3.png')}}" alt="image">

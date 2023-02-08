@@ -82,6 +82,21 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="row row-sm">
+                                                    <label class="col-sm-3 form-label">Related Post: </label>
+                                                    <div class="col-md-9">
+                                                        <x-inputs.select2 wire:model.defer="related" id="related"
+                                                                          placeholder=" selected">
+                                                            @foreach ($posts as $key => $value)
+                                                            <option value="{{ $value->id }}">
+                                                                {{ $value->currentTranslate()->title }}
+                                                            </option>
+                                                            @endforeach
+                                                        </x-inputs.select2>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> slug: <span class="tx-danger">*</span></label>
                                                 <div class="col-md-9">
@@ -118,7 +133,7 @@
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">*</span></label>
+                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span></label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
@@ -126,7 +141,7 @@
                                             </div>
                                            <div class="form-group" wire:ignore>
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
+                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span> </label>
                                                     <div class="col-sm-9">
                                                         <textarea  rows="10" class="form-control summernote-editor " id="summernote-editor{{$language->language->code}}" 
                                                                     wire:model.defer="description.{{$language->language->code}}"
@@ -200,4 +215,18 @@
             </div>
         </div>
     </div>
+    @push('jsBeforCustomJs')
+<!-- Select2 -->
+<script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script>
+    <script>
+        $(function () {
+            $('#related').select2({
+                theme: 'bootstrap4',
+            }).on('change', function () {
+                @this.
+                set('related', $('#related').val());
+            })
+        })
+    </script>
+@endpush
 </div>

@@ -7,9 +7,11 @@ use App\Traits\Module;
 
 class Feature extends Component
 {
-    use Module; 
+    use Module;
+    public $lang; 
     public function mount() {
         
+        $this->lang = app()->getLocale();
         $this->hasMeta =true;
         
     }

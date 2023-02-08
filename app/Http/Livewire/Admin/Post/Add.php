@@ -16,7 +16,7 @@ class Add extends Component {
 
     use WithFileUploads;
 
-    public $slug, $status, $category, $description, $image, $title, $meta_keyword = [], $meta_title = [], $meta_description = [], $languages;
+    public $slug, $status,$related=[], $category, $description, $image, $title, $meta_keyword = [], $meta_title = [], $meta_description = [], $languages;
     public $typePage = 'post';
     protected $rules = [
         'slug'               => 'required|string|min:2|max:199|unique:posts,slug',
@@ -27,9 +27,9 @@ class Add extends Component {
         "description.en"     => "required|string",
         "title"              => "required|array|min:1",
         "title.en"           => "required|string|min:3",
-        "meta_keyword.*"     => "nullable|string|min:3",
-        "meta_title.*"       => "nullable|string|min:3",
-        "meta_description.*" => "nullable|string|min:3",
+        "meta_keyword.en"     => "nullable|string|min:3",
+        "meta_title.en"       => "nullable|string|min:3",
+        "meta_description.en" => "nullable|string|min:3",
     ];
 
     public function uploadImage() {
@@ -79,15 +79,22 @@ class Add extends Component {
     }
 
     public function getItems() {
+        $now = now()->format('M Y');
+        $value =[$now];
+        $comma_separated = implode(",", $this->related);
         return [
             'slug' => $this->slug,
             'status' => $this->status,
             'image' => $this->uploadImage(),
             'blog_id' => $this->category,
+            'archive'=> json_encode($value),
+            'related'=> $comma_separated,
+            'user_id'=> auth()->user()->id
         ];
     }
 
     public function saveInfo() {
+        
         if (Gate::allows('edit_post')) {
             $this->validate();
             $translates = $this->getTranslate();
@@ -107,6 +114,7 @@ class Add extends Component {
     }
 
     public function mount() {
+      
         if (!Gate::allows('show_post')) {
             abort(403);
         }
@@ -129,9 +137,11 @@ class Add extends Component {
     }
 
     public function render() {
+        $posts       = app()->make(IPost::class)->get();
+     
         $categories = app()->make(iBlog::class)->all('')->get();
 
-        return view('livewire.admin.post.add', compact('categories'))->layout('layouts.admin');
+        return view('livewire.admin.post.add', compact('categories','posts'))->layout('layouts.admin');
     }
 
 }

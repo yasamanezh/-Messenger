@@ -3,55 +3,16 @@
         <div class="app-screenshots-area ptb-100">
             <div class="container">
                 <div class="section-title">
-                    <span class="sub-title">APP SCREENS</span>
-                    <h2>Beautifully Crafted All App Screenshots</h2>
+                    <span class="sub-title">{{$this->getTranslate('title',$module)}}</span>
+                    <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                 </div>
                 <div class="app-screenshots-slides owl-carousel owl-theme">
+                    @foreach($images as $image)
                     <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots1.png" alt="screenshots">
+                        <img src="storage/{{$image->file}}" alt="screenshots">
                     </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots2.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots3.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots4.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots5.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots1.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots2.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots3.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots4.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots5.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots1.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots2.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots3.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots4.png" alt="screenshots">
-                    </div>
-                    <div class="single-screenshot-card">
-                        <img src="assets/img/more-home/screenshots/screenshots5.png" alt="screenshots">
-                    </div>
+                    @endforeach
+                   
                 </div>
             </div>
         </div>
