@@ -1,6 +1,5 @@
 <div>
-@section('title',__('Languages'))
-   <!-- Start Page Title Area -->
+
         <livewire:front.blog.title />
         <!-- End Page Title Area -->
 

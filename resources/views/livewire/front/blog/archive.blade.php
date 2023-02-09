@@ -2,7 +2,7 @@
     @if($archives)
 <div class="widget widget_archive">
    
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">{{__('message.Archives')}}</h3>
     <ul>
         @foreach($archives as $archive)
         <li><a href="">{{$archive}}</a></li>
