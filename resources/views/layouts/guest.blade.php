@@ -19,7 +19,7 @@
         {{$slot}}
           <livewire:front.layout.social />
         </div>
-        <livewire:front.layout.footer />
+        <livewire:front.layout.script />
         @livewireScripts
     </body>
 
