@@ -47,25 +47,28 @@
                                     <a href="{{route('admin.page.faq')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-edit-2"></i>faq </a>
                                     <a href="{{route('admin.page.feature')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-edit-2"></i> feature</a>
                                     <a href="{{route('admin.page.work')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-edit-2"></i> how to work </a>
-                                @foreach($pages as $page)
-                                <div  class="btn ripple btn-light btn-lg btn-block">
-                                    <a href="{{route('admin.page.edit',$page->translateable_id)}}"><i class="fe fe-edit-2"></i></a>
-                                    <a  wire:click.prevent="confirmRemoval({{$page->translateable->id }})" >
-                                        <i class="fe fe-trash text-danger"></i>
-                                    </a>
-                                    {{$page->title}}
-                                    
-                                </div>
+                                    <a href="{{route('admin.page.pack')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-edit-2"></i>packages </a>
+                                    @foreach($pages as $page)
+                                    @if($page->translateable->slug == 'faq' || $page->translateable->slug == 'feature' || $page->translateable->slug == 'how-to-work'|| $page->translateable->slug == 'pack' || $page->translateable->slug == 'about' || $page->translateable->slug == 'contact'   ) @continue   @endif
 
-                                @endforeach
-                                
+                                    <div  class="btn ripple btn-light btn-lg btn-block">
+                                        <a href="{{route('admin.page.edit',$page->translateable_id)}}"><i class="fe fe-edit-2"></i></a>
+                                        <a  wire:click.prevent="confirmRemoval({{$page->translateable->id }})" >
+                                            <i class="fe fe-trash text-danger"></i>
+                                        </a>
+                                        {{$page->title}}
+
+                                    </div>
+
+                                    @endforeach
+
                                 </div>
                             </div>
                             <br>
                             <div>
                                 <a class="btn btn-primary" href="{{route('admin.page.add')}}">
                                     <i class="fa fa-plus-circle"></i>
-                                    
+
                                 </a>
                             </div>
                         </div>
@@ -74,7 +77,7 @@
             </div>
         </div>
     </div>
-        <!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true" wire:ignore.self>
         <div class="modal-dialog" role="document">
@@ -92,24 +95,24 @@
             </div>
         </div>
     </div>
-        @push('jsPanel')
-<script>
-    window.addEventListener('hide-form', event => {
-        $('#form').modal('hide');
-    })
+    @push('jsPanel')
+    <script>
+        window.addEventListener('hide-form', event => {
+            $('#form').modal('hide');
+        })
 
-    window.addEventListener('show-form', event => {
-        $('#form').modal('show');
-    })
+        window.addEventListener('show-form', event => {
+            $('#form').modal('show');
+        })
 
-    window.addEventListener('show-delete-modal', event => {
-        $('#confirmationModal').modal('show');
-    })
+        window.addEventListener('show-delete-modal', event => {
+            $('#confirmationModal').modal('show');
+        })
 
-    window.addEventListener('hide-delete-modal', event => {
-        $('#confirmationModal').modal('hide');
-    })
+        window.addEventListener('hide-delete-modal', event => {
+            $('#confirmationModal').modal('hide');
+        })
 
-</script>
-@endpush
+    </script>
+    @endpush
 </div>

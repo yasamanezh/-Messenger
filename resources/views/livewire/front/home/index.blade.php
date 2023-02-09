@@ -1,4 +1,5 @@
 <div>
+     <livewire:front.layout.menu :lang="$multiLanguage"  />
      <livewire:front.module.top />
      <livewire:front.module.feature />
      <livewire:front.module.about />

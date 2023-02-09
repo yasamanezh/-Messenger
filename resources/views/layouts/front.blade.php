@@ -9,7 +9,7 @@
     @livewireStyles
    </head>
    <body>
-        <livewire:front.layout.menu />
+       
        
         {{$slot}}
         <div class="go-top"><i class="ri-arrow-up-s-line"></i></div>

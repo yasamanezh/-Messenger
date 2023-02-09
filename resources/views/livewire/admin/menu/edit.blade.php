@@ -88,8 +88,10 @@
                                                         <option value="weblog">Weblog</option>
                                                         <option value="post">posts</option>
                                                         <option value="home">home page</option>
-                                                        <option value="help">help center page</option>
+                                                        <option value="help">faq page</option>
                                                         <option value="feature">feature page</option>
+                                                        <option value="work">how to work page</option>
+                                                        <option value="work">packages</option>
                                                         <option value="page">other page</option>
                                                     </select>
                                                 </div>
@@ -107,7 +109,7 @@
                                                 @error('status') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
                                             @if($type)
-                                            @if($type == 'blog' || $type == 'post' )
+                                            @if($type == 'blog' || $type == 'post' || $type == 'page' )
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-label">link:<span class="tx-danger">*</span></label>
                                                 <div class="col-sm-9">
@@ -123,6 +125,13 @@
                                                         <option value="{{$post->id}}">{{$post->currentTranslate()->title}}</option>
                                                         @endforeach
                                                         @endif
+                                                        @if($type == 'page')
+                                                        @foreach($pages as $page)
+                                                        @if($page->slug == 'faq' || $page->slug == 'feature' || $page->slug == 'how-to-work' || $page->slug == 'pack' || $page->slug == 'about' || $page->slug == 'contact'  ) @continue   @endif
+                                                        <option value="{{$page->id}}">{{$page->currentTranslate()->title}}</option>
+                                                        @endforeach
+                                                        @endif
+                                                        
                                                     </select>
                                                 </div>
                                                 @error('slug') <div class="invalid-feedback">  {{ $message }} </div> @enderror

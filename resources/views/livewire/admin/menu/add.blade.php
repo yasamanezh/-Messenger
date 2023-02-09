@@ -123,6 +123,12 @@
                                                         <option value="{{$post->id}}">{{$post->currentTranslate()->title}}</option>
                                                         @endforeach
                                                         @endif
+                                                        @if($type == 'page')
+                                                        @foreach($pages as $page)
+                                                        @if($page->slug == 'faq' || $page->slug == 'feature' || $page->slug == 'how-to-work' || $page->slug == 'pack' || $page->slug == 'about' || $page->slug == 'contact'  ) @continue   @endif
+                                                        <option value="{{$page->id}}">{{$page->currentTranslate()->title}}</option>
+                                                        @endforeach
+                                                        @endif
                                                     </select>
                                                 </div>
                                                 @error('slug') <div class="invalid-feedback">  {{ $message }} </div> @enderror

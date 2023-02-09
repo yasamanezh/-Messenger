@@ -6,7 +6,8 @@ use App\Repositories\Contract\{
     iBlog,
     ILog,
     IPost,
-    IMenu
+    IMenu,
+    IPage
 };
 use Livewire\Component;
 
@@ -93,8 +94,9 @@ class Add extends Component {
         $blogs = app()->make(iBlog::class)->get();
         $posts = app()->make(IPost::class)->get();
         $menus = app()->make(IMenu::class)->get();
+        $pages = app()->make(Ipage::class)->get();
 
-        return view('livewire.admin.menu.add', compact('blogs', 'posts', 'menus'))->layout('layouts.admin');
+        return view('livewire.admin.menu.add', compact('blogs', 'posts', 'menus','pages'))->layout('layouts.admin');
     }
 
 }

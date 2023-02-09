@@ -33,9 +33,9 @@ class Work extends Component {
     }
 
     public function mount() {
+        
         $data = $this->getInterface()->findBySlug('how-to-work');
-        ;
-        $this->starterDate($data, $this->Translateparams);
+      $this->starterDate($data, $this->Translateparams);
         if ($data) {
             $this->is_module = true;
             $this->module_id = $data->id;

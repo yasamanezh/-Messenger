@@ -1,5 +1,5 @@
 <div>
-    <livewire:front.page.layout.title :title="$this->getTranslate('title',$module)" />
+    <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
     <!-- Start Contact Area -->
     <div class="contact-area ptb-100">
         <div class="container">

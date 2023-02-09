@@ -18,7 +18,7 @@
                         <ul class="navbar-nav">
                             @foreach($menus as $menu)                          
                             <li class="nav-item">
-                                <a href="#" class="dropdown-toggle nav-link">{{$this->getTitle($menu)}}</a>   
+                                <a href="#" class="dropdown-toggle nav-link">{{$this->getTranslate('title',$menu)}}</a>   
                             </li>
                             @endforeach
                         </ul>

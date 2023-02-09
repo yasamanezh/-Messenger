@@ -1,5 +1,5 @@
 <div>
-    <livewire:front.page.layout.title :title="$this->getTranslate('title',$module)" />
+    <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
  <!-- Start Pricing Area -->
         <div class="pricing-area pt-100 pb-75">
             <div class="container">

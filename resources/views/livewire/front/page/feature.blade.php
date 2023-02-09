@@ -1,5 +1,5 @@
 <div>
-    <livewire:front.page.layout.title :title="$this->getTranslate('title',$module)" />
+    <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
  <!-- Start Features Area -->
         <div class="features-area pt-100 pb-75">
             <div class="container">

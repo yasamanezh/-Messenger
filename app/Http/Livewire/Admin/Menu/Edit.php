@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Admin\Menu;
-use App\Repositories\Contract\{iBlog,ILog,IPost,IMenu};
+use App\Repositories\Contract\{iBlog,ILog,IPost,IMenu,IPage};
 
 use Livewire\Component;
 
@@ -122,8 +122,10 @@ class Edit extends Component
     {
         $blogs  = app()->make(IBlog::class)->get();
         $posts  = app()->make(IPost::class)->get();
-        $menus  = app()->make(IMenu::class)->get();
+        $menus  = app()->make(IMenu::class)->get();        
+        $pages = app()->make(Ipage::class)->get();
 
-        return view('livewire.admin.menu.edit', compact('blogs','posts','menus'))->layout('layouts.admin');
+
+        return view('livewire.admin.menu.edit', compact('blogs','posts','menus','pages'))->layout('layouts.admin');
     }
 }

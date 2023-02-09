@@ -1,5 +1,5 @@
 <div>
-    <livewire:front.page.layout.title :title="$this->getTranslate('title',$module)" />
+    <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
           <!-- Start How It Works Area -->
         <div class="how-it-works-area ptb-100">
             <div class="container">
