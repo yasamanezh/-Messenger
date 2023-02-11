@@ -88,10 +88,10 @@
                                                         <option value="weblog">Weblog</option>
                                                         <option value="post">posts</option>
                                                         <option value="home">home page</option>
-                                                        <option value="help">faq page</option>
+                                                        <option value="faq">faq page</option>
                                                         <option value="feature">feature page</option>
                                                         <option value="work">how to work page</option>
-                                                        <option value="work">packages</option>
+                                                        <option value="pack">packages</option>
                                                         <option value="page">other page</option>
                                                     </select>
                                                 </div>

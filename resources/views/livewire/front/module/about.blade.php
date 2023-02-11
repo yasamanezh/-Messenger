@@ -1,4 +1,5 @@
 <div>
+    @if($module)
       <!-- Start App About Area -->
         <div class="app-about-area pb-100">
             <div class="container">
@@ -24,7 +25,7 @@
             </div>
         </div>
         <!-- End App About Area -->
-
+@endif
 </div>
 
      

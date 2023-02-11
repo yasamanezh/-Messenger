@@ -1,4 +1,5 @@
 <div>
+    @if($module)
        <!-- Start New App Main Banner Wrap Area -->
         <div class="new-app-main-banner-wrap-area">
             <div class="container-fluid">
@@ -37,5 +38,6 @@
             </div>
         </div>
         <!-- End New App Main Banner Wrap Area -->
+        @endif
         
 </div>

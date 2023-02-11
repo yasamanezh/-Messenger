@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-use App\Models\{Attach,Part,User,TicketAnswer};
+use App\Models\{Attach,Part,User,Answer};
 
 class Ticket extends Model {
 
@@ -14,7 +14,7 @@ class Ticket extends Model {
     protected $fillable = ['user_id', 'title', 'description', 'part','status',];
 
     public function answers() {
-        return $this->hasMany(TicketAnswer::class, 'ticket_id');
+        return $this->hasMany(Answer::class, 'ticket_id');
     }
     
     public function user(){

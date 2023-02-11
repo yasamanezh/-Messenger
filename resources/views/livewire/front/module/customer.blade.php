@@ -1,4 +1,5 @@
 <div>
+    @if($module)
     <!-- Start Feedback Wrap Area -->
         <div class="feedback-wrap-area ptb-100">
             <div class="container">
@@ -42,4 +43,5 @@
             </div>
         </div>
         <!-- End Feedback Wrap Area -->
+        @endif
 </div>

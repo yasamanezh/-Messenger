@@ -1,4 +1,5 @@
 <div>
+    @if($module)
     <!-- Start App Video Area -->
         <div class="app-video-area pb-100">
             <div class="container">
@@ -26,4 +27,5 @@
             </div>
         </div>
         <!-- End App Video Area -->
+        @endif
 </div>

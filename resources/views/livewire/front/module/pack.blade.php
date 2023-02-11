@@ -1,4 +1,5 @@
 <div>
+    @if($module)
       <!-- Start App Pricing Area -->
         <div class="app-pricing-area pt-100 pb-75">
             <div class="container">
@@ -12,7 +13,7 @@
                     </div>
                     <div class="col-lg-8 col-md-12">
                         <div class="row align-items-center">
-                            
+                            @if($packs)
                            @foreach($packs as $pack) 
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="single-app-pricing-box with-border-radius">
@@ -37,11 +38,13 @@
                                 </div>
                             </div>
                            @endforeach
+                           @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End App Pricing Area -->
+        @endif
 
 </div>

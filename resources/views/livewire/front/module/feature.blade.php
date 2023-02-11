@@ -1,4 +1,5 @@
 <div>
+    @if($module)
        <!-- Start Features Area -->
         <div class="features-area pt-100 pb-75">
             <div class="container">
@@ -14,6 +15,7 @@
                             </div>
                         </div>
                     </div>
+                    @if($keyas1)
                     <div class="col-lg-6 col-md-12 features-inner-list">
                         <div class="row justify-content-center">
                             
@@ -34,16 +36,17 @@
                           
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
         <!-- End Features Area -->
-        
+        @if($keyas2)
         <!-- Start Features Area -->
         <div class="features-area pb-75">
             <div class="container">
                 <div class="row justify-content-center">
-                    @foreach($keyas1 as $key=>$value)
+                    @foreach($keyas2 as $key=>$value)
                     <div class="col-xl-3 col-lg-3 col-sm-3 col-md-3 col-6">
                         <div class="features-box-card">
                             <div class="icon  @if($key+1 == 2 || $key+1 ==4)  bg2 @endif">
@@ -57,5 +60,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- End Features Area -->
+        @endif
 </div>

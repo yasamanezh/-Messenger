@@ -2,8 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Ticket;
 
-use App\Models\Ticket;
-use App\Models\User;
+
 use Livewire\Component;
 use App\Repositories\Contract\{Ipart,ILog,IUser,ITicket};
 use Livewire\WithFileUploads;
@@ -63,10 +62,10 @@ class Add extends Component
     
     public function uploadFile()
     {
-        $directory   = "photos/tickets";
+        $directory   = "public/photos/tickets";
         $name        = $this->file->getClientOriginalName();
         $this->file->storeAs($directory, $name);
-        return ($directory.'/'.$name);
+        return ('photos/tickets/'.$name);
     }
 
 
@@ -104,7 +103,7 @@ class Add extends Component
     }
     public function render()
     {
-        $parts    = $this->getParts()->all('')->get();
+        $parts    = $this->getParts()->get();
         $users    = $this->getUsers()->all('id','')->get();
 
         return view('livewire.admin.ticket.add',compact('users','parts'))->layout('layouts.admin');

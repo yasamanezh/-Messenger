@@ -20,5 +20,7 @@ class MenuRepository extends BaseRepository implements IMenu {
     public function hasTranslation() {
         return true;
     }
-
+    public function Menus($ids) {
+        return $this->getModelClass()->where('status',1)->whereIn('id',$ids)->get(); 
+    }
 }

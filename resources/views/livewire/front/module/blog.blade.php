@@ -1,4 +1,5 @@
 <div>
+     @if($module)
       <!-- Start Blog Wrap Area -->
         <div class="blog-area pb-75">
             <div class="container">
@@ -36,4 +37,5 @@
             </div>
         </div>
         <!-- End Blog Wrap Area -->
+        @endif
 </div>

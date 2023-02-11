@@ -11,7 +11,7 @@ class Top extends Component {
     use WithFileUploads;
     use UpdateModule;
 
-    public $module_id, $uploadImage, $image, $description, $short_description, $title, $languages;
+    public $module_id, $uploadImage, $image, $content, $short_content, $title, $languages;
     public $is_module = false;
     public $typePage = 'top page module';
     public $Translateparams = ['title', 'short_content','content'];

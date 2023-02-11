@@ -1,4 +1,5 @@
 <div>
+     @if($module)
    <!-- Start App Download Area -->
         <div class="app-download-area pb-100">
             <div class="container">
@@ -41,4 +42,5 @@
             </div>
         </div>
         <!-- End App Download Area -->
+        @endif
 </div>

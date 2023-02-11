@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Elequent;
 use App\Repositories\Contract\ITicket;
-use App\Models\Ticket;
+use App\Models\{Ticket,Answer};
 use Illuminate\Support\Facades\DB;
 
 use App\Repositories\Elequent\NoTranslateBaseRepository;
@@ -13,6 +13,10 @@ class TicketRepository extends NoTranslateBaseRepository implements ITicket {
         
         return Ticket::class;        
     }
+     public function Answermodel() {
+        
+        return app()->make(Answer::class);        
+    }
     
     public function createAttach($data,$attachs) {
          DB::beginTransaction();
@@ -21,7 +25,18 @@ class TicketRepository extends NoTranslateBaseRepository implements ITicket {
         DB::commit();
 
     }
+    
+    public function createAttachAnswer($data,$attachs) {
+         DB::beginTransaction();
+            $item = $this->Answermodel()->create($data);
+            $item->attach()->createMany($attachs);
+        DB::commit();
 
+    }
+    
+    
+
+    
     
 
 

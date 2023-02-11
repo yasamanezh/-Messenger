@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Ticket;
 
-use App\Models\Answer;
+use App\Repositories\Contract\{ITicket};
 use App\Models\Ticket;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -13,32 +13,78 @@ class Edit extends Component
 
     public Ticket $ticket;
     public $description,$file;
+        public $inputdownload = [], $download_file;
+    public $typePage  ='tickets';
+    public $l         = 1;
 
     public function uploadImage()
     {
-        $directory = "photos/tickets";
+        $directory = "public/photos/tickets";
         $name = $this->file->getClientOriginalName();
         $this->file->storeAs($directory, $name);
-        return ($directory.'/'.$name);
+        return ('photos/tickets/'.$name);
+    }
+   public function AddDownload($l)
+    {
+        $l = $l + 1;
+        $this->l = $l;
+        array_push($this->inputdownload, $l);
+    }
+    
+    public function removeDownload($l)
+    {
+        unset($this->inputdownload[$l]);
+        unset($this->download_file[$l]);
+
+    }
+     public function uploadFile()
+    {
+        $directory   = "public/photos/tickets";
+        $name        = $this->file->getClientOriginalName();
+        $this->file->storeAs($directory, $name);
+        return ('photos/tickets/'.$name);
+    }
+     public function getInterface() {
+
+        return  app()->make(ITicket::class);
+
     }
 
 
     public function saveInfo(){
 
         $this->validate([
-            'description'=>'required|string|min:2',
-            'file'=>'nullable||image|max:200|mimes:jpg,png,jpeg,gif',
+            'description'=>'nullable|string|min:2',
         ]);
-        $answer=new Answer();
-        $answer->user_id=auth()->user()->id;
-        $answer->answer=$this->description;
-        $answer->ticket_id=$this->ticket->id;
-        if($this->file){
-            $answer->file=$this->uploadImage();
+        $data = [
+         'user_id'=>auth()->user()->id,
+        'answer'=>$this->description,
+        'ticket_id'=>$this->ticket->id,
+       ];
+     
+        $downloads = [];
+        if ($this->download_file) {
+            foreach ($this->download_file as $key => $value) {
+                if($value){
+                $this->validate([
+                    "download_file.$key" => 'image|mimes:jpg,bmp,png,jpeg,gif,webp,svg',
+                ], [
+                    'download_file.*.mimes' => 'the file mimes is jpg,bmp,png,jpeg,gif,webp,svg . ',
+                    'download_file.*.image' => 'the file must be a image.',
+                ]);
+                $directory = "photos/tickets";
+                $name = $this->download_file[$key]->getClientOriginalName();
+                $this->download_file[$key]->storeAs($directory, $name);
+
+                $downloads[] = [  'file' => "$directory/$name"];
+                }
+            }
         }
-        $answer->save();
+        $this->getInterface()->createAttachAnswer($data,$downloads);
+     
+       
         $ticket=$this->ticket;
-        $ticket->status='admin';
+        $ticket->status='admin_answerd';
         $ticket->update();
         redirect(route('admin.tickets'));
     }
@@ -46,6 +92,7 @@ class Edit extends Component
     public function mount($id)
     {
         $this->ticket=Ticket::findOrFail($id);
+        
 
     }
 

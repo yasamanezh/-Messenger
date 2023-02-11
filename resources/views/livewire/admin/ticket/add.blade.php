@@ -21,7 +21,7 @@
                 <div wire:loading wire:target="saveInfo">
                     <div class="spinner-border text-primary" role="status"></div>
                 </div>
-                
+
             </div>
         </div>
         @include('livewire.admin.layouts.error')
@@ -52,9 +52,9 @@
                                                     <label for="inputDepartment">part</label>
                                                     <select id="inputDepartment" class="form-control" wire:model.defer="part">
                                                         <option value="">select</option>
-                                                  @foreach($parts as $part)
-                                                  <option value="{{$part->id}}">{{$part->title}}</option>
-                                                  @endforeach
+                                                        @foreach($parts as $part)
+                                                        <option value="{{$part->id}}">{{$part->currentTranslate()->title}}  </option>
+                                                        @endforeach
                                                     </select>
                                                     @error('part')
                                                     <div class="invalid-feedback display-block">
@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div class="form-group col-sm-4">
                                                     <label for="inputDepartment">user</label>
-                                                    <select name="part" id="inputDepartment" class="form-control" wire:model="user">
+                                                    <select   id="inputDepartment" class="form-control" wire:model="user">
                                                         <option value="">select</option>
                                                         @foreach($users as $user)
                                                         <option value="{{$user->id}}" >
@@ -93,43 +93,40 @@
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <label for="inputAttachments">attachments</label>
-                                                     
 
-                                                
+
+
                                                 </div>
                                                 <br>
                                                 <div  class="col-sm-12" >
-                                                <div  class="row" >
+                                                    <div  class="row" >
 
-                                                    @foreach($inputdownload as $key => $value)
+                                                        @foreach($inputdownload as $key => $value)
 
-                                                    <div class="col-sm-6">
-                                                        <input type="file" class="form-control" wire:model="download_file.{{ $key }}" >
-                                                    <br>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                         <button class=" bbtn ripple btn-secondary text-white btn-icon btn-sm"
-                                                            wire:click.prevent="removeDownload({{$key}})">
-                                                        <i class="fa fa-minus-circle"></i></button><br>
-                                                    </div>
+                                                        <div class="col-sm-6">
+                                                            <input type="file" class="form-control" wire:model="download_file.{{ $key }}" >
+                                                            <br>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <button class=" bbtn ripple btn-secondary text-white btn-icon btn-sm"
+                                                                    wire:click.prevent="removeDownload({{$key}})">
+                                                                <i class="fa fa-minus-circle"></i></button><br>
+                                                        </div>
 
-
-                                                   
-
-                                                    @endforeach
-<div class=" add-input">
-                                                    <div class="row">
-                                                        <div class="col-md-12 text-center">
-                                                            <button class="btn ripple btn-primary text-white btn-icon btn-xs"
-                                                                    wire:click.prevent="AddDownload({{$l}})"><i
-                                                                    class="fa fa-plus-circle"></i></button>
+                                                        @endforeach
+                                                        <div class=" add-input">
+                                                            <div class="row">
+                                                                <div class="col-md-12 text-center">
+                                                                    <button class="btn ripple btn-primary text-white btn-icon btn-xs"
+                                                                            wire:click.prevent="AddDownload({{$l}})"><i
+                                                                            class="fa fa-plus-circle"></i></button>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                </div>
-                                                </div>
                                                 <br>
-                                               
+
                                             </div>
 
 

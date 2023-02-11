@@ -3,12 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
 
-
 Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
-	
-Route::group(['prefix' => '/laravel-filemanager'], function () {
-    UniSharp\LaravelFilemanager\Lfm::routes();
-});
+
+    Route::group(['prefix' => '/laravel-filemanager'], function () {
+        UniSharp\LaravelFilemanager\Lfm::routes();
+    });
     Route::prefix('languages')->group(function () {
         Route::get('/', [LanguageController::class, 'index'])->name('translations_ui.index');
         Route::prefix('phrases')->group(function () {
@@ -37,7 +36,7 @@ Route::group(['prefix' => '/laravel-filemanager'], function () {
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Comment\Edit::class)->name('admin.comment.edit');
     });
 
-    
+
     //======================================= > //users//
     Route::group(['prefix' => 'users'], function() {
         Route::get('/', \App\Http\Livewire\Admin\Users\Index::class)->name('admin.users');
@@ -141,12 +140,12 @@ Route::group(['prefix' => '/laravel-filemanager'], function () {
         Route::get('/add', App\Http\Livewire\Admin\Module\Work\Add::class)->name('admin.work.add');
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Module\Work\Edit::class)->name('admin.work.edit');
     });
-        Route::group(['prefix' => 'contacts'], function() {
+    Route::group(['prefix' => 'contacts'], function() {
         Route::get('/', App\Http\Livewire\Admin\Contact\Index::class)->name('admin.contacts');
         Route::get('/show/{id}', App\Http\Livewire\Admin\Contact\Show::class)->name('admin.contact.show');
     });
-    
-     Route::group(['prefix' => 'pages'], function() {
+
+    Route::group(['prefix' => 'pages'], function() {
         Route::get('/list', App\Http\Livewire\Admin\Module\Page\Index::class)->name('admin.pages');
         Route::get('/custome/add', App\Http\Livewire\Admin\Module\Page\All\Add::class)->name('admin.page.add');
         Route::get('/custome/edit/{id}', App\Http\Livewire\Admin\Module\Page\All\Edit::class)->name('admin.page.edit');
@@ -156,9 +155,7 @@ Route::group(['prefix' => '/laravel-filemanager'], function () {
         Route::get('/feature', App\Http\Livewire\Admin\Module\Page\Feature::class)->name('admin.page.feature');
         Route::get('/how-to-work', App\Http\Livewire\Admin\Module\Page\Work::class)->name('admin.page.work');
         Route::get('/package', App\Http\Livewire\Admin\Module\Page\Pack::class)->name('admin.page.pack');
-      
     });
-    
-    Route::get('/footer', App\Http\Livewire\Admin\Footer\Index::class)->name('admin.footer');
 
+    Route::get('/footer', App\Http\Livewire\Admin\Footer\Index::class)->name('admin.footer');
 });

@@ -1,4 +1,5 @@
 <div>
+     @if($module)
      <!-- Start New App Download Area -->
         <div class="new-app-download-wrap-area ptb-100">
             <div class="container">
@@ -43,4 +44,6 @@
             </div>
         </div>
         <!-- End New App Download Area -->
+        
+       @endif
 </div>

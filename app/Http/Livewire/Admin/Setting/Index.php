@@ -56,7 +56,6 @@ class Index extends Component {
             'phone2' => $this->data['phone2'],
             'email1' => $this->data['email1'],
             'email2' => $this->data['email2'],
-            'address' => $this->data['address'],
             'location' => $this->data['location'],
             'daf_lang' => $this->data['daf_lang'],
             'mail_parameter' => $this->data['mail_parameter'],
@@ -91,6 +90,7 @@ class Index extends Component {
             $this->data      = $data;
             $this->module_id = $data->id;
         }
+        
 
     }
     

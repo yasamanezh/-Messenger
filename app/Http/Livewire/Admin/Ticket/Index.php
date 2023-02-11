@@ -93,15 +93,15 @@ class Index extends Component
 
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن گروهی تیکت ',
-                'actionType' => 'حذف'
+               'url' => 'delete tickets' ,
+                'actionType' => 'delete'
             ]);
             $this->SelectPage = false;
             $this->dispatchBrowserEvent('hide-form');
-            $this->emit('toast', 'success', 'رکورد مورد نظر با موفقیت حذف شد');
+            $this->emit('toast', 'success', 'success !');
         } else {
             $this->dispatchBrowserEvent('hide-form');
-            $this->emit('toast', 'warning', 'شما اجازه حذف این قسمت را ندارید.');
+            $this->emit('toast', 'warning', 'Access denied.');
         }
     }
 
@@ -113,14 +113,14 @@ class Index extends Component
 
             Log::create([
                 'user_id' => auth()->user()->id,
-                'url' => 'حذف کردن تیکت' . '-' . $data_info_id->title,
-                'actionType' => 'حذف'
+                'url' => 'delete ticket' ,
+                'actionType' => 'delete'
             ]);
             $this->dispatchBrowserEvent('hide-delete-modal');
-            $this->emit('toast', 'success', 'رکورد مورد نظر با موفقیت حذف شد');
+            $this->emit('toast', 'success', 'success');
         } else {
             $this->dispatchBrowserEvent('hide-delete-modal');
-            $this->emit('toast', 'warning', 'شما اجازه حذف این قسمت را ندارید.');
+            $this->emit('toast', 'warning', 'Access denied.');
         }
 
 
@@ -128,14 +128,14 @@ class Index extends Component
     public function status($id){
         $ticket=Ticket::findOrFail($id);
         if($ticket->status == 0){
-            return 'بسته شده';
+            return 'closed';
         }elseif($ticket->status == 'user'){
 
-            return 'در حال بررسی';
+            return 'Pending';
         }elseif ($ticket->status == 'admin'){
-            return 'پاسخ داده شده';
+            return 'user answer';
         }else{
-            return 'پیام ادمین';
+            return 'admin answer';
         }
     }
 
@@ -145,7 +145,7 @@ class Index extends Component
         if($ticket->status !=0){
             $ticket->status=0;
             $ticket->update();
-            $this->emit('toast', 'success', 'تیکت مورد نظر با موفقیت بسته شد.');
+            $this->emit('toast', 'success', 'success!');
             }
 
     }

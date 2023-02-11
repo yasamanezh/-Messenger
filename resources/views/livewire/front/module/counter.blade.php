@@ -1,4 +1,5 @@
 <div>
+   @if($modules)
      <!-- Start Gradient Funfacts Area -->
         <div class="gradient-funfacts-area pt-100 pb-75">
             <div class="container">
@@ -18,5 +19,6 @@
             </div>
         </div>
         <!-- End Gradient Funfacts Area -->
+        @endif
 
 </div>

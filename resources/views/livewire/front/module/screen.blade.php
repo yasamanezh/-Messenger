@@ -1,4 +1,5 @@
 <div>
+    @if($module)
      <!-- Start App Screenshots Area -->
         <div class="app-screenshots-area ptb-100">
             <div class="container">
@@ -17,5 +18,6 @@
             </div>
         </div>
         <!-- End App Screenshots Area -->
+        @endif
 
 </div>

@@ -62,7 +62,6 @@
                                                 <div class="col-sm-10">
                                                     <div class="well well-sm scrollbar" id="style-1"
                                                          style="height: 150px; overflow: auto;background-color: #f5f5f5;;padding: 20px">
-
                                                         @foreach($menus as $menu)
                                                         <div class="checkbox">
                                                             <label>
