@@ -8,18 +8,28 @@ use App\Repositories\Contract\{
 use App\Models\Ticket;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use App\Traits\Translate;
 
 class Edit extends Component {
 
     use WithFileUploads;
+    use Translate;
 
-    public Ticket $ticket;
+    public  $ticket;
     public $description, $file;
     public $inputdownload = [], $download_file;
     public $typePage = 'tickets';
     public $l = 1;
     public $multiLanguage = false;
     public $status,$success;
+    public $message;
+    
+    public function test() {
+        $this->validate([
+            'message'=>'required'
+        ]);
+        
+    }
 
     public function mount($language = null, $id = null)  {
       
@@ -71,12 +81,13 @@ class Edit extends Component {
 
         
         $this->validate([
-            'description' => 'required|string',
+            'message' => 'required|string',
         ]);
+        
      
         $data = [
             'user_id' => auth()->user()->id,
-            'answer' => $this->description,
+            'answer' => $this->message,
             'ticket_id' => $this->ticket->id,
         ];
 
@@ -103,16 +114,21 @@ class Edit extends Component {
 
 
         $ticket = $this->ticket;
-        
         $ticket->status = 'user_answerd';
         $ticket->update();
         $this->reset('description');
         $this->success ="success !";
     }
+    
+    public function getParts() {
+
+        return  app()->make(\App\Repositories\Contract\Ipart::class);
+
+    }
 
     public function render() {
-
-        return view('livewire.front.ticket.edit');
+        $parts    = $this->getParts()->get();
+        return view('livewire.front.ticket.edit', compact('parts'));
     }
 
 }

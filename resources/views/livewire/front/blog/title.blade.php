@@ -3,10 +3,10 @@
         <div class="page-title-area">
             <div class="container">
                 <div class="page-title-content">
-                    <h2>Blog Details</h2>
+                    <h2>Blog</h2>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li>Blog Details</li>
+                        <li>Blog</li>
                     </ul>
                 </div>
             </div>

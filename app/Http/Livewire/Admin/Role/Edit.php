@@ -10,33 +10,33 @@ use App\Repositories\Contract\{
     IRole
 };
 
+class Edit extends Component {
 
-class Edit extends Component
-{
- 
-    public $name, $label,$role;
+    public $name, $label, $role;
     public $edits = [];
     public $shows = [];
     public $delets = [];
     public $SelectShow = false;
     public $SelectEdit = false;
     public $SelectDelete = false;
-    
+
     public function mount(Role $role) {
-        $this->role   = $role; 
-        $this->name   = $role->name; 
-        $this->label  = $role->label; 
-      
-        foreach($this->getInterface()->getRolePermission($role->id,'show') as $show){
-            array_push($this->shows,$show->id);
+        if (!Gate::allows('show_role')) {
+            abort(403);
         }
-        foreach($this->getInterface()->getRolePermission($role->id,'edit') as $edit){
-            array_push($this->edits,$edit->id);
+        $this->role = $role;
+        $this->name = $role->name;
+        $this->label = $role->label;
+
+        foreach ($this->getInterface()->getRolePermission($role->id, 'show') as $show) {
+            array_push($this->shows, $show->id);
         }
-        foreach($this->getInterface()->getRolePermission($role->id,'delete') as $delete){
-            array_push($this->delets,$delete->id);
+        foreach ($this->getInterface()->getRolePermission($role->id, 'edit') as $edit) {
+            array_push($this->edits, $edit->id);
         }
-        
+        foreach ($this->getInterface()->getRolePermission($role->id, 'delete') as $delete) {
+            array_push($this->delets, $delete->id);
+        }
     }
 
     public function createLog($data) {
@@ -70,12 +70,12 @@ class Edit extends Component
 
     public function saveInfo() {
         if (Gate::allows('edit_role')) {
-            
-            $permitions=array_merge($this->edits,$this->shows,$this->delets);
+
+            $permitions = array_merge($this->edits, $this->shows, $this->delets);
 
             $this->validate();
-            $data =['name'=> $this->name,'label'=> $this->label];
-            $this->getInterface()->update($this->role->id,$data);
+            $data = ['name' => $this->name, 'label' => $this->label];
+            $this->getInterface()->update($this->role->id, $data);
 
             $this->getInterface()->syncPermission($this->role->id, $permitions);
 
@@ -97,6 +97,7 @@ class Edit extends Component
         $editPermissions = $this->getInterface()->getPermission('edit');
         $deletePermissions = $this->getInterface()->getPermission('delete');
 
-        return view('livewire.admin.role.edit',compact('showPermissions','editPermissions','deletePermissions'))->layout('layouts.admin');
+        return view('livewire.admin.role.edit', compact('showPermissions', 'editPermissions', 'deletePermissions'))->layout('layouts.admin');
     }
+
 }

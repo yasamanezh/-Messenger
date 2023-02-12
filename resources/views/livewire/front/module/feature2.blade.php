@@ -1,11 +1,11 @@
 <div>
-
+@if($module)
     <!-- Start Key Features Area -->
     <div class="key-features-area bg-transparent-with-color pt-100 pb-100">
         <div class="container">
             <div class="section-title">
-                <span class="sub-title">KEY FEATURES</span>
-                <h2>Most Probably Included Best Features Ever</h2>
+                <span class="sub-title">{{$this->getTranslate('title',$module)}}</span>
+                <h2>{{$this->getTranslate('short_content',$module)}}</h2>
             </div>
             @if($keyas)
 
@@ -31,4 +31,5 @@
         </div>
     </div>
     <!-- End Key Features Area --> 
+    @endif
 </div>

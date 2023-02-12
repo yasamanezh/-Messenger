@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Social extends Model
 {
-    protected $fillable=['telegram','whatsapp','linkdin','instagram','email','twitter'];
+    protected $fillable=['github','linkdin','instagram','email','twitter'];
     use HasFactory;
 }

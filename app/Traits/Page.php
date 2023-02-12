@@ -40,5 +40,9 @@ trait Page {
 
         return app()->make(IModule::class);
     }
+    
+    public function seo() {
+        
+    }
 
 }

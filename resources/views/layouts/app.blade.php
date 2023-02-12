@@ -16,7 +16,8 @@
     </head>
     <body>
                {{$slot}}
-          <livewire:front.layout.script />
+        
         @livewireScripts
+          <livewire:front.layout.script />
     </body>
 </html>

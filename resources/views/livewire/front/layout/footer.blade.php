@@ -87,6 +87,14 @@
                     <div class="single-footer-widget">
                         <h3>{{$this->getTranslate('title_right',$footer,'true')}}</h3>
                         <p>{{$this->getTranslate('content_right',$footer,'true')}}</p>
+                        
+                        <form class="newsletter-form" data-toggle="validator">
+                            <input type="text" wire:model.defer="email" class="input-newsletter" placeholder="Your Email" name="EMAIL" required autocomplete="off">
+                             <button  wire:loading  class="spinner-border text-danger" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </button>
+                            <button wire:loading.remove  wire:click.prevent="saveEmail()"><i class="ri-send-plane-2-line"></i></button>
+                            @error('email') <div id="validator-newsletter" class="form-result">{{$message}}</div>@endif
                         @if($success)
                         <div class="alert alert-success">
                             <ul>
@@ -95,10 +103,6 @@
                         </div>
 
                         @endif
-                        <form class="newsletter-form" data-toggle="validator">
-                            <input type="text" wire:model.defer="email" class="input-newsletter" placeholder="Your Email" name="EMAIL" required autocomplete="off">
-                            <button  wire:click.prevent="saveEmail()"><i class="ri-send-plane-2-line"></i></button>
-                            @error('email') <div id="validator-newsletter" class="form-result">{{$message}}</div>@endif
                         </form>
                     </div>
                 </div>

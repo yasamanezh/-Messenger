@@ -118,13 +118,7 @@
                                                     @error('title_right')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
                                                 </div>
                                             </div>
-                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title left:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
-                                                <div class="col-md-9">
-                                                    <input placeholder="title left"  class="form-control @error('title_left') is-invalid @enderror"  wire:model.defer="title_left.{{$language->language->code}}">
-                                                    @error('title_left')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
-                                                </div>
-                                            </div>
+                                             
                                             
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> description right:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>

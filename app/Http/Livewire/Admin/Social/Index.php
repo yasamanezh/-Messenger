@@ -14,6 +14,9 @@ class Index extends Component {
     public $social, $telegram, $whatsapp, $twitter, $linkdin, $instagram, $email, $success = false;
 
     public function mount() {
+        if (!Gate::allows('show_setting')) {
+            abort(403);
+        }
         $this->social = $this->getInterface()->first();
 
         if ($this->social) {
@@ -38,10 +41,9 @@ class Index extends Component {
 
     public function saveInfo() {
         $this->success = false;
-        if (Gate::allows('edit_option')) {
+        if (Gate::allows('edit_setting')) {
             $data = [
-                'telegram' => $this->telegram,
-                'whatsapp' => $this->whatsapp,
+                'github' => $this->telegram,
                 'twitter' => $this->twitter,
                 'linkdin' => $this->linkdin,
                 'instagram' => $this->instagram,
@@ -62,7 +64,7 @@ class Index extends Component {
             ]);
             $this->success = 'success !';
         } else {
-            $this->emit('toast', 'warning', 'شما اجازه ویرایش این قسمت را ندارید.');
+            $this->emit('toast', 'warning', 'permission denied !');
         }
     }
 

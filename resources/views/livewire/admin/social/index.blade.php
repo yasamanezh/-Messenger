@@ -38,33 +38,29 @@
                         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <form class="padding-10 saveInfo">
                                 <div class="form-group row">
-                                    <label class="form-label col-sm-2">Telegram : </label>
-                                    <input type="text" wire:model.lazy="telegram" placeholder=""
+                                    <label class="form-label col-sm-2">github : </label>
+                                    <input type="text" wire:model.defer="github" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
-                                <div class="form-group row">
-                                    <label class="form-label col-sm-2">Watssapp : </label>
-                                    <input type="text" wire:model.lazy="whatsapp" placeholder=""
-                                           class="form-control col-sm-6">
-                                </div>
+                               
                                 <div class="form-group row">
                                     <label class="form-label col-sm-2">Ttwitter : </label>
-                                    <input type="text" wire:model.lazy="twitter" placeholder=""
+                                    <input type="text" wire:model.defer="twitter" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
                                 <div class="form-group row">
                                     <label class="form-label col-sm-2">Linkedin : </label>
-                                    <input type="text" wire:model.lazy="linkdin" placeholder=""
+                                    <input type="text" wire:model.defer="linkdin" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
                                 <div class="form-group row">
                                     <label class="form-label col-sm-2">Instagram : </label>
-                                    <input type="text" wire:model.lazy="instagram" placeholder=""
+                                    <input type="text" wire:model.defer="instagram" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
                                 <div class="form-group row">
                                     <label class="form-label col-sm-2">Email : </label>
-                                    <input type="text" wire:model.lazy="email" placeholder=""
+                                    <input type="text" wire:model.defer="email" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
                             </form>

@@ -12,7 +12,7 @@ class Add extends Component
     use WithFileUploads;
 
     public $file,$user,$ticket;
-    public $title,$description,$part;
+    public $subject,$message,$part_id;
     public $inputdownload = [], $download_file;
     public $typePage  ='tickets';
     public $l         = 1;
@@ -25,10 +25,7 @@ class Add extends Component
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
     }
 
-    public function createLog($data) {
-        
-        return  app()->make(ILog::class)->create($data);
-    }
+   
     
     public function getUsers() {
         
@@ -46,42 +43,41 @@ class Add extends Component
         return  app()->make(Ipart::class);
 
     }
-      public function AddDownload($l)
-    {
+    
+    public function AddDownload($l) {
         $l = $l + 1;
         $this->l = $l;
         array_push($this->inputdownload, $l);
     }
     
-    public function removeDownload($l)
-    {
+    public function removeDownload($l)  {
         unset($this->inputdownload[$l]);
         unset($this->download_file[$l]);
 
     }
     
-  
-    public function uploadFile()
-    {
+    public function uploadFile() {
         $directory   = "public/photos/tickets";
         $name        = $this->file->getClientOriginalName();
         $this->file->storeAs($directory, $name);
         return ('photos/tickets/'.$name);
     }
 
-
     public function saveInfo(){
+        
         $this->validate([
-        'title'       =>'required|string|min:2',
-        'description' =>'required|string|min:2',
-        'part'        =>'required|string|exists:parts,id',
+        'subject'       =>'required|string|min:2',
+        'message' =>'required|string|min:2',
+        'part_id'        =>'required|string|exists:parts,id',
         ]);
 
+
        $data = [
-        'user_id'       => auth()->user()->id,
-        'title'       =>$this->title,
-        'description' =>$this->description,
-        'part'        =>$this->part,
+        'user_id'      => auth()->user()->id,
+        'title'       =>$this->subject,
+        'description' =>$this->message,
+        'status'      =>'open',
+        'part'        =>$this->part_id,
        ];
      
         $downloads = [];
@@ -103,9 +99,11 @@ class Add extends Component
             }
         }
         $this->getInterface()->createAttach($data,$downloads);
-        $this->reset(['title','description','part']);
+        $this->success ="success !";
+        $this->reset(['subject','message','part_id']);
 
     }
+    
     public function render()
     {
         $parts    = $this->getParts()->get();

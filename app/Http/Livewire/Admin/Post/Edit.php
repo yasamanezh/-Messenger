@@ -132,14 +132,18 @@ class Edit extends Component {
                 $meta_description = $this->meta_description[$lan->language->code];
             }
 
-            $translations[] = [
+             if(!empty($title) || !empty($content) || !empty($meta_title)|| !empty($meta_keyword)|| !empty($meta_description) ){
+              
+              $translations[] = [
                 'title' => $title,
                 'content' => $content,
                 'meta_title' => $meta_title,
                 'meta_keyword' => $meta_keyword,
                 'meta_description' => $meta_description,
                 'language_id' => $lan->language->id
-            ];
+            ]; 
+            
+            }
         }
         return $translations;
     }

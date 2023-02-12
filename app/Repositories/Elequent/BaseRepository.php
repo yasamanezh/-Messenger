@@ -92,6 +92,7 @@ class BaseRepository implements IBase {
     }
 
     public function create($data,$translate) {
+        
         DB::beginTransaction();
             $item = $this->getModelClass()->create($data);
             $item->translate()->createMany($translate);

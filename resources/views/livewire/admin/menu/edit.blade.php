@@ -142,7 +142,7 @@
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">*</span></label>
+                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span></label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror

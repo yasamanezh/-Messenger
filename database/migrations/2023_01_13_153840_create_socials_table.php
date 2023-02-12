@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->id();
-            $table->string('telegram')->nullable();
-            $table->string('whatsapp')->nullable();
+            $table->string('github')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkdin')->nullable();
             $table->string('instagram')->nullable();

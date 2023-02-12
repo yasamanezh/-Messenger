@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Module;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Traits\Admin\UpdateModule;
+use Image;
 
 class Top extends Component {
 
@@ -23,8 +24,16 @@ class Top extends Component {
         "content"         => "required",
         "content.en"       => "required|string|min:3",
         "title"               => "required",
-        "title.*"              => "required|string|min:3",
+        "title.en"              => "required|string|min:3",
     ];
+ public function uploadImage() {
+
+        $directory = "public/photos/modules";
+        $name = $this->uploadImage->getClientOriginalName();
+        Image::make($this->uploadImage->getRealPath())->resize(950, 825)->save();
+        $this->uploadImage->storeAs($directory, $name);
+        return("photos/modules/" . "$name");
+    }
 
     public function getItems() {
         if ($this->uploadImage) {
@@ -49,6 +58,7 @@ class Top extends Component {
             $this->image = $data->file1;
         }
     }
+ 
 
     public function render() {
         return view('livewire.admin.module.top')->layout('layouts.admin');

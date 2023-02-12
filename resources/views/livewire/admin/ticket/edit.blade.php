@@ -155,7 +155,7 @@
                                             </div>
                                         </div>
                                         <br>
-                                        @foreach($ticket->answers as $answer)
+                                        @foreach($ticket->answers()->orderBy('created_at','DESC')->get() as $answer)
                                         <div class="ticket-body mt-2" style="margin-right: 20px;">
                                             <div class="col-lg-12 col-md-8 col-xs-12 pull-left">
                                                 <div class="article box1">
@@ -169,11 +169,14 @@
 
                                                         {{$answer->answer}}
                                                     </p>
-                                                    @if($answer->attach)
+                                                    <div class="p-3">
+                                                         @if($answer->attach)
                                                     @foreach($answer->attach as $file )
                                                     <a   href="/storage/{{$file->file}}">{{  explode('/', $file->file)[2]}}</a>
                                                     @endforeach
                                                     @endif
+                                                    </div>
+                                                   
                                                 </div>
                                             </div>
                                         </div><br>

@@ -56,12 +56,17 @@ trait UpdateModule {
             foreach ($params as $param) {
                 if (is_array($param)) {
                     foreach ($param as $value) {
-                        if($this->$value[$lan->language->code]){
+                        if($this->$value[$lan->language->code] && !empty($this->$value[$lan->language->code])){
                          $meta[$value] = $this->$value[$lan->language->code];  
                        }
                     }
-                } elseif ($this->$param[$lan->language->code])
-                    $items[$param] = $this->$param[$lan->language->code];
+                } elseif ($this->$param[$lan->language->code]){
+                    if(!empty( $this->$param[$lan->language->code])){
+                       $items[$param] = $this->$param[$lan->language->code]; 
+                    }
+                     
+                }
+                   
             }
 
             $lang = [
@@ -78,9 +83,7 @@ trait UpdateModule {
                 if (!empty($meta)) {
                     $more = ['meta' => json_encode($meta)];
                     $translations[] = array_merge($lang, $more);
-                } else {
-                    $translations[] = array_merge( $lang);
-                }
+                } 
             }
             
         }
@@ -93,7 +96,9 @@ trait UpdateModule {
     }
 
     public function saveData() {
+        
         $translates = $this->getTranslate($this->Translateparams);
+       
         $items = $this->getItems();
         if ($this->is_module) {
             $this->getInterface()->update($this->module_id, $items, $translates);

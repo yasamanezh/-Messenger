@@ -1,4 +1,6 @@
 <div>
+        <livewire:front.layout.menu :lang="$multiLanguage">
+
     <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
  <!-- Start Pricing Area -->
         <div class="pricing-area pt-100 pb-75">
@@ -35,7 +37,7 @@
             <div class="shape13"><img src="{{asset('front/ltr/assets/img/shape/shape15.png')}}" alt="shape"></div>
         </div>
         <!-- End Pricing Area -->
-
+    <livewire:front.layout.footer :language="$multiLanguage">
 
 
 </div>

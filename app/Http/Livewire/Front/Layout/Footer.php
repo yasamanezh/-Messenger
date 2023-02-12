@@ -72,8 +72,9 @@ class Footer extends Component
             'email'=>'required|email'
         ]);
         $latter = new \App\Models\NewsLetter();
-        $latter->emil = $this->email;
+        $latter->email = $this->email;
         $latter->save();
+        $this->reset('email');
         $this->success = 'success !';
         
         

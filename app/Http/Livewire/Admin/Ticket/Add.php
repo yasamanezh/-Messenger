@@ -6,6 +6,7 @@ namespace App\Http\Livewire\Admin\Ticket;
 use Livewire\Component;
 use App\Repositories\Contract\{Ipart,ILog,IUser,ITicket};
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Gate;
 
 class Add extends Component
 {
@@ -70,12 +71,14 @@ class Add extends Component
 
 
     public function saveInfo(){
+        if (Gate::allows('edit_ticket')) {
         $this->validate();
 
        $data = [
         'user_id'       => $this->user,
         'title'       =>$this->title,
         'description' =>$this->description,
+        'status'      =>'open',
         'part'        =>$this->part,
        ];
      
@@ -99,6 +102,9 @@ class Add extends Component
         }
         $this->getInterface()->createAttach($data,$downloads);
         redirect(route('admin.tickets'));
+        } else {
+            $this->emit('toast', 'warning', 'permission denied !');
+        }
 
     }
     public function render()

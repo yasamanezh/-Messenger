@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Module\Page;
 use Livewire\Component;
 use App\Traits\Admin\UpdateSettinges;
 use App\Repositories\Contract\IPage;
+use Illuminate\Support\Facades\Gate;
 
 class Contact extends Component {
 
@@ -16,7 +17,7 @@ class Contact extends Component {
     public $typePage = 'contact page';
     public $Translateparams = ['title', 'short_content', 'content', 'meta_keyword', 'meta_title', 'meta_description', ['meta' => "call_text"]];
     public $IndexRoute = 'admin.pages';
-    public $gate = 'design';
+    public $gate = 'page';
     protected $rules = [
         "short_content" => "nullable|array|min:1",
         "short_content.en" => "nullable|string|min:3",
@@ -39,6 +40,9 @@ class Contact extends Component {
     }
 
     public function mount() {
+         if (!Gate::allows('show_page')) {
+             abort(403); 
+        } 
         $data = $this->getInterface()->findBySlug('contact');
         $this->starterDate($data, $this->Translateparams);
         if ($data) {

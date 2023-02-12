@@ -13,8 +13,8 @@ trait UpdateSettinges {
 
     public function starterDate($data, $params) {
 
-          foreach ($this->languages as $value) {
-             foreach ($params as $param) {
+        foreach ($this->languages as $value) {
+            foreach ($params as $param) {
                 if (is_array($param)) {
                     foreach ($param as $value1) {
                         $this->$value1[$value->language->code] = '';
@@ -24,7 +24,7 @@ trait UpdateSettinges {
                 }
             }
         }
-        
+
         if ($data) {
             foreach ($this->languages as $value) {
                 $code = $data->translate()->where('language_id', $value->language->id)->first();
@@ -46,7 +46,7 @@ trait UpdateSettinges {
         }
     }
 
-    public function getTranslate($params) {
+     public function getTranslate($params) {
         $translations = [];
         foreach ($this->languages as $lan) {
             $items = [];
@@ -54,19 +54,25 @@ trait UpdateSettinges {
             foreach ($params as $param) {
                 if (is_array($param)) {
                     foreach ($param as $value) {
-                       if($this->$value[$lan->language->code]){
+                        if($this->$value[$lan->language->code] && !empty($this->$value[$lan->language->code])){
                          $meta[$value] = $this->$value[$lan->language->code];  
                        }
-                        
                     }
-                } elseif ($this->$param[$lan->language->code])
-                    $items[$param] = $this->$param[$lan->language->code];
+                } elseif ($this->$param[$lan->language->code]){
+                    if(!empty( $this->$param[$lan->language->code])){
+                       $items[$param] = $this->$param[$lan->language->code]; 
+                    }
+                     
+                }
+                   
             }
 
-            $lang = [  'language_id' => $lan->language->id ];
+            $lang = [
+                'language_id' => $lan->language->id
+            ];
             if (!empty($items)) {
                 if (!empty($meta)) {
-                    $more =  ['meta'  => json_encode($meta)];
+                    $more = ['meta' => json_encode($meta)];
                     $translations[] = array_merge($items, $lang, $more);
                 } else {
                     $translations[] = array_merge($items, $lang);
@@ -77,6 +83,7 @@ trait UpdateSettinges {
                     $translations[] = array_merge($lang, $more);
                 } 
             }
+            
         }
         return $translations;
     }
@@ -92,15 +99,14 @@ trait UpdateSettinges {
         $this->uploadImage->storeAs($directory, $name);
         return("photos/modules/" . "$name");
     }
-    
+
     public function saveData() {
         $translates = $this->getTranslate($this->Translateparams);
         $items = $this->getItems();
-        if($this->module_id){
+        if ($this->module_id) {
             $this->getInterface()->update($this->module_id, $items, $translates);
-        }else{
-            $this->getInterface()->create( $items, $translates);
-
+        } else {
+            $this->getInterface()->create($items, $translates);
         }
         $this->createLog([
             'user_id' => auth()->user()->id,
@@ -111,7 +117,7 @@ trait UpdateSettinges {
 
     public function saveInfo() {
 
-      
+
         if (Gate::allows('edit_' . $this->gate)) {
             $this->validate();
             $this->saveData();

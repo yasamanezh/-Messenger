@@ -1,4 +1,5 @@
 <div>
+      <livewire:front.layout.menu :lang="$multiLanguage">
     <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
  <!-- Start Features Area -->
         <div class="features-area pt-100 pb-75">
@@ -66,5 +67,7 @@
             </div>
         </div>
         <!-- End Key Features Area --> 
+    <livewire:front.layout.footer :language="$multiLanguage">
+
         
 </div>

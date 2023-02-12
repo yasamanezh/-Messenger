@@ -1,14 +1,14 @@
 <div>
-    @section('title',__('Add Package'))
+    @section('title',__('Edit Package'))
     <div class="container-fluid">
         <div class="inner-body">
             <div class="page-header">
                 <div>
-                    <h2 class="main-content-title tx-24 mg-b-5">Add Package</h2><br>
+                    <h2 class="main-content-title tx-24 mg-b-5">Edit Package</h2><br>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.packs')}}">Packages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page"> Add Package</li>
+                        <li class="breadcrumb-item active" aria-current="page"> Edit Package</li>
                     </ol>
                 </div>
                 <div>
@@ -30,7 +30,7 @@
                     <div class="card custom-card">
                         <div class="card-body">
                             <div>
-                                <h6 class="main-content-label mb-1">Package</h6>
+                                <h6 class="main-content-label mb-1">Edit Package</h6>
                                 <p class="text-muted card-sub-title">It is necessary to fill in the fields marked with (*)</p>
                             </div>
                             <form id="formInfo" wire:submit.prevent="saveInfo()" role="form" >
@@ -110,15 +110,22 @@
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">*</span></label>
+                                                <label class="col-md-3 form-label"> title: <span class="tx-danger">{{$language->language->code == 'en' ? '*' :''}}</span></label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> month text:</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="month text " class="form-control @error('month_text') is-invalid @enderror"  wire:model.defer="month_text.{{$language->language->code}}">
+                                                    @error('month_text') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
+                                                    <label class="form-label col-sm-3">description:<span class="tx-danger">{{$language->language->code == 'en' ? '*' :''}}</span> </label>
                                                     <div class="col-sm-9">
                                                         <textarea wire:model.defer="description.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
                                                         @error('description')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror

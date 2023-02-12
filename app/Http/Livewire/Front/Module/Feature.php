@@ -9,8 +9,9 @@ class Feature extends Component
 {
     use Module;
     public $lang; 
-    public function mount() {
-        
+    public $multiLanguage;
+    public function mount($lang) {
+         $this->multiLanguage = $lang;
         $this->lang = app()->getLocale();
         $this->hasMeta =true;
         

@@ -11,7 +11,7 @@ class Post extends Model {
 
     use Translations;
 
-    protected $fillable = ['slug', 'image', 'thumbnail', 'status','archive', 'blog_id','user_id','related'];
+    protected $fillable = ['slug', 'image', 'thumbnail', 'status','archive', 'blog_id','userid','related'];
 
     use HasFactory;
 
@@ -25,7 +25,7 @@ class Post extends Model {
     }
     
     public function user() {
-        return $this->beLongsTo(User::class);
+        return $this->beLongsTo(User::class,'userid');
     }
     
 

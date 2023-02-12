@@ -9,7 +9,7 @@
                     <li class="breadcrumb-item active" aria-current="page">tickets</li>
                 </ol>
             </div>
-             <div>
+            <div>
                 <a class="btn btn-primary my-2 btn-icon-text" href="{{route('admin.ticket.add')}}">Add
                     <i class="fa fa-plus-circle"></i>
                 </a>
@@ -23,15 +23,15 @@
                     <div class="card-header p-3 tx-medium my-auto tx-white bg-primary">
                         tickets
                         @if(count($deleteItem) >=1 )
-                        <span class="float-left">
-                            <a href="" wire:click.prevent="confirmAllRemoval()" class="btn btn-sm btn-danger">حذف ({{count($deleteItem)}})</a>
+                        <span class="float-right">
+                            <a href="" wire:click.prevent="confirmAllRemoval()" class="btn btn-sm btn-danger">delete ({{count($deleteItem)}})</a>
                         </span>
                         @endif
                     </div>
                     <div class="card-body">
 
                         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                             <div class="container">
+                            <div class="container">
                                 <div class="row">
                                     <div class="col-sm-8">
                                         <div class="input-group mb-2">
@@ -89,6 +89,7 @@
                                                     <th scope="col">status</th>
                                                     <th scope="col">latest update</th>
                                                     <th scope="col">operation</th>
+                                                    <th scope="col">close</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -101,10 +102,13 @@
                                                         </label>
                                                     </td>
                                                     <td>{{ $ticket->created_at }}</td>
-                                                    <td>{{$ticket->part}}</td>
+                                                    <td>@if(\App\Models\Part::find($ticket->part))
+                                                        {{\App\Models\Part::find($ticket->part)->currentTranslate()->title}}
+                                                        @endif
+                                                    </td>
                                                     <td>{{$ticket->title}}</td>
                                                     <td>{{$this->status($ticket->id)}}</td>
-                                                    <td>{{ $ticket->updates_at}}</td>
+                                                    <td>{{ $ticket->updated_at}}</td>
                                                     <td>
                                                         <a href="{{route('admin.ticket.edit',$ticket->id)}}"  class="btn btn-sm btn-info">
                                                             <i class="fe fe-edit-2"></i>
@@ -113,12 +117,18 @@
                                                            class="btn btn-sm btn-danger">
                                                             <i class="fe fe-trash"></i>
                                                         </a>
-                                                        @if($ticket->status == 0)
-                                                        <a href=""  class="btn btn-sm btn-danger">بسته </a>
+
+                                                    </td>
+                                                    <td>
+
+                                                        @if($ticket->status == 'close')
+                                                        <a href=""  class="btn btn-sm btn-danger">close </a>
                                                         @else
-                                                        <a href=""   wire:click.prevent="close({{ $ticket->id }})" class="btn btn-sm btn-success">باز </a>
+                                                        <a href=""   wire:click.prevent="close({{ $ticket->id }})" class="btn btn-sm btn-success">open </a>
                                                         @endif
                                                     </td>
+
+
                                                 </tr>
                                                 @endforeach
                                             </tbody>
@@ -145,9 +155,9 @@
                 <div class="modal-header">
                     <h5>delete log</h5>
                 </div>
-                    <div class="modal-body">
-                        <h4>Are you sure you want to delete this item?</h4>
-                    </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to delete this item?</h4>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click.prevent="cancelDelete"><i
                             class="fa fa-times ml-1"></i> Cancel

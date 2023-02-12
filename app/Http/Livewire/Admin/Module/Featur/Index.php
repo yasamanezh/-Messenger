@@ -39,6 +39,7 @@ class Index extends Component
         if($data){
             $this->is_module   = true;
             $this->module_id   = $data->id;
+            $this->more_link   = $data->more_link;
         } 
     }
 

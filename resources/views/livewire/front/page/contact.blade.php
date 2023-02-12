@@ -1,4 +1,5 @@
 <div>
+    <livewire:front.layout.menu :lang="$multiLanguage">
     <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
         <!-- Start Contact Area -->
         <div class="contact-area ptb-100">
@@ -66,4 +67,5 @@
         </div>
         <!-- End Contact Area -->
         <livewire:front.page.layout.call :title="[$setting,$call_text]" />
+            <livewire:front.layout.footer :language="$multiLanguage">
 </div>

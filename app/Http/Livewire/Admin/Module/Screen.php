@@ -4,9 +4,13 @@ namespace App\Http\Livewire\Admin\Module;
 
 use Livewire\Component;
 use App\Traits\Admin\UpdateModule;
+use Livewire\WithFileUploads;
+use Image;
+
 class Screen extends Component {
 
     use UpdateModule;
+    use WithFileUploads;
 
     public $module_id, $short_content, $title, $languages;
     public $inputImage = [], $product_img = [], $uploadImage = [], $j = 0;
@@ -49,6 +53,7 @@ class Screen extends Component {
                 if (isset($this->uploadImage[$key])) {
                     $directory = "public/photos/modules/screen";
                     $name1 = $this->uploadImage[$key]->getClientOriginalName();
+                    Image::make($this->uploadImage[$key]->getRealPath())->resize(530, 1115)->save();
                     $this->uploadImage[$key]->storeAs($directory, $name1);
                     $images[] = [
                         'file' => "photos/modules/screen/" . "$name1",

@@ -4,10 +4,14 @@ namespace App\Http\Livewire\Admin\Module;
 
 use Livewire\Component;
 use App\Traits\Admin\UpdateModule;
+use Image;
+use Livewire\WithFileUploads;
+
 
 class Download extends Component {
 
     use UpdateModule;
+    use WithFileUploads;
 
     public $module_id, $uploadImage, $image, $content, $short_content, $title, $languages;
     public $is_module = false;
@@ -23,7 +27,13 @@ class Download extends Component {
         "title" => "required|array|min:1",
         "title.en" => "required|string|min:3",
     ];
-
+  public function uploadImage() {
+        $directory = "public/photos/modules";
+        $name = $this->uploadImage->getClientOriginalName();
+        Image::make($this->uploadImage->getRealPath())->resize(634, 615)->save();
+        $this->uploadImage->storeAs($directory, $name);
+        return("photos/modules/" . "$name");
+    }
     public function getItems() {
         if ($this->uploadImage) {
             return [

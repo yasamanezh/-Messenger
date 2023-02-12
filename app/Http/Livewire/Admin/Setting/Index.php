@@ -19,7 +19,7 @@ class Index extends Component {
     public $typePage = 'setting';
     public $Translateparams  =['content','meta_keyword','meta_title','meta_description'];
     public $IndexRoute       = 'admin.setting';
-    public $gate             ='design';
+    public $gate             ='setting';
     protected $rules = [
         'data.logo'           => 'nullable',
         'data.email1'           => 'nullable',

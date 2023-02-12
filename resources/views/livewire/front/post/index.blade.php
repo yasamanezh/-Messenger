@@ -1,4 +1,5 @@
 <div>
+     <livewire:front.layout.menu :lang="$multiLanguage">
         <!-- Start Page Title Area -->
         <div class="page-title-area">
             <div class="container">
@@ -75,4 +76,6 @@
         <!-- End Blog Details Area -->
 
      <livewire:front.module.download1 />
+         <livewire:front.layout.footer :language="$multiLanguage">
+
 </div>

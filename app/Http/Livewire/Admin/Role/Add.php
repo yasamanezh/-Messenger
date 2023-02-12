@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Admin\Role;
 
 use Illuminate\Support\Facades\Gate;
 use Livewire\Component;
-
 use App\Repositories\Contract\{
     ILog,
     IRole
@@ -23,6 +22,12 @@ class Add extends Component {
     public function createLog($data) {
 
         return app()->make(ILog::class)->create($data);
+    }
+
+    public function mount() {
+        if (!Gate::allows('show_role')) {
+            abort(403);
+        }
     }
 
     public function getInterface() {
@@ -55,7 +60,7 @@ class Add extends Component {
             $shows = $this->shows;
             $delets = $this->delets;
             $this->validate();
-            $data =['name'=> $this->name,'label'=> $this->label];
+            $data = ['name' => $this->name, 'label' => $this->label];
             $role = $this->getInterface()->create($data);
 
             $this->getInterface()->attachPermission($role, $edits);

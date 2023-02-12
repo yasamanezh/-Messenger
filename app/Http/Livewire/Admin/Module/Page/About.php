@@ -37,7 +37,7 @@ class About extends Component {
     public function mount() {
         $this->languages = $this->getInterface()->getLanguage();
 
-        if (!Gate::allows('show_design')) {
+        if (!Gate::allows('show_page')) {
             abort(403);
         }
         $data = $this->getInterface()->findBySlug('about');
@@ -97,7 +97,7 @@ class About extends Component {
 
     public function saveInfo() {
 
-        if (Gate::allows('edit_design')) {
+        if (Gate::allows('edit_page')) {
             $this->validate();
 
             $translates = $this->getTranslate();

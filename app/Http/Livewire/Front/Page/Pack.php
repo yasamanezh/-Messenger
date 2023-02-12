@@ -24,9 +24,7 @@ class Pack extends Component
 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
         $this->page = $this->getPage('pack');
- 
-        
-    }
+     }
 
     public function render()
     {

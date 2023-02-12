@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Add extends Component {
 
-    public $sort, $status, $category, $description, $image, $title, $price, $languages, $options = [];
+    public $sort, $status, $category, $description, $image, $month_text, $title, $price, $languages, $options = [];
     public $typePage = 'packages';
     protected $rules = [
         'sort' => 'required|integer|min:1',
@@ -22,6 +22,8 @@ class Add extends Component {
         "description.en" => "nullable|string|min:3",
         "title" => "required|array|min:1",
         "title.en" => "required|string|min:3",
+        "month_text" => "nullable|array|min:1",
+        "month_text.en" => "nullable|string|min:3",
     ];
 
     public function createLog($data) {
@@ -30,19 +32,40 @@ class Add extends Component {
     }
 
     public function getTranslate() {
-
+       
         $translations = [];
         foreach ($this->languages as $lan) {
+            
             $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
             $this->description[$lan->language->code] ? $content = $this->description[$lan->language->code] : $content = '';
-
-
-            $translations[] = [
+            if ($this->month_text[$lan->language->code]) {
+                
+                $more =json_encode(['month_text'=>$this->month_text[$lan->language->code]], true);
+            }else{
+                 $more='';
+            }
+            
+            if(!empty($title) || !empty($content) || !empty($more)){
+                if(!empty($more)){
+              $translations[] = [
+                'title' => $title,
+                'content' => $content,
+                'meta' => $more,
+                'language_id' => $lan->language->id
+            ];  
+            }else{
+                $translations[] = [
                 'title' => $title,
                 'content' => $content,
                 'language_id' => $lan->language->id
             ];
+            }
+            }
+
+            
+            
         }
+       
         return $translations;
     }
 
@@ -55,6 +78,7 @@ class Add extends Component {
     }
 
     public function saveInfo() {
+    
         if (Gate::allows('edit_pack')) {
             $this->validate();
             $translates = $this->getTranslate();
@@ -82,6 +106,7 @@ class Add extends Component {
         foreach ($this->languages as $value) {
             $this->title[$value->language->code] = '';
             $this->description[$value->language->code] = '';
+            $this->month_text[$value->language->code] = '';
         }
     }
 
@@ -92,7 +117,7 @@ class Add extends Component {
 
     public function render() {
         $Alloption = app()->make(IOption::class)->get();
-        
+
 
         return view('livewire.admin.package.add', compact('Alloption'))->layout('layouts.admin');
     }

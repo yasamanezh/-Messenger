@@ -128,8 +128,8 @@
                                                     <label class="form-label col-sm-3">description:<span class="tx-danger">*</span> </label>
                                                     <div class="col-sm-9">
                                                         <textarea  rows="10" class="form-control summernote-editor " id="summernote-editor{{$language->language->code}}" 
-                                                                    wire:model.defer="content.{{$language->language->code}}"
-                                                                  autocomplete="off">{!! $content[$language->language->code] !!}</textarea>
+                                                                    wire:model.defer="description.{{$language->language->code}}"
+                                                                  autocomplete="off">{!! $description[$language->language->code] !!}</textarea>
 
                                                     </div>
                                                 </div>
@@ -157,7 +157,7 @@
                                                         height: 200,
                                                         callbacks: {
                                                         onChange: function (contents, $editable) {
-                                                        @this.set("content." + "{{$language->language->code}}", contents);
+                                                        @this.set("description." + "{{$language->language->code}}", contents);
                                                         }
                                                         },
                                                 });

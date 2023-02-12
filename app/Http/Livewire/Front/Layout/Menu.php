@@ -74,11 +74,20 @@ class Menu extends Component {
     }
 
     public function getUrl($param) {
-        return str_replace(app()->getlocale(), $param, Request::url());
+        if($this->multiLanguage){
+            return str_replace(app()->getlocale(), $param, Request::url());
+        }else{
+            if($_SERVER['REQUEST_URI'] != '/'){
+                return str_replace($_SERVER['REQUEST_URI'],'/'.$param.$_SERVER['REQUEST_URI'],Request::url()); 
+            }else{
+               return Request::url().'/'.$param; 
+            }
+            
+        }
+       
     }
 
     public function mount($lang) {
-
         $this->multiLanguage = $lang;
         $this->setting = app()->make(ISetting::class)->first();
         $this->defaultLanguage = Language::findOrFail($this->setting->daf_lang);

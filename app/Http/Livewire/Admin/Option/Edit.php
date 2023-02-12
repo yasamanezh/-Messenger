@@ -4,31 +4,26 @@ namespace App\Http\Livewire\Admin\Option;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Gate;
-use App\Repositories\Contract\{ILog,IOption};
+use App\Traits\Admin\UpdateSettinges;
+use App\Repositories\Contract\IOption;
 
 class Edit extends Component
 {
-    public $option_id,$sort, $status, $title, $languages;
-    public $typePage  = 'package option';
+    use UpdateSettinges;
+    public $module_id,$sort, $status, $title, $languages;
+       public $typePage = 'package option';
+    public $Translateparams  =['title'];
+    public $IndexRoute       = 'admin.pack.options';
+    public $gate             ='option';
     
     protected $rules = [
         'status'             => 'required|integer|min:0|max:1',
         'sort'             => 'required|integer|min:1',
         "title"              => "required|array|min:1",
-        "title.*"            => "required|string|min:3",
+        "title.en"            => "required|string|min:3",
 
     ];
-    public function createLog($data) {
-        
-        return  app()->make(ILog::class)->create($data);
-    }
-    
-    public function getCurrentTitle() {
-        
-       return $this->getInterface()->getCurrentTitle($this->option_id); 
-    }
-
-        
+      
     public function getItems() {
         return [
             'sort'   => $this->sort,
@@ -42,56 +37,15 @@ class Edit extends Component
             abort(403);
         }
         $data            = $this->getInterface()->find($id);
-        $this->languages = $this->getInterface()->getLanguage();
-        $this->status    = $data->status;
-        $this->option_id   = $id;
-        $this->sort      = $data->sort;
-        
-        foreach ($this->languages as $value) {
-            $code = $data->translate()->where('language_id',$value->language->id)->first();
-            if($code){
-                $this->title[$value->language->code]            = $code->title  ;
-            }else{
-                $this->title[$value->language->code]            = ''  ;
-            }
+        $this->starterDate($data, $this->Translateparams);
+        if($data){
+           $this->status    = $data->status;
+        $this->module_id   = $id;
+        $this->sort      = $data->sort; 
         }
+        
     }
  
-    public function getTranslate() {
-        
-        $translations =[];
-        foreach ($this->languages as $lan) {
-
-            $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
-
-            $translations[] = [
-                'title'            => $title,
-                'language_id'      => $lan->language->id
-            ];
-        }
-        return $translations;
-        
-    }
-    
-    public function saveInfo() {
-        if (Gate::allows('edit_option')) {
-            $this->validate();
-            $translates = $this->getTranslate();
-            $items = $this->getItems();
-
-            $this->createLog([
-                'user_id' => auth()->user()->id,
-                'actionType' => 'edit ' . $this->typePage,
-                'url' => $this->getInterface()->getCurrentTitle($this->option_id),
-            ]);
-
-            $this->getInterface()->update($this->option_id, $items, $translates);
-            return (redirect(route('admin.pack.options')))->with('sucsess', 'sucsess');
-        } else {
-            $this->emit('toast', 'warning', 'permission denied !');
-        }
-    }
-
     public function getInterface() {
 
         return app()->make(IOption::class);

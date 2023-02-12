@@ -22,7 +22,7 @@
                                         <i class="ri-star-fill"></i>
                                     </div>
                                 </div>
-                                <p>‘{{$this->getTranslate('short_content',$module)}}’</p>
+                                <p>‘{{$this->getTranslate('short_content',$user)}}’</p>
                                 <div class="client-info">
                                     <img src="storage/{{$user->image}}" alt="user">
                                     <div class="title">

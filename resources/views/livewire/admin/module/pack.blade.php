@@ -84,13 +84,7 @@
                                                     @error('more_text') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <label class="col-md-3 form-label"> see more buttom link:</label>
-                                                <div class="col-md-9">
-                                                    <input type="text" placeholder="see more buttom link " class="form-control @error('more_link') is-invalid @enderror"  wire:model.defer="more_link.{{$language->language->code}}">
-                                                    @error('more_link') <div class="invalid-feedback">  {{ $message }} </div> @enderror
-                                                </div>
-                                            </div>
+                                            
                                             <div class="form-group">
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">short description:  @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>

@@ -21,7 +21,8 @@
                                         <h3>{{$this->getTranslate('title',$pack)}}</h3>
                                         <p>{{$this->getTranslate('short_content',$pack)}}</p>
                                     </div>
-                                    <span class="popular">Most Popular</span>
+                                    
+                                    <span class="popular">{{$loop->first ? 'Most Popular' : ''}}</span>
                                     <div class="price">
                                         ${{$pack->price}} <span>/Month</span>
                                     </div>

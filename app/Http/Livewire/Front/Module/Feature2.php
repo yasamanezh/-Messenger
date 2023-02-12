@@ -18,8 +18,9 @@ class Feature2 extends Component
     public function render()
     {
         $type ='feature';
-        $keyas =   app()->make(IModuleOption::class)->skipTake($type,0,6);
+        $keyas =   app()->make(IModuleOption::class)->skipTake($type,8,6);
         $module  = $this->getInterface()->firstByType('feature2');
+        
       
         return view('livewire.front.module.feature2', compact('module','keyas'));
     }

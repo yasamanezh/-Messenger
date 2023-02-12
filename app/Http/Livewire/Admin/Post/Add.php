@@ -7,28 +7,28 @@ use App\Repositories\Contract\{
     ILog,
     IPost
 };
-
 use Illuminate\Support\Facades\Gate;
 use Livewire\WithFileUploads;
 use Livewire\Component;
+use Image;
 
 class Add extends Component {
 
     use WithFileUploads;
 
-    public $slug, $status,$related=[], $category, $description, $image, $title, $meta_keyword = [], $meta_title = [], $meta_description = [], $languages;
+    public $slug, $status, $related = [], $category, $description, $image, $title, $meta_keyword = [], $meta_title = [], $meta_description = [], $languages;
     public $typePage = 'post';
     protected $rules = [
-        'slug'               => 'required|string|min:2|max:199|unique:posts,slug',
-        'category'           => 'required|exists:blogs,id',
-        'image'              => 'required|image',
-        'status'             => 'required|integer|min:0|max:1',
-        "description"        => "required|array|min:1",
-        "description.en"     => "required|string",
-        "title"              => "required|array|min:1",
-        "title.en"           => "required|string|min:3",
-        "meta_keyword.en"     => "nullable|string|min:3",
-        "meta_title.en"       => "nullable|string|min:3",
+        'slug' => 'required|string|min:2|max:199|unique:posts,slug',
+        'category' => 'required|exists:blogs,id',
+        'image' => 'required|image',
+        'status' => 'required|integer|min:0|max:1',
+        "description" => "required|array|min:1",
+        "description.en" => "required|string",
+        "title" => "required|array|min:1",
+        "title.en" => "required|string|min:3",
+        "meta_keyword.en" => "nullable|string|min:3",
+        "meta_title.en" => "nullable|string|min:3",
         "meta_description.en" => "nullable|string|min:3",
     ];
 
@@ -36,6 +36,7 @@ class Add extends Component {
 
         $directory = "public/photos/posts";
         $name = $this->image->getClientOriginalName();
+        Image::make($this->image->getRealPath())->resize(865, 645)->save();
         $this->image->storeAs($directory, $name);
         return("photos/posts/" . "$name");
     }
@@ -65,36 +66,41 @@ class Add extends Component {
             if ($this->meta_description && $this->meta_description[$lan->language->code]) {
                 $meta_description = $this->meta_description[$lan->language->code];
             }
-
-            $translations[] = [
+              if(!empty($title) || !empty($content) || !empty($meta_title)|| !empty($meta_keyword)|| !empty($meta_description) ){
+              
+              $translations[] = [
                 'title' => $title,
                 'content' => $content,
                 'meta_title' => $meta_title,
                 'meta_keyword' => $meta_keyword,
                 'meta_description' => $meta_description,
                 'language_id' => $lan->language->id
-            ];
+            ]; 
+            
+            }
+
+            
         }
         return $translations;
     }
 
     public function getItems() {
         $now = now()->format('M Y');
-        $value =[$now];
+        $value = [$now];
         $comma_separated = implode(",", $this->related);
         return [
             'slug' => $this->slug,
             'status' => $this->status,
             'image' => $this->uploadImage(),
             'blog_id' => $this->category,
-            'archive'=> json_encode($value),
-            'related'=> $comma_separated,
-            'user_id'=> auth()->user()->id
+            'archive' => json_encode($value),
+            'related' => $comma_separated,
+            'userid' => auth()->user()->id
         ];
     }
 
     public function saveInfo() {
-        
+
         if (Gate::allows('edit_post')) {
             $this->validate();
             $translates = $this->getTranslate();
@@ -114,7 +120,7 @@ class Add extends Component {
     }
 
     public function mount() {
-      
+
         if (!Gate::allows('show_post')) {
             abort(403);
         }
@@ -137,11 +143,11 @@ class Add extends Component {
     }
 
     public function render() {
-        $posts       = app()->make(IPost::class)->get();
-     
+        $posts = app()->make(IPost::class)->get();
+
         $categories = app()->make(iBlog::class)->all('')->get();
 
-        return view('livewire.admin.post.add', compact('categories','posts'))->layout('layouts.admin');
+        return view('livewire.admin.post.add', compact('categories', 'posts'))->layout('layouts.admin');
     }
 
 }

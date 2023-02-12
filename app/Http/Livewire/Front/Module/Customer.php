@@ -13,7 +13,7 @@ class Customer extends Component
     public function render()
     { 
         $module = $this->getInterface()->firstByType('client');
-        $users =   app()->make(IModuleOption::class)->getByType('client',true);
+        $users =   $this->getOptionInterface('client');
  
         return view('livewire.front.module.customer', compact('module','users'));
     }

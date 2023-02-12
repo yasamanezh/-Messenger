@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin\Module;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Traits\Admin\UpdateModule;
+use Image;
+
 
 class Video extends Component
 {   
@@ -28,6 +30,14 @@ class Video extends Component
     ];
     
   
+    public function uploadImage() {
+        $directory = "public/photos/posts";
+        $name = $this->uploadImage->getClientOriginalName();
+        Image::make($this->uploadImage->getRealPath())->resize(750, 500)->save();
+        $this->uploadImage->storeAs($directory, $name);
+        return("photos/posts/" . "$name");
+    }
+
      public function getItems() {
          if($this->uploadImage){
              return [

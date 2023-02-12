@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Module\Page;
 use Livewire\Component;
 use App\Traits\Admin\UpdateSettinges;
 use App\Repositories\Contract\IPage;
+use Illuminate\Support\Facades\Gate;
 
 class Pack extends Component {
 
@@ -17,7 +18,7 @@ class Pack extends Component {
     public $typePage        = 'package page';
     public $Translateparams = ['title','meta_keyword','meta_description'];
     public $IndexRoute      = 'admin.pages';
-    public $gate            = 'design';
+    public $gate            = 'page';
     
     public function getInterface() {
         return app()->make(IPage::class);
@@ -35,6 +36,9 @@ class Pack extends Component {
     }
 
     public function mount() {
+         if (!Gate::allows('show_page')) {
+            abort(403);
+        }
         $data = $this->getInterface()->findBySlug('pack');
         $this->starterDate($data, $this->Translateparams);
         if ($data) {

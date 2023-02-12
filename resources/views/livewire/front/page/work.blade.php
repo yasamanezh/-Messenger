@@ -1,4 +1,5 @@
 <div>
+          <livewire:front.layout.menu :lang="$multiLanguage">
     <livewire:front.page.layout.title :title="$this->getTranslate('title',$page)" />
           <!-- Start How It Works Area -->
         <div class="how-it-works-area ptb-100">
@@ -26,6 +27,8 @@
         </div>
         <!-- End How It Works Area -->
            <livewire:front.module.download1 />
+               <livewire:front.layout.footer :language="$multiLanguage">
+
 
 
 </div>
