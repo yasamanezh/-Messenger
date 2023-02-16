@@ -20,9 +20,9 @@ class About extends Component {
     }
    public function getUrl($param) {
         if($this->multiLanguage){
-            return $_SERVER['APP_URL'].'/'.app()->getlocale().$param;
+            return env('API_DOMAIN').'/'.app()->getlocale().$param;
         }else{
-            return $_SERVER['APP_URL'].$param;
+            return env('API_DOMAIN').$param;
         }
        
     }

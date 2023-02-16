@@ -63,10 +63,10 @@
                                         @foreach($pharas as $phara)
                                         <tr id="image-row5">  
                                             <td class="text-left" style="width: 50%">
-                                                <div class="form-control" >{{$phara->key}}<div>
+                                                <div class="border p-2" >{{$phara->key}}<div>
                                             </td>
                                             <td class="text-right">
-                                                    <input type="text" wire:model.defer="phara.{{$phara->id}}" class="form-control" placeholder="translation"> 
+                                                <textarea type="text" wire:model.defer="phara.{{$phara->id}}" class="form-control" placeholder="translation"></textarea> 
                                             </td> 
                                         @endforeach
                                         </tr>

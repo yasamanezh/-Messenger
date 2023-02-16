@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Helper\EmailConfig;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-     
+     $this->app->bind('EmailConfig',function (){
+            return new EmailConfig();
+    });
+        
     }
 
     /**

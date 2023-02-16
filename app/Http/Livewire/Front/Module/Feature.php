@@ -18,13 +18,14 @@ class Feature extends Component {
         $this->multiLanguage = $setting[0];
         $this->setting = $setting[1];
         $this->hasMeta = true;
+       
     }
 
     public function getUrl($param) {
         if ($this->multiLanguage) {
-            return $_SERVER['APP_URL'] . '/' . app()->getlocale() . $param;
+            return env('API_DOMAIN') . '/' . app()->getlocale() . $param;
         } else {
-            return $_SERVER['APP_URL'] . $param;
+            return env('API_DOMAIN') . $param;
         }
     }
 
