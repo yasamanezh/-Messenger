@@ -18,7 +18,7 @@
                     <div class="spinner-border text-primary" role="status"></div>
                 </div>
                 <a data-toggle="tooltip" href="{{route('admin.roles')}}" class="btn btn-warning text-white"
-                   data-original-title="برگشت">
+                   data-original-title="back">
                     <i class="fa fa-backward"></i>
                 </a>
             </div>

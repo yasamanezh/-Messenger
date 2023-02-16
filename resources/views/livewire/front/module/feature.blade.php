@@ -1,5 +1,5 @@
 <div>
-    @if($module)
+   
        <!-- Start Features Area -->
         <div class="features-area pt-100 pb-75">
             <div class="container">
@@ -10,8 +10,9 @@
                             <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                             <p>{{$this->getTranslate('content',$module)}}</p>
                             <div class="btn-box">
-                                <livewire:front.module.free-trial />
-                                <a href="{{$multiLanguage ? $lang.'/'.$module->more_link  : '/'.$module->more_link}}" class="link-btn">{{$this->getTranslate('more_text',$module,'true')}}</a>
+                                <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Start Free Trial')}}</a>
+
+                                <a href="{{$this->getUrl($module->more_link)}}" class="link-btn">{{$this->getTranslate('more_text',$module,'true')}}</a>
                             
                             
                             </div>
@@ -63,6 +64,5 @@
             </div>
         </div>
         @endif
-        <!-- End Features Area -->
-        @endif
+        
 </div>

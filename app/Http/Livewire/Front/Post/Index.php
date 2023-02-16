@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Front\Post;
 
 use Livewire\Component;
-use App\Traits\Module;
+use App\Traits\Translate;
 use App\Repositories\Contract\IPost;
 
 class Index extends Component {
 
-    use Module;
+    use Translate;
 
     public $blog, $post;
     public $multiLanguage = false;
@@ -16,9 +16,11 @@ class Index extends Component {
     public function mount($language = null, $id = null) {
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
         $this->post = app()->make(IPost::class)->findBySlug($id);
-       if(!$this->post){
+        if(!$this->post){
            abort(404);
        }
+        $this->seo($this->post);
+       
     }
 
     public function render() {

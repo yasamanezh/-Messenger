@@ -9,7 +9,7 @@ use App\Traits\{
 };
 use App\Repositories\Contract\{
 
-    IOption,IPack
+    IOption,IPack,ISetting
  
 };
 
@@ -24,13 +24,17 @@ class Pack extends Component
 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
         $this->page = $this->getPage('pack');
+        if(!$this->page){
+            abort(404);
+        }
+        $this->seo($this->page );
      }
 
     public function render()
-    {
+    {      $setting = app()->make(ISetting::class)->first();
          $module = $this->getInterface()->firstByType('pack');
          $packs  = app()->make(IPack::class)->getPacks();
 
-        return view('livewire.front.page.pack', compact('module','packs'))->layout('layouts.front');
+        return view('livewire.front.page.pack', compact('module','packs','setting'))->layout('layouts.front');
     }
 }

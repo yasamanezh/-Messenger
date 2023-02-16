@@ -25,7 +25,7 @@
                             <li><i class="ri-time-line"></i> {{$post->created_at->format('M d , Y')}}</li>
                             <li><i class="ri-message-2-line"></i>
                                 <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$post->slug]) : route('front.post',$post->slug)}}">
-                                    ({{count($post->comments)}}) Comment</a></li>
+                                    ({{count($post->comments)}}) {{__('Comments')}}</a></li>
                         </ul>
                         <h3>
                             <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$post->slug]) : route('front.post',$post->slug)}}">
@@ -45,7 +45,7 @@
         <aside class="widget-area">
             <div class="widget widget_search">
                 <form class="search-form">
-                    <label><input type="search" wire:model.debounce.1000="search" class="search-field" placeholder="Search..."></label>
+                    <label><input type="search" wire:model.debounce.1000="search" class="search-field" placeholder="{{__('Search')}}..."></label>
                     <button type="submit"><i class="ri-search-2-line"></i></button>
                 </form>
             </div>

@@ -13,7 +13,7 @@
                         <div class="single-blog-wrap-post">
                             <div class="image">
                                 <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}" class="d-block">
-                                    <img src="storage/{{$blog->image}}" alt="blog">
+                                    <img src="storage/{{$blog->image}}" alt="{{ \Illuminate\Support\Str::limit($this->getTranslate('title',$blog),80,'...') }}">
                                 </a>
                                 <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}" class="tag">{{$this->getTranslate('title',$blog->blog)}}</a>
                             </div>

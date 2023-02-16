@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Index extends Component {
 
-    public $social, $telegram, $whatsapp, $twitter, $linkdin, $instagram, $email, $success = false;
+    public $social, $telegram, $whatsapp, $twitter, $linkdin, $instagram, $email,$github, $success = false;
 
     public function mount() {
         if (!Gate::allows('show_setting')) {

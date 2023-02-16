@@ -20,6 +20,7 @@ class Index extends Component {
 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
         $this->page = $this->getPage($id);
+        $this->seo($this->page );
         if(!$this->page){
             abort(404);
         }

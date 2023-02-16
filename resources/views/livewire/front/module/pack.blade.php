@@ -24,10 +24,10 @@
                                     
                                     <span class="popular">{{$loop->first ? 'Most Popular' : ''}}</span>
                                     <div class="price">
-                                        ${{$pack->price}} <span>/Month</span>
+                                        ${{$pack->price}} <span>{{$this->getTranslate('month_text',$pack,'true')}}</span>
                                     </div>
                                     <div class="pricing-btn">
-                                        <a href="#" class="default-btn">Purchase Plan</a>
+                                        <a href="{{$setting->app_link}}" class="default-btn">{{__('Purchase Plan')}}</a>
                                     </div>
                                     <ul class="features-list">
                                 @foreach($pack->options as $option)

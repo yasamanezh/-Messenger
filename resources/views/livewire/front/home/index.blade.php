@@ -1,15 +1,15 @@
 <div>
     <livewire:front.layout.menu :lang="$multiLanguage">
-    <livewire:front.module.top />
-    <livewire:front.module.feature :lang="$multiLanguage" />
-    <livewire:front.module.about :lang="$multiLanguage" />
-    <livewire:front.module.feature2 />
+    <livewire:front.module.top :setting="$setting" />
+    <livewire:front.module.feature :setting="[$multiLanguage,$setting]" />
+    <livewire:front.module.about :setting="[$multiLanguage,$setting]" />
+    <livewire:front.module.feature2 :setting="[$multiLanguage,$setting]" />
     <livewire:front.module.screen />
-    <livewire:front.module.video />
+    <livewire:front.module.video :setting="[$multiLanguage,$setting]"/>
     <livewire:front.module.counter />
-    <livewire:front.module.download />
+    <livewire:front.module.download :setting="$setting"/>
     <livewire:front.module.customer />
-    <livewire:front.module.pack />
+    <livewire:front.module.pack :setting="$setting" />
     <livewire:front.module.blog :lang="$multiLanguage" />
     <livewire:front.layout.footer :language="$multiLanguage">
 </div>

@@ -138,19 +138,23 @@ return [
         ],
     ],
     'attributes' => [
-        'title' => [
-            '*' => 'english title',
-        ],
-        'description' => [
-            '*' => ' description',
-        ],
-        'short_description' => [
-            '*' => 'short description',
-        ],
-        'meta_title' => [
-            '*' => 'meta title',
-        ],
-        'meta_keyword' => 'meta keyword',
+        'title.en' => 'english title',
+        'name.en' => 'english user name',
+        'job.en' => 'english user job',
+        'description.en' => ' english description',
+        'content.en' => 'english description',
+         'short_content.en' => 'english short description',
+         'more_text.en' => 'english show more text',
+        'short_description.en' =>'short description',
+        'meta_title.en' => 'english meta title',
+        'content' => 'description',
+        'short_content' => 'short description',
         'meta_description' => 'meta description',
+        'meta_description.en' => 'english meta description',
+        'meta_keyword' => 'meta keyword',
+        'meta_keyword.en' => 'english meta keyword',
+        'more_text' => 'show more text ',
+        'more_link' => 'show more link ',
+        'call_text'=>'call us text'
     ],
 ];

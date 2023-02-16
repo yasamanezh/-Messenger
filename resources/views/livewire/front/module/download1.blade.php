@@ -11,26 +11,26 @@
                                 <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                                 <p>{{$this->getTranslate('content',$module)}}</p>
                                 <div class="btn-box">
-                                    <a href="#" class="playstore-btn" target="_blank">
-                                        <img src="{{asset('front/ltr/assets/img/play-store.png')}}" alt="image">
-                                        Get It On
-                                        <span>Google Play</span>
+                                    <a href="{{$setting->google_play_link}}" class="playstore-btn" target="_blank">
+                                        <img src="{{asset('front/ltr/assets/img/play-store.png')}}" alt="{{__('Google Play')}}">
+                                        {{__('Get It On')}}
+                                        <span>{{__('Google Play')}}</span>
                                     </a>
-                                    <a href="#" class="applestore-btn" target="_blank">
-                                        <img src="{{asset('front/ltr/assets/img/apple-store.png')}}" alt="image">
-                                        Download on the
-                                        <span>Apple Store</span>
+                                    <a href="{{$setting->app_store_link}}" class="applestore-btn" target="_blank">
+                                        <img src="{{asset('front/ltr/assets/img/apple-store.png')}}" alt="{{__('Apple Store')}}">
+                                        {{__('Download on the')}}
+                                        <span>{{__('Apple Store')}}</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="app-download-image" data-aos="fade-up">
-                                <img src="/storage/{{$module->file1}}" alt="app-img">
+                                <img src="/storage/{{$module->file1}}" alt="{{$this->getTranslate('title',$module)}}">
                             </div>
                         </div>
                     </div>
-                    <div class="shape5"><img src="{{asset('front/ltr/assets/img/shape/shape4.png')}}" alt="shape4"></div>
+                    <div class="shape5"><img src="{{asset('front/ltr/assets/img/shape/shape4.png')}}" alt="{{$this->getTranslate('title',$module)}}"></div>
                     <div class="lines">
                         <div class="line"></div>
                         <div class="line"></div>

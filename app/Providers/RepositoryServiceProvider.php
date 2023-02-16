@@ -22,6 +22,9 @@ class RepositoryServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        $this->app->bind(\App\Repositories\Contract\IPhrase::class, \App\Repositories\Elequent\PhraseRepository::class);
+        $this->app->bind(\App\Repositories\Contract\INews::class, \App\Repositories\Elequent\NewsRepository::class);
+        $this->app->bind(\App\Repositories\Contract\ITranslation::class, \App\Repositories\Elequent\TranslationRepository::class);
         $this->app->bind(\App\Repositories\Contract\IComment::class, \App\Repositories\Elequent\CommentRepository::class);
         $this->app->bind(\App\Repositories\Contract\IContact::class, \App\Repositories\Elequent\ContactRepository::class);
         $this->app->bind(\App\Repositories\Contract\IPage::class, \App\Repositories\Elequent\PageRepository::class);

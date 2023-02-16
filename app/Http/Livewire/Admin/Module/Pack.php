@@ -21,7 +21,7 @@ class Pack extends Component
         "title"                => "required|array|min:1",
         "title.en"              => "required|string|min:3",      
         "more_link"             => "nullable|string",
-       "more_text"             => "nullable|array|min:1",
+        "more_text"             => "nullable|array|min:1",
         "more_text.en"          => "nullable|string|min:3",
     ];
     

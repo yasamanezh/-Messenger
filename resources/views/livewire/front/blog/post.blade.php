@@ -1,6 +1,6 @@
  <div class="widget widget_pakap_posts_thumb">
         
-        <h3 class="widget-title">Popular Posts</h3>
+        <h3 class="widget-title">{{__('Popular Posts')}} </h3>
         @foreach($posts as $blog)
         <article class="item">
             <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}" class="thumb">

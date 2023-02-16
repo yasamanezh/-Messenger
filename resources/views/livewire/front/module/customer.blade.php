@@ -24,7 +24,7 @@
                                 </div>
                                 <p>‘{{$this->getTranslate('short_content',$user)}}’</p>
                                 <div class="client-info">
-                                    <img src="storage/{{$user->image}}" alt="user">
+                                    <img src="storage/{{$user->image}}" alt="{{$this->getTranslate('name',$user,'true')}}">
                                     <div class="title">
                                         <h3>{{$this->getTranslate('name',$user,'true')}}</h3>
                                         <span>{{$this->getTranslate('job',$user,'true')}}</span>

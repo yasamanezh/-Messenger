@@ -63,14 +63,12 @@ trait General {
 
     public function delete() {
         if (Gate::allows('delete_' . $this->gate)) {
-            $name = $this->getInterface()->find($this->IdBeingRemoved)->name;
-
             $this->getInterface()->delete($this->IdBeingRemoved);
 
             $this->createLog([
                 'user_id' => auth()->user()->id,
                 'actionType' => 'delete ' . $this->typePage,
-                'url' => $name,
+                'url' =>  $this->typePage,
             ]);
             $this->dispatchBrowserEvent('hide-delete-modal');
             $this->emit('toast', 'success', 'success !');

@@ -1,5 +1,5 @@
 <div class="widget widget_categories">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">{{__('Categories')}}</h3>
     <ul>
         @foreach($categories as $category)
         <li>

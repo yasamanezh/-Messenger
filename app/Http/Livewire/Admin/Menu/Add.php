@@ -16,7 +16,7 @@ use Livewire\Component;
 class Add extends Component {
     use CreateSettinges;
 
-    public $slug, $status, $type, $image, $title, $sort, $languages, $parent;
+    public $slug, $status, $type, $image, $title, $sort, $languages, $parent,$show_in_header,$show_in_footer;
     public $typePage = 'menus';
     public $Translateparams  =['title'];
     public $IndexRoute       = 'admin.menus';
@@ -34,6 +34,8 @@ class Add extends Component {
     public function getItems() {
         return [
             'slug' => $this->slug,
+            'show_in_footer' => $this->show_in_footer,
+            'show_in_header' => $this->show_in_header,
             'status' => $this->status,
             'type' => $this->type,
             'sort' => $this->sort,

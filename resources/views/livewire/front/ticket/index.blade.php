@@ -1,6 +1,29 @@
 <div>
+     @section('title',__('Tickets'))
     <livewire:front.layout.menu :lang="$multiLanguage">
-        <livewire:front.page.layout.title :title="__('Tickets')" />
+        <!-- Start Page Title Area -->
+        <div class="page-title-area">
+            <div class="container">
+                <div class="page-title-content">
+                    <h2>{{__('Tickets')}}</h2>
+                    <ul>
+                        <li><a href="{{$multiLanguage ? route('front.home.language',app()->getlocale()) : route('front.home')}}">{{__('Home')}}</a></li>
+                        <li>{{__('Tickets')}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="banner-shape1"><img src="{{asset('front/ltr/assets/img/shape/shape9.png')}}" alt="{{__('Tickets')}}"></div>
+        </div>
+        <!-- End Page Title Area -->
+
         <div class="checkout-area ptb-100">
             <div class="container">
                 <form>
@@ -16,12 +39,12 @@
                                                role="grid" aria-describedby="example2_info">
                                             <thead >
                                                 <tr>
-                                                    <th class="wd-lg-20p"> <span>crate date</span> </th>
-                                                    <th class="wd-lg-20p"> <span>subject</span> </th>
-                                                    <th class="wd-lg-20p"> <span>part</span> </th>
-                                                    <th scope="col">latest update</th>
-                                                    <th scope="col">status</th>
-                                                    <th scope="col">operation</th>
+                                                    <th class="wd-lg-20p"> <span>{{__('create date')}}</span> </th>
+                                                    <th class="wd-lg-20p"> <span>{{__('subject')}}</span> </th>
+                                                    <th class="wd-lg-20p"> <span>{{__('part')}}</span> </th>
+                                                    <th scope="col">{{__('latest update')}}</th>
+                                                    <th scope="col">{{__('status')}}</th>
+                                                    <th scope="col">{{__('operation')}}</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

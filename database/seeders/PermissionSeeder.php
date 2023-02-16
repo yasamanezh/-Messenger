@@ -16,6 +16,21 @@ class PermissionSeeder extends Seeder {
      */
     public function run() {
 
+ Permission::create([
+            'name' => 'show_language',
+            'label' => 'show',
+            'description' => 'languages',
+        ]);
+        Permission::create([
+            'name' => 'edit_language',
+            'label' => 'edit',
+            'description' => 'language',
+        ]);
+        Permission::create([
+            'name' => 'delete_language',
+            'label' => 'delete',
+            'description' => 'language',
+        ]);
 
         Permission::create([
             'name' => 'show_contact',
@@ -223,16 +238,6 @@ class PermissionSeeder extends Seeder {
 
 
         Permission::create([
-            'name' => 'edit_tools',
-            'label' => 'edit',
-            'description' => 'tools',
-        ]);
-        Permission::create([
-            'name' => 'show_tools',
-            'label' => 'show',
-            'description' => 'tools',
-        ]);
-        Permission::create([
             'name' => 'show_user',
             'label' => 'show',
             'description' => 'user',
@@ -249,7 +254,6 @@ class PermissionSeeder extends Seeder {
             'label' => 'delete',
             'description' => 'user',
         ]);
-        
          Permission::create([
             'name' => 'show_setting',
             'label' => 'show',

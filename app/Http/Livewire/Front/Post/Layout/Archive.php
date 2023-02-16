@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Front\Post\Layout;
 
 use Livewire\Component;
-use App\Repositories\Contract\IPost;
 
 class Archive extends Component
 {

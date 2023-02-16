@@ -68,7 +68,7 @@
                                                 </th>
                                                 <th > user </th>
                                                 <th>Action</th>
-                                                <th > link </th>
+                                                
                                                 <th>
                                                    create 
                                                     <span wire:click="sortBy('created_at')" class="float-right text-sm" style="cursor: pointer;">
@@ -90,7 +90,7 @@
                                                         </td>
                                                         <td>{{\App\Models\User::where('id',$info->user_id)->pluck('name')->first()}} </td>
                                                         <td>{{$info->actionType}}  </td>
-                                                        <td>{{$info->url}}  </td>
+                                                        
                                                         <td>{{ $info->created_at }}</td>
                                                         <td>
                                                             <a href="" wire:click.prevent="confirmRemoval({{ $info->id }})" class="btn btn-sm btn-danger">

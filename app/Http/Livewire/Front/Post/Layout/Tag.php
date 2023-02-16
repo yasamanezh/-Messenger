@@ -3,11 +3,11 @@
 namespace App\Http\Livewire\Front\Post\Layout;
 
 use Livewire\Component;
-use App\Traits\Module;
+use App\Traits\Translate;
 
 class Tag extends Component
 {
-      use Module;
+      use Translate;
     public $tags;
     public function mount($post) {
         

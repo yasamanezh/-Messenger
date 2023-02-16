@@ -17,6 +17,8 @@ class Index extends Component {
 
     public function mount($language = null) {
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
+       
+      
     }
 
     protected $paginationTheme = 'bootstrap';
@@ -36,10 +38,9 @@ class Index extends Component {
 
     public function render(Ipart $part) {
         $parts = $part->all('')->get();
-        $tickets = Ticket::latest()->paginate(12);
+        $tickets = Ticket::where('user_id', auth()->user()->id)->latest()->paginate(12);
 
-
-        return view('livewire.front.ticket.index', compact('tickets', 'parts'))->layout('layouts.app');
+        return view('livewire.front.ticket.index', compact('tickets', 'parts'));
     }
 
 }

@@ -26,7 +26,7 @@
             </div>
             @endif
             <div class="key-features-btn">
-                <livewire:front.module.free-trial />
+                <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Start Free Trial')}}</a>
             </div>
         </div>
     </div>

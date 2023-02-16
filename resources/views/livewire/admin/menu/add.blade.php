@@ -6,7 +6,7 @@
                 <div>
                     <h2 class="main-content-title tx-24 mg-b-5">Add Menu</h2><br>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('Dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.menus')}}">Menu</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Add Menu</li>
                     </ol>
@@ -62,11 +62,12 @@
                                                 <label class="col-sm-3 form-label">sort:</label>
                                                 <div class="col-sm-9">
                                                     <input class="form-control" placeholder="sort" wire:model.defer="sort" >
-                                                       
+
                                                 </div>
                                                 @error('sort') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
-                                             <div class="form-group row">
+                                            
+                                            <div class="form-group row">
                                                 <label class="col-sm-3 form-label">parent:<span class="tx-danger">*</span></label>
                                                 <div class="col-sm-9">
                                                     <select class="form-control" wire:model.defer="parent" >
@@ -88,9 +89,11 @@
                                                         <option value="weblog">Weblog</option>
                                                         <option value="post">posts</option>
                                                         <option value="home">home page</option>
+                                                        <option value="contact">contact</option>
+                                                        <option value="about">about</option>
                                                         <option value="faq">help center page</option>
                                                         <option value="feature">feature page</option>
-                                                         <option value="work">how to work page</option>
+                                                        <option value="work">how to work page</option>
                                                         <option value="pack">packages</option>
                                                         <option value="page">other page</option>
                                                     </select>
@@ -135,8 +138,36 @@
                                                 </div>
                                                 @error('slug') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
+                                            
                                             @endif
                                             @endif
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-label">show in header :</label>
+                                                <div class="col-sm-9">
+                                                    <div class="checkbox">
+                                                        
+                                                    </div>
+                                                    <select class="form-control" wire:model.defer="show_in_header" >
+                                                        <option value="">select</option>
+                                                        <option value="1">Yes</option>
+                                                        <option value="0">NO</option>
+                                                    </select>
+
+                                                </div>
+                                                @error('show_in_header') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-label">show in footer :</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" wire:model.defer="show_in_footer" >
+                                                        <option value="">select</option>
+                                                       <option value="1">Yes</option>
+                                                        <option value="0">NO</option>
+                                                    </select>
+                                                   
+                                                </div>
+                                                @error('show_in_footer') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
                                         </div>
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">

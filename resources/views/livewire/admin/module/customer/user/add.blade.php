@@ -6,7 +6,7 @@
                 <div>
                     <h2 class="main-content-title tx-24 mg-b-5">Add Client</h2><br>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('Dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.customer.users')}}">Client</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Add Client</li>
                     </ol>

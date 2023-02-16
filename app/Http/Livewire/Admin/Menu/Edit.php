@@ -17,7 +17,7 @@ class Edit extends Component {
 
     use UpdateSettinges;
 
-    public $module_id, $slug, $status, $type, $image, $title, $sort, $languages, $parent;
+    public $module_id, $slug, $status, $type, $image, $title, $sort, $languages, $parent,$show_in_footer,$show_in_header;
     public $typePage = 'menus';
     public $Translateparams = ['title'];
     public $IndexRoute = 'admin.menus';
@@ -34,6 +34,8 @@ class Edit extends Component {
     public function getItems() {
         return [
             'slug' => $this->slug,
+            'show_in_footer' => $this->show_in_footer,
+            'show_in_header' => $this->show_in_header,
             'status' => $this->status,
             'type' => $this->type,
             'sort' => $this->sort,
@@ -49,12 +51,15 @@ class Edit extends Component {
         $this->starterDate($data, $this->Translateparams);
         if ($data) {
             $this->status = $data->status;
+            $this->show_in_footer = $data->show_in_footer;
+            $this->show_in_header= $data->show_in_header;
             $this->module_id = $id;
             $this->slug = $data->slug;
             $this->type = $data->type;
             $this->sort = $data->sort;
             $this->parent = $data->parent;
         }
+       
     }
 
     public function getInterface() {

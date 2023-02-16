@@ -3,16 +3,14 @@
 namespace App\Http\Livewire\Front\Blog;
 
 use Livewire\Component;
-use App\Repositories\Contract\iBlog;
-use App\Traits\Module;
+use App\Traits\Translate;
 
 class Tag extends Component
 {
-    use Module;
+    use Translate;
     public $tags;
     public function mount($blog) {
-        
-        $blog = app()->make(iBlog::class)->findBySlug($blog);
+
        
         $this->tags=explode(',',$this->getMeta($blog,'meta_keyword'));
 

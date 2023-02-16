@@ -1,4 +1,5 @@
 <x-guest-layout>
+       @section('title', __('Forgot your password'))
     <div class="d-table">
         <div class="d-table-cell">
             <div class="container">

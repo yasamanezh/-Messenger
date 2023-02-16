@@ -1,13 +1,13 @@
 <div>
     <div class="related-post">
-        <h3 class="title">Related Post</h3>
+        <h3 class="title">{{__('Related Post')}}</h3>
         <div class="row justify-content-center">
             @foreach($posts as $blog)
             <div class="col-lg-6 col-md-6">
                 <div class="single-blog-post">
                     <div class="image">
                         <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}" class="d-block">
-                            <img src="/storage/{{$blog->image}}" alt="blog">
+                            <img src="/storage/{{$blog->image}}" alt="{{ $this->getTranslate('title',$blog) }}">
                         </a>
                         <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}" class="tag">{{$this->getTranslate('title',$blog->blog)}}</a>
                     </div>
@@ -16,7 +16,7 @@
                             <li><i class="ri-time-line"></i> {{$blog->created_at->format('M d , Y')}}</li>
                             <li><i class="ri-message-2-line"></i> 
                                 <a href="{{$multiLanguage ? route('front.post.language',['language'=>app()->getLocale(),'id'=>$blog->slug]) : route('front.post',$blog->slug)}}">
-                                    ({{count($blog->comments)}}) Comment
+                                    ({{count($blog->comments)}}) {{__('Comments')}}
                                 </a>
                             </li>
                         </ul>

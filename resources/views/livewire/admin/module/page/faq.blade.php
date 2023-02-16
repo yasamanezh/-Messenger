@@ -6,7 +6,7 @@
                 <div>
                     <h2 class="main-content-title tx-24 mg-b-5">Edit faq page</h2><br>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('Dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.pages')}}" >pages</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Edit faq page</li>
                     </ol>

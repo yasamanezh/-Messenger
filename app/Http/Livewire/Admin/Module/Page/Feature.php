@@ -25,8 +25,8 @@ class Feature extends Component {
     }
     protected $rules = [
 
-        "title"            => "nullable|array|min:1",
-        "title.en"         => "nullable|string|min:3",
+        "title"            => "required|array|min:1",
+        "title.en"         => "required|string|min:3",
         "meta_keyword.en"     => "nullable|string|min:2",
         "meta_description.en" => "nullable|string|min:2",
     ];

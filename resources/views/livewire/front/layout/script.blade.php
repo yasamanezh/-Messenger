@@ -1,6 +1,7 @@
 <div>
       <!-- Link of JS files -->
     <script src="{{asset('front/'.$dir.'/assets/js/jquery.min.js')}}"></script>
+     <script src="{{asset('admin/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('front/'.$dir.'/assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('front/'.$dir.'/assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('front/'.$dir.'/assets/js/swiper-bundle.min.js')}}"></script>

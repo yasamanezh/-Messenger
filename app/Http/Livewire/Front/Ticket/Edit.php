@@ -33,7 +33,7 @@ class Edit extends Component {
 
     public function mount($language = null, $id = null)  {
       
-            $this->ticket = Ticket::findOrFail($id);
+            $this->ticket = Ticket::where('user_id', auth()->user()->id)->findOrFail($id);
         if( $this->ticket->status == 'close'){
             $this->status = 'close';
         }elseif ( $this->ticket->status == 'admin_answerd'){

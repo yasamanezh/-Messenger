@@ -5,7 +5,7 @@
                 <div class="page-title-content">
                     <h2>{{$title}}</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html">{{__('Home')}}</a></li>
                         <li>{{$title}}</li>
                     </ul>
                 </div>

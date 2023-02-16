@@ -17,7 +17,7 @@ class About extends Component {
         "description" => "required|array|min:1",
         "description.en" => "required|string|min:3",
         "meta_keyword.en" => "nullable|string|min:3",
-        "title.en" => "nullable|string|min:3",
+        "title.en" => "required|string|min:3",
         "meta_description.en" => "nullable|string|min:3",
     ];
 

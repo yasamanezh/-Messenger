@@ -1,20 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LanguageController;
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
 
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin'], 'as' => 'admin.'], function() {
     Route::group(['prefix' => '/laravel-filemanager'], function () {
         UniSharp\LaravelFilemanager\Lfm::routes();
     });
-    Route::prefix('languages')->group(function () {
-        Route::get('/', [LanguageController::class, 'index'])->name('translations_ui.index');
-        Route::prefix('phrases')->group(function () {
-            Route::get('{translation}', [LanguageController::class, 'phrases'])->name('translations_ui.phrases.index');
-            Route::get('{translation}/edit/{phrase:uuid}', [LanguageController::class, 'phrase'])->name('translations_ui.phrases.show');
-        });
+});
+Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+    Route::get('mySiteMapGenerate',[\App\Http\Controllers\Smpe::class,'index'])->name('admin.siteMap');
+
+    //======================================= > //language//
+    Route::group(['prefix' => 'language'], function() {
+        Route::get('/', App\Http\Livewire\Admin\Language\Index::class)->name('admin.language');
+        Route::get('/pharas', App\Http\Livewire\Admin\Language\Def\Index::class)->name('admin.pharas');
+        Route::get('/add', App\Http\Livewire\Admin\Language\Add::class)->name('admin.language.add');
+        Route::get('/edit/{id}', App\Http\Livewire\Admin\Language\Edit::class)->name('admin.language.edit');
     });
+
     //======================================= > //dashboard//
     Route::get('/dashboard', App\Http\Livewire\Admin\Home\Index::class)->name('Dashboard');
 
@@ -53,7 +57,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
 
     //=======================================> //logs//
     Route::group(['prefix' => 'logs'], function() {
-        Route::get('/list', App\Http\Livewire\Admin\LogUser\Index::class)->name('admin.userlogs');
+        Route::get('/activity', App\Http\Livewire\Admin\LogUser\Index::class)->name('admin.userlogs');
     });
     //=======================================> //ticket//
     Route::group(['prefix' => 'tickets'], function() {
@@ -107,6 +111,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
         Route::get('/feature', App\Http\Livewire\Admin\Module\Featur\Index::class)->name('admin.module.feature');
         Route::get('/feature2', App\Http\Livewire\Admin\Module\Feature2::class)->name('admin.module.feature2');
     });
+    //=======================================> //newslatter//
+    Route::get('/newslatters', App\Http\Livewire\Admin\NewsLatter\Index::class)->name('admin.newslatters');
 
     //=======================================> //feature options//
     Route::group(['prefix' => 'modules/feature/keys'], function() {

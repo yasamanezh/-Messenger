@@ -7,6 +7,7 @@ use App\Repositories\Contract\{
     IFooter,
     IMenu
 };
+use App\Models\Menu;
 use App\Traits\Admin\UpdateSettinges;
 use Illuminate\Support\Facades\Gate;
 
@@ -77,7 +78,7 @@ class Index extends Component {
     }
 
     public function render(Imenu $menu) {
-        $menus = $menu->get();
+            $menus = Menu::where('show_in_footer','1')->get();
 
         return view('livewire.admin.footer.index', compact('menus'))->layout('layouts.admin');
     }

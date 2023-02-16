@@ -23,7 +23,11 @@ class Work extends Component {
     public function mount($language = null) {
 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
-        $this->page = $this->getPage('work');
+        $this->page = $this->getPage('how-to-work');
+        if(!$this->page){
+            abort(404);
+        }
+        $this->seo($this->page );
         
     }
 

@@ -15,7 +15,7 @@
                             <li><a href="{{$social->twitter}}" target="_blank"><i class="ri-twitter-fill"></i></a></li>
                             <li><a href="{{$social->linkdin}}" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
                             <li><a href="{{$social->email}}" target="_blank"><i class="ri-messenger-fill"></i></a></li>
-                            <li><a href="{{$social->instagram}}" target="_blank"><i class="ri-github-fill"></i></a></li>
+                            <li><a href="{{$social->github}}" target="_blank"><i class="ri-github-fill"></i></a></li>
                             @endif
                         </ul>
                     </div>
@@ -91,14 +91,14 @@
                         <form class="newsletter-form" data-toggle="validator">
                             <input type="text" wire:model.defer="email" class="input-newsletter" placeholder="Your Email" name="EMAIL" required autocomplete="off">
                              <button  wire:loading  class="spinner-border text-danger" role="status">
-                                <span class="visually-hidden">Loading...</span>
+                                <span class="visually-hidden">{{__('Loading')}}...</span>
                             </button>
                             <button wire:loading.remove  wire:click.prevent="saveEmail()"><i class="ri-send-plane-2-line"></i></button>
                             @error('email') <div id="validator-newsletter" class="form-result">{{$message}}</div>@endif
                         @if($success)
                         <div class="alert alert-success">
                             <ul>
-                                <li>{{$success}}</li>
+                                <li>{{__('success')}}</li>
                             </ul>
                         </div>
 
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="copyright-area">
-                <p>Copyright <script>document.write(new Date().getFullYear())</script> <strong>Pakap</strong>. All Rights Reserved by <a href="https://envytheme.com/" target="_blank">EnvyTheme</a></p>
+                <p>{{__('Copyright')}} <script>document.write(new Date().getFullYear())</script> <strong>{{$this->getTranslate('title',$setting)}}</strong>.</p>
             </div>
         </div>
     </div>

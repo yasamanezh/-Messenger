@@ -35,14 +35,14 @@ class Menu extends Component {
 
         $type = $param->type;
         $menuRoute = [0];
-        if ($type == 'blog') {
+      if ($type == 'blog') {
             $blog = app()->make(iBlog::class)->find($param->slug);
             if ($this->multiLanguage) {
                 $menuRoute = ['front.blog.language',[ 'language'=>app()->getLocale(),'id'=>$blog->slug]];
             } else {
                 $menuRoute = ['front.blog', $blog->slug];
             }
-        } elseif ($type == 'post') {
+        } else if ($type == 'post') {
             $post = app()->make(IPost::class)->find($param->slug);
 
             if ($this->multiLanguage) {

@@ -15,7 +15,7 @@
             <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
                 <div class="card custom-card">
                     <div class="card-header p-3 tx-medium my-auto tx-white bg-primary">
-                        comments
+                        contacts
                         @if(count($deleteItem) >=1 )
                         <span class="float-right">
                             <a href="" wire:click.prevent="confirmAllRemoval()"

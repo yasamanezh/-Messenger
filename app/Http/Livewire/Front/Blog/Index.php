@@ -27,7 +27,7 @@ class Index extends Component {
     public function render(iBlog $post) {
 
         $posts = $post->activePosts($this->search, $this->blog,3);
-        return view('livewire.front.blog.index', compact('posts'));
+        return view('livewire.front.blog.index', compact('posts'))->layout('layouts.front');
     }
 
 }

@@ -1,15 +1,15 @@
 
 <div >
-
+     @section('title',__('view ticket'))
     <livewire:front.layout.menu :lang="$multiLanguage">
         <!-- Start Page Title Area -->
         <div class="page-title-area">
             <div class="container">
                 <div class="page-title-content">
-                    <h2>view tickets</h2>
+                    <h2>{{__('view ticket')}}</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li>view tickets</li>
+                        <li><a href="{{$multiLanguage ? route('front.home.language',app()->getlocale()) : route('front.home')}}">{{__('Home')}}</a></li>
+                        <li>{{__('view ticket')}}</li>
                     </ul>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-            <div class="banner-shape1"><img src="{{asset('front/ltr/assets/img/shape/shape9.png')}}" alt="image"></div>
+            <div class="banner-shape1"><img src="{{asset('front/ltr/assets/img/shape/shape9.png')}}" alt="{{__('view ticket')}}"></div>
         </div>
         <!-- End Page Title Area -->
 
@@ -33,7 +33,7 @@
                 @if($success)
                 <div class="alert alert-success">
                     <ul>
-                        <li>{{$success}}</li>
+                        <li>{{__('success')}}</li>
                     </ul>
                 </div>
                 @endif
@@ -41,32 +41,32 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="order-details">
-                                <h3 class="title">Answer</h3>
+                                <h3 class="title">{{__('Answer')}}</h3>
 
                                 <div class="user-actions">
 
                                     <div class="row p-1 bg-light">
                                         <div class="col-lg-3 col-md-3 col-xs-6">
                                             <div class="row center">
-                                                <strong>created date:</strong>{{$ticket->created_at->format('d M  ,Y h:i A')}}
+                                                <strong>{{__('create date')}}:</strong>{{$ticket->created_at->format('d M  ,Y h:i A')}}
                                             </div>
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-xs-6">
                                             <div class="row center">
-                                                <strong>last updated:</strong>{{$ticket->updated_at->format('d M  ,Y h:i A')}}
+                                                <strong>{{__('latest update')}}:</strong>{{$ticket->updated_at->format('d M  ,Y h:i A')}}
                                             </div>
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-xs-6">
                                             <div class="row center">
-                                                <strong>subject:</strong><span style="color:#888888">{{$ticket->title}}</span>
+                                                <strong>{{__('subject')}}:</strong><span style="color:#888888">{{$ticket->title}}</span>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-xs-6">
                                             <div class="row center">
-                                                <strong>part:</strong>
+                                                <strong>{{__('part')}}:</strong>
                                                 @if(\App\Models\Part::find($ticket->part))
                                                 {{$this->getTranslate('title',\App\Models\Part::find($ticket->part))}}
                                                 @endif
@@ -79,13 +79,13 @@
                                 <div class="payment-box">
                                     <div class="payment-method">
                                         <div class="form-group">
-                                            <label for="inputMessage"> message</label>
+                                            <label for="inputMessage"> {{__('message')}}</label>
                                             <textarea wire:model.defer="message" id="inputMessage" rows="12" class="form-control"></textarea>
                                             
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <label for="inputAttachments">attachments</label>
+                                                <label for="inputAttachments">{{__('attachments')}}</label>
 
                                             </div>
                                             <br>
@@ -119,9 +119,9 @@
                                         </div>
                                     </div>
                                     <div  wire:loading wire:target="saveInfo"  class="spinner-border text-danger" role="status">
-                                        <span class="visually-hidden">Loading...</span>
+                                        <span class="visually-hidden">{{__('Loading')}}...</span>
                                     </div>
-                                    <button wire:click.prevent="saveInfo()" class="default-btn"><i class='bx bx-paper-plane'></i>Save</button>
+                                    <button wire:click.prevent="saveInfo()" class="default-btn"><i class='bx bx-paper-plane'></i>{{__('save')}}</button>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -173,11 +173,11 @@
                                                                         <div class="pull-right body">
                                                                             <div class="row">
                                                                                 <div class="col-6">
-                                                                                    <label class="form-label">title:</label>
+                                                                                    <label class="form-label">{{__('title')}}:</label>
                                                                                     <div  class="form-control">{{$ticket->title}}</div>
                                                                                 </div>
                                                                                 <div class="col-6">
-                                                                                    <label class="form-label">part:</label>
+                                                                                    <label class="form-label">{{__('part')}}:</label>
                                                                                     @if(\App\Models\Part::find($ticket->part))
                                                                                     <div  class="form-control">{{\App\Models\Part::find($ticket->part)->currentTranslate()->title}}</div>
                                                                                     @endif

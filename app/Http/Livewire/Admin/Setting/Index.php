@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use App\Repositories\Contract\ISetting;
 use App\Traits\Admin\UpdateSettinges;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Sitemap\SitemapGenerator;
 
 
 class Index extends Component {
@@ -14,14 +15,18 @@ class Index extends Component {
     use WithFileUploads;
     use UpdateSettinges;
 
-    public $module_id,$meta_keyword, $meta_title, $meta_description, $languages,$content;
+    public $module_id,$title,$meta_keyword, $meta_title, $meta_description, $languages,$content;
     public $data = [], $uploadLogo, $uploadIcon,$success=false;
     public $typePage = 'setting';
-    public $Translateparams  =['content','meta_keyword','meta_title','meta_description'];
+    public $Translateparams  =['title','content','meta_keyword','meta_title','meta_description'];
     public $IndexRoute       = 'admin.setting';
     public $gate             ='setting';
     protected $rules = [
         'data.logo'           => 'nullable',
+        'data.app_store_link'  => 'nullable',
+        'data.google_play_link' => 'nullable',
+        'data.free_trial'    => 'nullable',
+        'data.app_link'   => 'nullable',
         'data.email1'           => 'nullable',
         'data.email2'           => 'nullable',
         'data.phone1'           => 'nullable',
@@ -35,14 +40,28 @@ class Index extends Component {
         'data.mail_parameter' => 'nullable|string',
         'data.mail_username'  => 'nullable|string',
         'data.mail_password'  => 'nullable|string',
-        "meta_keyword"        => "nullable|array|min:1",
-        "meta_keyword.en"      => "nullable|string|min:3",
-        "meta_title"          => "nullable|array|min:1",
-        "meta_title.en"        => "nullable|string|min:3",
-        "meta_description"    => "nullable|array|min:1",
-        "meta_description.en"  => "nullable|string|min:3",
+        "meta_keyword"        => "required|array|min:1",
+        "meta_keyword.en"      => "required|string|min:3",
+        "meta_title"          => "required|array|min:1",
+        "meta_title.en"        => "required|string|min:3",
+        "meta_description"    => "required|array|min:1",
+        "meta_description.en"  => "required|string|min:3",
     ];
-
+    public function updateSitMap() {
+        $path=\Illuminate\Support\Facades\URL::to('/');
+        SitemapGenerator::create($path)->writeToFile(public_path('siteMap.xml'));
+        $this->success = 'success';
+    }
+    
+    public function clearCash() {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        $this->success = 'success';
+    }
+    public function Cash() {
+        \Illuminate\Support\Facades\Artisan::call('optimize');
+        $this->success = 'success';
+    }
+    
   
     public function getItems() {
 
@@ -52,6 +71,10 @@ class Index extends Component {
         return [
             'logo' => $logo,
             'icon' => $icon,
+            'app_store_link' => $this->data['app_store_link'],
+            'google_play_link' => $this->data['google_play_link'],
+            'free_trial' => $this->data['free_trial'],
+            'app_link'   => $this->data['app_link'],
             'phone1' => $this->data['phone1'],
             'phone2' => $this->data['phone2'],
             'email1' => $this->data['email1'],
@@ -75,6 +98,10 @@ class Index extends Component {
             'id' => '',
             'logo' => '',
             'icon' => '',
+             'data.app_store_link' => '',
+            'data.google_play_link' => '',
+            'data.free_trial' => '',
+            'data.app_link'   =>'',
             'location' => '',
             'email1' => '',
             'email2' => '',
@@ -87,6 +114,7 @@ class Index extends Component {
         ];
 
         if ($data) {
+  
             $this->data      = $data;
             $this->module_id = $data->id;
         }

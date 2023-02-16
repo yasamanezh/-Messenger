@@ -6,7 +6,7 @@
                 <div class="page-title-content">
                     <h2>{{$this->getTranslate('title',$post)}}</h2>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{$multiLanguage ? route('front.home.language',app()->getlocale()) : route('front.home')}}">{{__('Home')}}</a></li>
                         <li>{{$this->getTranslate('title',$post)}}</li>
                     </ul>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-            <div class="banner-shape1"><img src="{{asset('front/ltr/assets/img/shape/shape9.png')}}" alt="image"></div>
+            <div class="banner-shape1"><img src="{{asset('front/ltr/assets/img/shape/shape9.png')}}" alt="{{$this->getTranslate('title',$post)}}"></div>
         </div>
         <!-- End Page Title Area -->
 
@@ -31,14 +31,14 @@
                         <div class="blog-details-desc">
                             <div class="article-image">
                                 <a href="blog-grid.html" class="tag">{{$this->getTranslate('title',$post->blog)}}</a>
-                                <img src="/storage/{{$post->image}}" alt="blog-details">
+                                <img src="/storage/{{$post->image}}" alt="{{$this->getTranslate('title',$post->blog)}}">
                             </div>
                             <div class="article-content">
                                 <div class="entry-meta">
                                     <h4>{{$this->getTranslate('title',$post)}}</h4>
                                     <ul>
                                         <li><i class="ri-calendar-2-line"></i> {{$post->created_at->format('M d , Y')}}</li>
-                                        <li><i class="ri-message-2-line"></i><a href="blog-grid.html">({{count($post->comments)}}) Comments</a></li>
+                                        <li><i class="ri-message-2-line"></i><a href="">({{count($post->comments)}}) {{__('Comments')}}</a></li>
                                     </ul>
                                 </div>
                                 {!! $this->getTranslate('content',$post) !!} 
@@ -46,9 +46,10 @@
                             <div class="article-footer">
                                 <div class="post-author-meta">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{asset('front/ltr/assets/img/user/user6.jpg')}}" alt="user">
+                                        <img src="{{asset('front/ltr/assets/img/user/user6.jpg')}}" alt="{{$post->user->name }}">
                                         <div class="title">
-                                            <span class="name"> <a href="blog-grid.html">{{$post->user ? $post->user->name : 'admin'}}</a></span>
+                                            <span class="name">
+                                                <a href="">{{$post->user ? $post->user->name : 'admin'}}</a></span>
                                             <span class="date">{{$post->created_at->format('M d , Y')}}</span>
                                         </div>
                                     </div>
@@ -66,8 +67,6 @@
                             <livewire:front.blog.category :lang="$multiLanguage" />
                             <livewire:front.post.layout.archive :post="$post" />
                             <livewire:front.post.layout.tag :post="$post" />
-                            
-                            
                         </aside>
                     </div>
                 </div>
@@ -75,7 +74,7 @@
         </div>
         <!-- End Blog Details Area -->
 
-     <livewire:front.module.download1 />
-         <livewire:front.layout.footer :language="$multiLanguage">
+    <livewire:front.module.download1 />
+    <livewire:front.layout.footer :language="$multiLanguage">
 
 </div>

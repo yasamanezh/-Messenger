@@ -17,8 +17,13 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->nullable();
+            $table->string('name')->nullable();
+            $table->text('app_store_link')->nullable();
+            $table->text('google_play_link')->nullable();
+            $table->string('free_trial')->nullable();
+            $table->string('app_link')->nullable();
             $table->string('icon')->nullable();
-            $table->string('location')->nullable();
+            $table->text('location')->nullable();
             $table->string('daf_lang')->nullable();
             $table->string('address')->nullable();
             $table->string('phone1')->nullable();

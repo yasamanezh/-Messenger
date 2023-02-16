@@ -10,13 +10,22 @@ class About extends Component {
 
     use Module;
 
-    public $multiLanguage,$lang;
+    public $multiLanguage,$lang,$setting;
 
-    public function mount($lang) {
+    public function mount($setting) {
         $this->lang = app()->getLocale();
-        $this->multiLanguage = $lang;
+        $this->multiLanguage = $setting[0];
+        $this->setting = $setting[1];
+    
     }
-
+   public function getUrl($param) {
+        if($this->multiLanguage){
+            return $_SERVER['APP_URL'].'/'.app()->getlocale().$param;
+        }else{
+            return $_SERVER['APP_URL'].$param;
+        }
+       
+    }
     public function render() {
         $url = URL::to('/');
         $module = $this->getInterface()->firstByType('about');

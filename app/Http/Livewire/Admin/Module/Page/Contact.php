@@ -19,12 +19,12 @@ class Contact extends Component {
     public $IndexRoute = 'admin.pages';
     public $gate = 'page';
     protected $rules = [
-        "short_content" => "nullable|array|min:1",
-        "short_content.en" => "nullable|string|min:3",
+        "short_content" => "required|array|min:1",
+        "short_content.en" => "required|string|min:3",
         "content" => "nullable|array|min:1",
         "content.en" => "nullable|string|min:3",
-        "title" => "nullable|array|min:1",
-        "title.en" => "nullable|string|min:3",
+        "title" => "required|array|min:1",
+        "title.en" => "required|string|min:3",
         "meta_keyword.en" => "nullable|string|min:2",
         "meta_title.en" => "nullable|string|min:2",
         "meta_description.en" => "nullable|string|min:2",

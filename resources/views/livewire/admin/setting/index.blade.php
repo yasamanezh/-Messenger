@@ -6,15 +6,33 @@
                 <div>
                     <h2 class="main-content-title tx-24 mg-b-5">Edit Setting</h2><br>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('Dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active" aria-current="page"> Edit Setting</li>
                     </ol>
                 </div>
                 <div>
+                    <div wire:loading >
+                        <div class="spinner-border text-primary" role="status"></div>
+                    </div>
+                    
+                    <button class="btn btn-danger my-2 btn-icon-text"  wire:click.prevent="updateSitMap()"  wire:loading.attr="disabled"   wire:target="updateSitMap"> 
+                        update sitemap
+                    </button>
+                     <button class="btn btn-danger my-2 btn-icon-text"  wire:click.prevent="Cash()"  wire:loading.attr="disabled"   wire:target="updateSitMap"> 
+                        optimize
+                    </button>
+                    
+                     <button class="btn btn-danger my-2 btn-icon-text"  wire:click.prevent="clearCash()"  wire:loading.attr="disabled"   wire:target="updateSitMap"> 
+                        clear optimize
+                    </button>
+                    
+                    
                     
                     <button class="btn btn-primary my-2 btn-icon-text"  form="formInfo"  wire:loading.attr="disabled"  wire:loading.remove wire:target="saveInfo"> 
                         save
-                    </button>                   
+                    </button> 
+                    
+                    
                     <div wire:loading wire:target="saveInfo">
                         <div class="spinner-border text-primary" role="status"></div>
                     </div>
@@ -132,12 +150,46 @@
                                             </div>
 
                                             <div class="form-group row">
+                                                <label class="col-md-3 form-label"> app store link: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="app store link" class="form-control @error('data.app_store_link') is-invalid @enderror"  wire:model.defer="data.app_store_link">
+                                                    @error('data.app_store_link') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> google play link: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="google play link" class="form-control @error('data.google_play_link') is-invalid @enderror"  wire:model.defer="data.google_play_link">
+                                                    @error('data.google_play_link') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> free trial link: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="free trial link" class="form-control @error('data.free_trial') is-invalid @enderror"  wire:model.defer="data.free_trial">
+                                                    @error('data.free_trial') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> app link: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="app link" class="form-control @error('data.app_link') is-invalid @enderror"  wire:model.defer="data.app_link">
+                                                    @error('data.app_link') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
                                                 <label class="col-md-3 form-label"> location: </label>
                                                 <div class="col-md-9">
                                                     <input type="text" placeholder="location" class="form-control @error('data.location') is-invalid @enderror"  wire:model.defer="data.location">
                                                     @error('data.location') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
+                                            
+                                            
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> phone1: </label>
                                                 <div class="col-md-9">
@@ -213,12 +265,20 @@
 
                                             <div class="form-group">
                                                 <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">title: </label>
+                                                    <div class="col-sm-9">
+                                                        <input wire:model.defer="title.{{$language->language->code}}"  placeholder="address" class="form-control">
+                                                </div>
+                                            </div>
+                                               <div class="form-group">
+                                                <div class="row row-sm">
                                                     <label class="form-label col-sm-3">address: </label>
                                                     <div class="col-sm-9">
                                                         <textarea wire:model.defer="content.{{$language->language->code}}" rows="5" placeholder="address" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group">
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">Meta description: </label>

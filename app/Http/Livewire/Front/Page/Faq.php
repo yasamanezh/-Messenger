@@ -24,6 +24,10 @@ class Faq extends Component {
 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
         $this->page = $this->getPage('faq');
+        if(!$this->page){
+            abort(404);
+        }
+        $this->seo($this->page );
   
  
     }

@@ -22,7 +22,7 @@ class About extends Component {
         "description.en" => "required|string|min:3",
         "title" => "required|array|min:1",
         "title.en" => "required|string|min:3",
-        "short_content.en" => "nullable|string|min:3",
+        "short_content.en" => "required|string|min:3",
     ];
 
     public function createLog($data) {
@@ -69,6 +69,7 @@ class About extends Component {
         if ($data) {
             $this->image = $data->file1;
             $this->module_id = $data->id;
+            $this->more_link = $data->more_link;
         }
         $this->languages = $this->getInterface()->getLanguage();
 
@@ -81,11 +82,13 @@ class About extends Component {
             $this->more_text[$value->language->code] = '';
 
             $code = $data->translate()->where('language_id', $value->language->id)->first();
+          
             if ($code) {
                 $this->title[$value->language->code] = $code->title;
                 $this->description[$value->language->code] = $code->content;
                 $this->short_content[$value->language->code] = $code->short_content;
-                $this->more_text[$value->language->code] = json_decode($code->more_text);
+                $this->more_text[$value->language->code] = json_decode($code->meta,true)['more_text'];
+               
             }
         }
     }
@@ -96,7 +99,7 @@ class About extends Component {
         foreach ($this->languages as $lan) {
             $title = '';
             $content = '';
-            $$short='';
+            $short='';
             
 
 
@@ -107,20 +110,29 @@ class About extends Component {
                 $short = $this->short_content[$lan->language->code];
             }
             if ($this->more_text && $this->more_text[$lan->language->code]) {
-                $more = json_encode($this->more_text[$lan->language->code]);
+                $more = json_encode(['more_text'=>$this->more_text[$lan->language->code]]);
             }else{
-                
-            }$more = '';
+               $more = ''; 
+            }
 
             if (!empty($title) || !empty($content) || !empty($more) || !empty($short)) {
-
-                $translations[] = [
+               if($more){
+                   $translations[] = [
                     'title' => $title,
                     'short_content' => $short,
                     'content' => $content,
                     'meta' => $more,
                     'language_id' => $lan->language->id
                 ];
+               }else{
+                  $translations[] = [
+                    'title' => $title,
+                    'short_content' => $short,
+                    'content' => $content,
+                    'language_id' => $lan->language->id
+                ]; 
+               }
+                
             }
         }
         return $translations;

@@ -100,9 +100,7 @@ class Footer extends Component
                 $this->Useful = app()->make(IMenu::class)->Menus($Useful);
             }
         }
-       
-        
-        
+
         return view('livewire.front.layout.footer', compact('footer','social'));
 
     }

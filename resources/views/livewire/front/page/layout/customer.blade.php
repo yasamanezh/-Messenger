@@ -11,7 +11,7 @@
                     <div class="single-feedback-box">
                         <div class="client-info">
                             <div class="d-flex align-items-center">
-                                <img src="/storage/{{$user->image}}" alt="user">
+                                <img src="/storage/{{$user->image}}" alt="{{$this->getTranslate('name',$user,'true')}}">
                                 <div class="title">
                                     <h3>{{$this->getTranslate('name',$user,'true')}}</h3>
                                     <span>{{$this->getTranslate('job',$user,'true')}}</span>
