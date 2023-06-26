@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Add extends Component {
 
-    public $sort, $status, $category, $description, $image, $month_text, $title, $price, $languages, $options = [];
+    public $sort, $status, $category, $description, $image, $month_text, $title, $price, $languages,$most_popular,$is_free, $options = [];
     public $typePage = 'packages';
     protected $rules = [
         'sort' => 'required|integer|min:1',
@@ -45,6 +45,7 @@ class Add extends Component {
                  $more='';
             }
             
+            
             if(!empty($title) || !empty($content) || !empty($more)){
                 if(!empty($more)){
               $translations[] = [
@@ -70,15 +71,19 @@ class Add extends Component {
     }
 
     public function getItems() {
+       
         return [
             'sort' => $this->sort,
             'status' => $this->status,
             'price' => $this->price,
+             'is_free'=>$this->is_free,
+            'most_popular'=>$this->most_popular
+            
         ];
     }
 
     public function saveInfo() {
-    
+        
         if (Gate::allows('edit_pack')) {
             $this->validate();
             $translates = $this->getTranslate();
@@ -102,6 +107,8 @@ class Add extends Component {
             abort(403);
         }
         $this->status = 1;
+        $this->is_free =0;
+        $this->most_popular=0;
         $this->languages = $this->getInterface()->getLanguage();
         foreach ($this->languages as $value) {
             $this->title[$value->language->code] = '';

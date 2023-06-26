@@ -46,7 +46,7 @@
                             <div class="article-footer">
                                 <div class="post-author-meta">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{asset('front/ltr/assets/img/user/user6.jpg')}}" alt="{{$post->user->name }}">
+                                        <img src="@if($post->user->profile_photo_path)  /storage/{{$post->user->profile_photo_path }} @else {{asset('admin/img/svgs/user.svg')}} @endif" alt="{{$post->user->name }}">
                                         <div class="title">
                                             <span class="name">
                                                 <a href="">{{$post->user ? $post->user->name : 'admin'}}</a></span>

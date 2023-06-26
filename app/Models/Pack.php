@@ -10,7 +10,7 @@ class Pack extends Model
 {
     use Translations;
     use HasFactory;
-     protected $fillable = ['sort','status','price' ];
+     protected $fillable = ['sort','status','price','most_popular','is_free' ];
        public function options()
     {
         return $this->belongsToMany(Option::class);

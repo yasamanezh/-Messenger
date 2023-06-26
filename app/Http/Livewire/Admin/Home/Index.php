@@ -3,20 +3,21 @@
 namespace App\Http\Livewire\Admin\Home;
 
 use Livewire\Component;
-use App\Models\{User,Comment,Contact};
+use App\Models\{User,Comment,Contact,Ticket};
 use Illuminate\Support\Facades\Gate;
 
 class Index extends Component
 {
-    public $usersCount,$ComentCount,$massageCount;
+    public $usersCount,$ComentCount,$massageCount,$ticketCount;
     public function mount() {
          if (!Gate::allows('show_dashboard')) {
             abort(403);
         }
        // \Illuminate\Support\Facades\Artisan::call('down --secret="demo"');
-       $this->usersCount = $this->getUsersCount('TODAY');
-       $this->ComentCount = $this->getComentCount('TODAY');
+       $this->usersCount   = $this->getUsersCount('TODAY');
+       $this->ComentCount  = $this->getComentCount('TODAY');
        $this->massageCount = $this->getComentCount('TODAY');
+       $this->ticketCount  = $this->getTicketCount('TODAY');
     }
      public function getUsersCount($option = 'TODAY')
     {
@@ -24,6 +25,14 @@ class Index extends Component
             ->whereBetween('created_at', $this->getDateRange($option))
             ->count();
     }
+     public function getTicketCount($option = 'TODAY')
+    {
+        return $this->ticketCount = Ticket::query()
+            ->whereBetween('created_at', $this->getDateRange($option))
+            ->count();
+    }
+    
+    
  
     public function getComentCount($option = 'TODAY') {
           return $this->ComentCount = Comment::query()

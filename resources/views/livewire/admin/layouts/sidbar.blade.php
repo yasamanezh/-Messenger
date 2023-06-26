@@ -149,6 +149,33 @@
                     <span class="sidemenu-label">General</span>
                 </a>
             </li>
+           <li class="nav-item   @if(Request::routeIs('admin.order') ) active @endif">
+                <a class="nav-link" href="{{route('admin.order')}}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="ti-face-smile sidemenu-icon"></i>
+                    <span class="sidemenu-label">Orders</span>
+                </a>
+            </li>
+          
+            
+            <li class="nav-item   @if(Request::routeIs('admin.images') ) active @endif">
+                <a class="nav-link" href="{{route('admin.images')}}">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="ti-palette sidemenu-icon"></i>
+                    <span class="sidemenu-label">Image Manager</span>
+                </a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/front-end-builder">
+                    <span class="shape1"></span>
+                    <span class="shape2"></span>
+                    <i class="ti-write sidemenu-icon"></i>
+                    <span class="sidemenu-label">Page Builder</span>
+                </a>
+            </li>
+            
             <li class="nav-item  @if(Request::routeIs('admin.socials')) active @endif ">
                 <a class="nav-link" href="{{route('admin.socials')}}">
                     <span class="shape1"></span>

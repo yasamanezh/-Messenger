@@ -57,12 +57,19 @@
                                     </div>
                                     <div class="content clearfix tab-content mh-260" id="myTabContent"> 
                                         <div  wire:ignore.self class="tab-pane fade show active" id="general" role="tabpanel">
-                                          
+
                                             <div class="form-group row">
                                                 <label class="col-md-3 form-label"> slug: <span class="tx-danger">*</span></label>
                                                 <div class="col-md-9">
                                                     <input type="text" placeholder="slug" class="form-control @error('slug') is-invalid @enderror"  wire:model.defer="slug">
                                                     @error('slug') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> name in english: <span class="tx-danger">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="name" class="form-control @error('name') is-invalid @enderror"  wire:model.defer="name">
+                                                    @error('name') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -76,7 +83,7 @@
                                                 </div>
                                                 @error('status') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
-                                           
+
 
                                         </div>
                                         @foreach($languages as $key=>$language)
@@ -88,13 +95,13 @@
                                                     @error('title')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
                                                 </div>
                                             </div>
-                                             <div class="form-group" wire:ignore>
+                                            <div class="form-group" wire:ignore>
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">description:<span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span> </label>
                                                     <div class="col-sm-9">
                                                         <textarea  rows="10" class="form-control summernote-editor " id="summernote-editor{{$language->language->code}}" 
-                                                                    wire:model.defer="description.{{$language->language->code}}"
-                                                                  autocomplete="off">{!! $description[$language->language->code] !!}</textarea>
+                                                                   wire:model.defer="description.{{$language->language->code}}"
+                                                                   autocomplete="off">{!! $description[$language->language->code] !!}</textarea>
 
                                                     </div>
                                                 </div>
@@ -129,7 +136,17 @@
 
                                             </script>
                                             @endpush
+                                            <div class="form-group" wire:ignore>
+                                                <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">css:<span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span> </label>
+                                                    <div class="col-sm-9">
+                                                        <textarea  rows="10" class="form-control summernote-editor " 
+                                                                   wire:model.defer="css.{{$language->language->code}}"
+                                                                   ></textarea>
 
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="row row-sm">
                                                     <label class="form-label col-sm-3">Meta description: </label>
@@ -147,7 +164,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         @endforeach
                                     </div>

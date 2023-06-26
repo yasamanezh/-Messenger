@@ -33,7 +33,7 @@ class Edit extends Component {
 
     public function mount($language = null, $id = null)  {
       
-            $this->ticket = Ticket::where('user_id', auth()->user()->id)->findOrFail($id);
+        $this->ticket = Ticket::where('user_id', auth()->user()->id)->findOrFail($id);
         if( $this->ticket->status == 'close'){
             $this->status = 'close';
         }elseif ( $this->ticket->status == 'admin_answerd'){
@@ -43,7 +43,6 @@ class Edit extends Component {
         }else{
             $this->status = 'open';
         }
-        
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
     }
 
@@ -66,10 +65,10 @@ class Edit extends Component {
     }
 
     public function uploadFile() {
-        $directory = "public/photos/tickets";
+        $directory = "public/tickets";
         $name = $this->file->getClientOriginalName();
         $this->file->storeAs($directory, $name);
-        return ('photos/tickets/' . $name);
+        return ('photos/' . $name);
     }
 
     public function getInterface() {
@@ -118,6 +117,11 @@ class Edit extends Component {
         $ticket->update();
         $this->reset('description');
         $this->success ="success !";
+         if($this->multiLanguage){
+             return redirect(route('front.ticket.language',app()->getLocale()));
+        }else{
+             return redirect(route('front.ticket'));
+        }
     }
     
     public function getParts() {

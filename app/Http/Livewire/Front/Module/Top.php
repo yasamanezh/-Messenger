@@ -16,9 +16,15 @@ class Top extends Component {
     }
 
     public function render() {
+        $file = false;
         $module = $this->getInterface()->firstByType('top_page');
+        if ($module->meta) {
+            $file = json_decode($module->meta, true)['file'];
+        }
 
-        return view('livewire.front.module.top', compact('module'));
+
+        $images = $this->getInterface()->find($module->id)->attach;
+        return view('livewire.front.module.top', compact('module', 'images', 'file'));
     }
 
 }

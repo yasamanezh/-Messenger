@@ -2,20 +2,16 @@
 
 namespace App\Helper;
 
-
-use App\Models\Setting;
-
 use Illuminate\Support\Facades\Config;
+use App\Repositories\Contract\ISetting;
 
 class EmailConfig
 {
 
     public function emailConfig()
     {
-        $siteOption=Setting::first();
-        if($siteOption->mail_parameter){
-            Config::set('mail.from.address', $siteOption->mail_parameter);
-        }
+        $siteOption=app()->make(ISetting::class)->first();
+        
         if($siteOption->mail_username){
             Config::set('mail.mailers.smtp.username', $siteOption->mail_username);
         }

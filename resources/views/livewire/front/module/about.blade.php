@@ -15,7 +15,7 @@
                             <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                             {!! $this->getTranslate('content',$module)!!}
                             <div class="btn-box">
-                               <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Start Free Trial')}}</a>
+                               <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Download Free')}}</a>
                                <a href="{{$this->getUrl($module->more_link)}}" class="link-btn">{{$this->getTranslate('more_text',$module,'true')}}</a>
                             </div>
                         </div>

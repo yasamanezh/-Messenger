@@ -25,15 +25,9 @@
                     <button class="btn btn-danger my-2 btn-icon-text"  wire:click.prevent="clearCash()"  wire:loading.attr="disabled"   wire:target="updateSitMap"> 
                         clear optimize
                     </button>
-
-
-
                     <button class="btn btn-primary my-2 btn-icon-text"  form="formInfo"  wire:loading.attr="disabled" wire:target="saveInfo"> 
                         save
                     </button> 
-
-
-                    
                 </div>
             </div>
             @include('livewire.admin.layouts.error')
@@ -76,15 +70,15 @@
                                                 </a>
                                             </li>
 
-                                            @foreach($languages as $key=>$language)
+                                             @foreach($languages as $key=>$language)
                                             <li class="nav-item dir-ltr">
                                                 <a   wire:ignore data-target="#language{{$language->id}}" class="nav-link pl-0" data-toggle="tab" role="tablist" >
                                                     <span class="current-info audible">current step: </span>
-                                                    <span class="number">{{$key+3}}</span> 
+                                                    <span class="number">{{$key+2}}</span> 
                                                     <span class="title">{{$language->language->name}}</span>
                                                 </a>
                                             </li>
-                                            @endforeach
+                                        @endforeach
                                         </ul>
                                     </div>
                                     <div class="content clearfix tab-content mh-260" id="myTabContent"> 
@@ -298,6 +292,29 @@
                                                 </div>
                                                 @error('data.daf_lang') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
+                                            
+                                             <div class="form-group row">
+                                                <label class="col-sm-3 form-label">payment in site:</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" wire:model.defer="data.is_payment" >
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                                @error('data.is_payment') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
+                                            
+                                            
+                                             <div class="form-group row">
+                                                <label class="col-md-3 form-label"> payment url: </label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="payment url" class="form-control @error('data.payment_url') is-invalid @enderror"  wire:model.defer="data.payment_url">
+                                                    @error('data.payment_url') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+
+
 
 
                                         </div>
@@ -311,6 +328,7 @@
                                                         <input wire:model.defer="title.{{$language->language->code}}"  placeholder="address" class="form-control">
                                                     </div>
                                                 </div>
+                                            </div>
                                                 <div class="form-group">
                                                     <div class="row row-sm">
                                                         <label class="form-label col-sm-3">address: </label>

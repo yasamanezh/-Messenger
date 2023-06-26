@@ -58,10 +58,10 @@
                                     <div class="content clearfix tab-content mh-260" id="myTabContent"> 
                                         <div  wire:ignore.self class="tab-pane fade show active" id="general" role="tabpanel">
                                             <div class="form-group row">
-                                                <label class="form-label col-sm-2">image: <span class="tx-danger">*</span></label>
+                                                <label class="form-label col-sm-2">banner: <span class="tx-danger">*</span></label>
                                                 <div class="col-sm-10">
-                                                    @if($uploadImage)
-                                                    <img src="{{ $uploadImage->temporaryUrl() }}"
+                                                    @if($upload)
+                                                    <img src="{{ $upload->temporaryUrl() }}"
                                                          style="width: 200px;height:200px;padding: 10px;border:2px dashed #ddd;cursor: pointer;"
                                                          id="picture">
                                                     @elseif($image)
@@ -74,9 +74,9 @@
                                                     @endif
                                                     <br>
                                                     <input type="file" class="form-control " style="display:none" id="fileinput"
-                                                           wire:model.defer="uploadImage" accept="image/*">
+                                                           wire:model.defer="upload" accept="image/*">
                                                     <span class="mt-2 text-danger" wire:loading
-                                                          wire:target="uploadImage">uploading...</span>
+                                                          wire:target="upload">uploading...</span>
                                                     <br>
                                                     @error('uploadImage')
                                                     <div class="invalid-feedback display-block">
@@ -85,8 +85,56 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            
-                                            
+                                            <div class="form-group row">
+                                                <label class="form-label col-sm-2">app file: <span class="tx-danger">*</span></label>
+                                                <div class="col-sm-10">
+                                                     <input type="file" class="form-control "wire:model.defer="uploadFile" >
+                                                     <span class="mt-2 text-danger" wire:loading
+                                                          wire:target="uploadFile">uploading...</span>
+                                                </div>
+                                            </div>
+                                             <div class="row">
+                                            @foreach($inputImage as $key => $value)
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mt-2"
+                                                     style="position: relative">
+                                                    <a>
+                                                        @if(isset($uploadImage[$key]))
+                                                        <img id="picture{{$key}}" class="pic" src="{{$uploadImage[$key]->temporaryUrl()}}" style="width: 200px;height: 200px"/>
+                                                        @elseif(isset($product_img[$key]))
+                                                           <img id="picture{{$key}}" class="pic"  src="/storage/{{$product_img[$key]}}" style="width: 200px;height: 200px"/>
+                                                        @else
+                                                            <img id="picture{{$key}}" class="pic"  src="{{ asset('admin/img/uploadicon.png')}}" style="width: 200px;height: 200px"/>
+                                                        @endif
+
+                                                    </a>
+                                                    <input id="fileinput{{$key}}" type="file" wire:model.defer="uploadImage.{{ $key }}" style="display:none">
+                                                    <span class="mt-2 text-danger" wire:loading  wire:target="uploadImage.{{ $key }}">uploading...</span>
+                                                    <a style="color: red;position: absolute;top:10px;right: 10px"
+                                                       wire:click.prevent="removeImage({{$key}})">
+                                                        <i class="fa fa-minus-circle"></i>
+                                                    </a>
+                                                </div>
+                                                <script>
+                                                    $(function () {
+                                                        $("#picture{{$key}}").on('click', function () {
+                                                            $("#fileinput{{$key}}").trigger('click');
+                                                        });
+                                                    });
+                                                </script>
+                                            @endforeach
+                                             </div>
+                                        <br>
+                                        <br>
+                                        <hr>
+                                        <div class=" add-input" style="display: block;width: 200px;float:left">
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <button class="btn ripple btn-primary text-white btn-icon btn-xs"  wire:click.prevent.prefetch="AddImage({{$j}})">
+                                                        <i class="fa fa-plus-circle"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                         </div>
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
@@ -103,7 +151,6 @@
                                                     <div class="col-sm-9">
                                                         <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="short description" class="form-control"></textarea>
                                                         @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,6 +163,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="row row-sm">
+                                                    <label class="form-label col-sm-3"> used this App text:  </label>
+                                                    <div class="col-sm-9">
+                                                        <input wire:model.defer="count_use.{{$language->language->code}}" placeholder="description" class="form-control">
+                                                        @error('count_use')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                         @endforeach
                                     </div>

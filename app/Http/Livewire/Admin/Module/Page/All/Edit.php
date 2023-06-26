@@ -16,11 +16,10 @@ class Edit extends Component {
 
     use WithFileUploads;
 
-    public $page_id,$slug,$use_app_module, $status,$meta_keyword = [], $title = [], $meta_description = [],$description = [], $languages;
+    public $page_id,$name,$slug,$use_app_module, $status,$meta_keyword = [], $title = [],$css = [], $meta_description = [],$description = [], $languages;
     public $typePage = 'page';
     protected $rules = [
-        "description"        => "required|array|min:1",
-        "description.en"     => "required|string",
+        'name'               => 'required|string|min:2|max:199',
         "title"              => "required|array|min:1",
         "title.en"           => "required|string|min:3",
         "meta_keyword.en"     => "nullable|string|min:3",
@@ -40,6 +39,7 @@ class Edit extends Component {
             $meta_keyword = '';
             $meta_description = '';
             $content='';
+            $css='';
 
             $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
             $this->description[$lan->language->code] ? $content = $this->description[$lan->language->code] : $content = '';
@@ -50,10 +50,14 @@ class Edit extends Component {
             if ($this->meta_description && $this->meta_description[$lan->language->code]) {
                 $meta_description = $this->meta_description[$lan->language->code];
             }
+            if ($this->css && $this->css[$lan->language->code]) {
+                $css = $this->css[$lan->language->code];
+            }
 
             $translations[] = [
                 'title' => $title,
                 'content' => $content,
+                'short_content' => $css,
                 'meta_keyword' => $meta_keyword,
                 'meta_description' => $meta_description,
                 'language_id' => $lan->language->id
@@ -66,6 +70,7 @@ class Edit extends Component {
     
         return [
             'slug' => $this->slug,
+            'name' => $this->name,
             'use_app_module' => $this->use_app_module,
         ];
     }
@@ -101,6 +106,7 @@ class Edit extends Component {
         $this->page_id =$id;
         $data = $this->getInterface()->find($id);
         $this->slug = $data->slug;
+        $this->name = $data->name;
         $this->use_app_module = $data->use_app_module;
 
         $this->languages = $this->getInterface()->getLanguage();
@@ -111,11 +117,13 @@ class Edit extends Component {
             $this->description[$value->language->code] = '';
             $this->meta_keyword[$value->language->code] = '';
             $this->meta_description[$value->language->code] = '';
+            $this->css[$value->language->code] = '';
             
             $code = $data->translate()->where('language_id', $value->language->id)->first();
             if ($code) {
                 $this->title[$value->language->code] = $code->title;
                 $this->description[$value->language->code] = $code->content;
+                $this->css[$value->language->code] = $code->short_content;
                 $this->meta_keyword[$value->language->code] = $code->meta_keyword;
                 $this->meta_description[$value->language->code] = $code->meta_description;
             }

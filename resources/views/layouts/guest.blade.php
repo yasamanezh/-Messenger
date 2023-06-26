@@ -8,6 +8,7 @@
         <livewire:front.layout.head />
            <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+         <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     @livewireStyles
    </head>
 
@@ -21,6 +22,7 @@
           <livewire:front.layout.social />
         </div>
         <livewire:front.layout.script />
+          @stack('scripts')
         @livewireScripts
     </body>
 

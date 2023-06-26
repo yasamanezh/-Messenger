@@ -77,7 +77,7 @@
                                         </div>
                                         @foreach($languages as $language)
                                         <div wire:ignore.self class="tab-pane fade " id="language{{$language->id}}" role="tabpanel">
-                                            <div class="form-group row">
+                                              <div class="form-group row">
                                                 <label class="col-md-3 form-label"> title: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
                                                 <div class="col-md-9">
                                                     <input placeholder="title"  class="form-control @error('title') is-invalid @enderror"  wire:model.defer="title.{{$language->language->code}}">
@@ -87,10 +87,19 @@
                                             
                                             <div class="form-group">
                                                 <div class="row row-sm">
-                                                    <label class="form-label col-sm-3">description: @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif</label>
+                                                    <label class="form-label col-sm-3">count : @if($language->language->code == 'en') <span class="tx-danger">*</span> @endif </label>
                                                     <div class="col-sm-9">
-                                                        <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
+                                                        <textarea wire:model.defer="short_content.{{$language->language->code}}" rows="5" placeholder="count" class="form-control"></textarea>
                                                         @error('short_content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">description:</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea wire:model.defer="content.{{$language->language->code}}" rows="5" placeholder="description" class="form-control"></textarea>
+                                                        @error('content')  <div class="invalid-feedback" style="display: block"> {{ $message }}  </div> @enderror
                                                     </div>
                                                 </div>
                                             </div>

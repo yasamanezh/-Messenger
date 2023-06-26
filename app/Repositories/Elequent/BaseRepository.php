@@ -5,12 +5,16 @@ namespace App\Repositories\Elequent;
 use App\Repositories\Contract\IBase;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\{Language,Translation};
+use App\Repositories\Criteria\ICriteria;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+
+
 
 
 use Exception;
 
-class BaseRepository implements IBase {
+class BaseRepository implements IBase,ICriteria {
 
     protected $model;
     protected $translationModel ;
@@ -109,6 +113,11 @@ class BaseRepository implements IBase {
         
        return $this->getModelClass()->with('translate')->findOrFail($id);
     }
+     public function findEnable($id) {
+        
+       return $this->getModelClass()->where('status',1)->find($id);
+    }
+    
     
     public function findBySlug($slug) {
         
@@ -164,7 +173,11 @@ class BaseRepository implements IBase {
       public function takeByEnable($count) {
         return $this->getModelClass()->where('status',1)->take($count)->get();
     }
-     
-    
 
+    public function withCriteria(...$criteria) {
+       foreach ($criteria[0] as $item){
+            $this->model = $item[0]->apply($this->model,$item[1],$item[2]);
+       }
+       return $this->model;
+       }
 }

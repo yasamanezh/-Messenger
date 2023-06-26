@@ -38,7 +38,7 @@
                         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <form class="padding-10 saveInfo">
                                 <div class="form-group row">
-                                    <label class="form-label col-sm-2">github : </label>
+                                    <label class="form-label col-sm-2">facebook : </label>
                                     <input type="text" wire:model.defer="github" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>
@@ -59,7 +59,7 @@
                                            class="form-control col-sm-6">
                                 </div>
                                 <div class="form-group row">
-                                    <label class="form-label col-sm-2">Email : </label>
+                                    <label class="form-label col-sm-2">youtube : </label>
                                     <input type="text" wire:model.defer="email" placeholder=""
                                            class="form-control col-sm-6">
                                 </div>

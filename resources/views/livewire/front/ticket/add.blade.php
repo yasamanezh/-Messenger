@@ -73,21 +73,21 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-12 mt-2 mb-2">
                                                     <label for="inputAttachments">{{__('attachments')}}</label>
                                                 </div>
-                                                <br>
+                                                
                                                 <div  class="col-sm-12" >
                                                     <div  class="row" >
 
                                                         @foreach($inputdownload as $key => $value)
 
                                                         <div class="col-sm-6">
-                                                            <input type="file" class="form-control" wire:model="download_file.{{ $key }}" >
+                                                            <input type="file" class="form-control" wire:model="download_file.{{ $key }}" style="padding: 14px 20px;" >
                                                             <br>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                            <button class=" bbtn ripple btn-secondary text-white btn-icon btn-sm"
+                                                            <button class=" bbtn ripple btn-secondary text-white btn-icon btn-sm mt-2"
                                                                     wire:click.prevent="removeDownload({{$key}})">
                                                                 <i class="fa fa-minus-circle"></i></button><br>
                                                         </div>
@@ -95,7 +95,7 @@
                                                         @endforeach
                                                         <div class=" add-input">
                                                             <div class="row">
-                                                                <div class="col-md-12 text-center">
+                                                                <div class="col-md-12">
                                                                     <button class="btn ripple btn-primary text-white btn-icon btn-xs"
                                                                             wire:click.prevent="AddDownload({{$l}})"><i
                                                                             class="fa fa-plus-circle"></i></button>
@@ -114,7 +114,7 @@
                                     <div  wire:loading wire:target="saveInfo"  class="spinner-border text-danger" role="status">
                                         <span class="visually-hidden">{{__('Loading')}}...</span>
                                     </div>
-                                    <button wire:click.prevent="saveInfo()" class="default-btn"><i class='bx bx-paper-plane'></i>{{__('save')}}</button>
+                                    <button wire:click.prevent="saveInfo()" class="default-btn"><i class='bx bx-paper-plane'></i>{{__('Send')}}</button>
                                 </div>
                             </div>
                         </div>

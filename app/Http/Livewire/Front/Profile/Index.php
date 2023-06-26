@@ -6,12 +6,14 @@ use Livewire\Component;
 use App\Repositories\Contract\IUser;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithFileUploads;
 
 class Index extends Component {
 
+    use WithFileUploads;
     public $multiLanguage = false;
-    public $user, $name, $email, $success, $errorsmsg;
-    public $password_confirmation, $password;
+    public $user, $name, $email, $success, $errorsmsg ,$uploadImage, $image;
+    public  $password;
 
     public function mount($language = null) {
         $this->success = false;
@@ -20,6 +22,7 @@ class Index extends Component {
         $this->user = $this->getInterFace()->find(auth()->user()->id);
         $this->name = $this->user->name;
         $this->email = $this->user->email;
+        $this->image = $this->user->profile_photo_path;
     }
 
     public function getInterFace() {
@@ -37,7 +40,12 @@ class Index extends Component {
 
         if ($this->password) {
             $this->validate([
-                'password' => 'required|string|min:8|max:20|confirmed',
+         
+            'password' => [  'string','min:8','regex:/[a-z]/','regex:/[A-Z]/','regex:/[0-9]/','regex:/[@$!%*#?&]/']
+     
+                ],[
+            'password'=>'The password must be 8 characters long and contain uppercase and lowercase letters numbers and symbols.'
+            
             ]);
             
             $password = Hash::make($this->password);
@@ -45,16 +53,35 @@ class Index extends Component {
             $password = $this->user->password;
         }
 
-        $data = [
+       
+        if ($this->uploadImage) {
+            $this->validate([
+            'uploadImage' => ['image', 'max:120'],
+        ]);
+             $data = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $password,
+            'profile_photo_path' => $this->uploadImage(),
+        ];
+             
+        } else {
+             $data = [
             'name' => $this->name,
             'email' => $this->email,
             'password' => $password,
         ];
+        }
         $this->getInterFace()->update($this->user->id, $data);
 
         $this->success = 'success!';
     }
-
+    public function uploadImage() {
+        $directory = "public/photos/profiles";
+        $name = $this->uploadImage->getClientOriginalName();
+        $this->uploadImage->storeAs($directory, $name);
+        return("photos/profiles/" . "$name");
+    }
     public function render() {
         return view('livewire.front.profile.index');
     }

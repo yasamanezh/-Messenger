@@ -20,7 +20,7 @@
                             <span class="sub-title">{{$this->getTranslate('title',$module)}}</span>
                             <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                             <p>{{$this->getTranslate('content',$module)}}</p>
-                            <a href="{{$multiLanguage ? $lang.'/'.$setting->free_trial  : '/'.$setting->free_trial}}" class="default-btn">{{__('Start Free Trial')}}</a>
+                            <a href="{{$multiLanguage ? $lang.'/'.$setting->free_trial  : '/'.$setting->free_trial}}" class="default-btn">{{__('Download Free')}}</a>
 
                         </div>
                     </div>

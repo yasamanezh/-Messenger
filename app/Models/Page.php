@@ -11,7 +11,7 @@ class Page extends Model {
     use Translations;
     use HasFactory;
 
-    protected $fillable = ['slug', 'status','use_app_module'];
+    protected $fillable = ['slug', 'status','use_app_module','name'];
 
     use HasFactory;
 }

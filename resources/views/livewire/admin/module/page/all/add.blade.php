@@ -66,6 +66,14 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
+                                                <label class="col-md-3 form-label"> name in english: <span class="tx-danger">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input type="text" placeholder="name" class="form-control @error('name') is-invalid @enderror"  wire:model.defer="name">
+                                                    @error('name') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
                                                 <label class="col-sm-3 form-label">use app module:</label>
                                                 <div class="col-sm-9">
                                                     <select class="form-control" wire:model.defer="use_app_module" >
@@ -129,6 +137,17 @@
 
                                             </script>
                                             @endpush
+                                            <div class="form-group" wire:ignore>
+                                                <div class="row row-sm">
+                                                    <label class="form-label col-sm-3">css:<span class="tx-danger">{{$language->language->code=='en' ? '*':''}}</span> </label>
+                                                    <div class="col-sm-9">
+                                                        <textarea  rows="10" class="form-control summernote-editor " 
+                                                                    wire:model.defer="css.{{$language->language->code}}"
+                                                                 ></textarea>
+
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <div class="row row-sm">

@@ -5,7 +5,8 @@ namespace App\Http\Livewire\Front\Page;
 use Livewire\Component;
 use App\Traits\{
     Page,
-    Translate
+    Translate,
+    Module,Cart
 };
 use App\Repositories\Contract\{
 
@@ -13,12 +14,17 @@ use App\Repositories\Contract\{
  
 };
 
+
+
 class Pack extends Component
 {
       use Page;
     use Translate;
+    use Cart;
 
     public $page, $title;
+        public $subError =false;
+    public $packError =false;
 
     public function mount($language = null) {
 

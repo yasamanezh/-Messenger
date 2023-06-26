@@ -19,6 +19,7 @@ interface IBase {
     public function getEnables();
     public function takeByEnable($count); 
     public function PaginateEnables($count,$slug =null) ;
+     public function findEnable($id) ;
     
     
 }

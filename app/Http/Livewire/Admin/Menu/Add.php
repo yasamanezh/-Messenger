@@ -16,7 +16,7 @@ use Livewire\Component;
 class Add extends Component {
     use CreateSettinges;
 
-    public $slug, $status, $type, $image, $title, $sort, $languages, $parent,$show_in_header,$show_in_footer;
+    public $slug, $status, $type,$customelink, $image, $title, $sort, $languages, $parent,$show_in_header,$show_in_footer;
     public $typePage = 'menus';
     public $Translateparams  =['title'];
     public $IndexRoute       = 'admin.menus';
@@ -30,16 +30,42 @@ class Add extends Component {
         "title.en" => "required|string|min:3",
     ];
 
-
+    public function saveInfo1() {
+       
+        
+    }
     public function getItems() {
+        
+        if($this->type == 'page' ||$this->type == 'post' ||$this->type == 'blog' ){
+            
+            $this->validate([
+                'slug'=>'required'
+            ]);
+        }
+        if($this->type == 'link'){
+            $this->validate([
+                'customelink'=>'required'
+            ]); 
+            $link =1;
+            $type ='page';
+            $slug = $this->customelink;
+            
+        }else{
+            $link =0;
+            $type = $this->type;
+            $slug = $this->slug;
+        }
+        
+        
         return [
-            'slug' => $this->slug,
+            'slug' => $slug,
             'show_in_footer' => $this->show_in_footer,
             'show_in_header' => $this->show_in_header,
             'status' => $this->status,
-            'type' => $this->type,
+            'type' => $type,
             'sort' => $this->sort,
             'parent' => $this->parent,
+            'link' => $link,
         ];
     }
 

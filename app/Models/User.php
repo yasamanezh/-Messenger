@@ -10,8 +10,10 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
+
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -33,7 +35,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'status'
+        'status',
+        'profile_photo_path'
     ];
 
     /**

@@ -11,7 +11,7 @@ class Menu extends Model {
     use HasFactory;
     use Translations;
 
-    protected $fillable = ['slug', 'parent', 'type','sort','status','show_in_header','show_in_footer'];
+    protected $fillable = ['slug', 'parent', 'type','sort','status','show_in_header','show_in_footer','link'];
 
   
     

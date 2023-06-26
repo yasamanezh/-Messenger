@@ -24,6 +24,8 @@ class Index extends Component {
         if (!Gate::allows('show_option')) {
             abort(403);
         }
+        $this->sortDirection ='ASC';
+        
     }
 
     public function getInterface() {

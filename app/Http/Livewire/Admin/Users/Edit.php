@@ -47,6 +47,14 @@ class Edit extends Component
         
         
         if($this->password){
+              $this->validate([
+         
+            'password' => [  'confirmed','string','min:8','regex:/[a-z]/','regex:/[A-Z]/','regex:/[0-9]/','regex:/[@$!%*#?&]/']
+     
+                ],[
+            'password'=>'The password must be 8 characters long and contain uppercase and lowercase letters numbers and symbols.'
+            
+            ]);
             return [
             'name'     => $this->name,
             'email'    => $this->email,

@@ -14,4 +14,11 @@
     <script src="{{asset('front/'.$dir.'/assets/js/ajaxchimp.min.js')}}"></script>
     <script src="{{asset('front/'.$dir.'/assets/js/aos.js')}}"></script>
     <script src="{{asset('front/'.$dir.'/assets/js/main.js')}}"></script>
+      <script>
+        $(function() {
+            $("#picture").on('click', function() {
+                $("#fileinput").trigger('click');
+            });
+        });
+    </script>
 </div>

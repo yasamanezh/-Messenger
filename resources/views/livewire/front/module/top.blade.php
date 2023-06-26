@@ -10,7 +10,16 @@
                         <h1>{{$this->getTranslate('short_content',$module)}}</h1>
                         <p>{{$this->getTranslate('content',$module)}} </p>
 
-                        <br><br><br>
+                         <ul class="user-info">
+                              @foreach($images as $image)
+                                <li><img src="storage/{{$image->file}}" class="rounded-circle" alt="user"></li>
+                                @endforeach
+
+                                <li class="title">
+                                    {{$this->getTranslate('count_use',$module,'true')}}
+                                   
+                                </li>
+                            </ul>
 
                         <div class="app-btn-box">
                             <a href="{{$setting->app_store_link}}" class="applestore-btn" target="_blank">
@@ -25,7 +34,21 @@
 
                                 <span>{{__('Google Play')}}</span>
                             </a>
+                            
+                           
                         </div>
+                         @if($file) 
+                         <div class="app-btn-box text-center">
+                             
+                             <a download  href="storage/{{$file}}"  class="applestore-btn" target="_blank" style="width: 180px">
+                            <img src="{{asset('front/ltr/assets/img/download.png')}}" alt="{{__('Windows')}}">
+                                    {{__('Get it from')}}
+
+                                <span>{{__('Windows')}}</span>
+                            </a>
+                             
+                         </div>
+                            @endif
                     </div>
                 </div> 
                 <div class="col-lg-6 col-md-12">

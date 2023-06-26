@@ -187,6 +187,7 @@ return [
          * Package Service Providers...
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
+           
         
         /*
          * Application Service Providers...
@@ -217,6 +218,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
          'EmailConfig' => App\Helper\facade\EmailConfig::class,
+         'GetApi' => App\Helper\facade\GetApi::class,
+        
     ])->toArray(),
 
 ];

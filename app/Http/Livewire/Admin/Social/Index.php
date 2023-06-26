@@ -21,7 +21,7 @@ class Index extends Component {
 
         if ($this->social) {
             $this->telegram = $this->social->telegram;
-            $this->whatsapp = $this->social->whatsapp;
+            $this->github = $this->social->github;
             $this->twitter = $this->social->twitter;
             $this->linkdin = $this->social->linkdin;
             $this->instagram = $this->social->instagram;
@@ -43,7 +43,7 @@ class Index extends Component {
         $this->success = false;
         if (Gate::allows('edit_setting')) {
             $data = [
-                'github' => $this->telegram,
+                'github' => $this->github,
                 'twitter' => $this->twitter,
                 'linkdin' => $this->linkdin,
                 'instagram' => $this->instagram,

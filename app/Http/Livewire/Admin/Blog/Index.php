@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Blog;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Repositories\Contract\iBlog;
+use App\Repositories\Elequent\Criteria\Status;
 use Illuminate\Support\Facades\Gate;
 use App\Traits\Admin\Settinges;
 
@@ -23,6 +24,12 @@ class Index extends Component {
          if (!Gate::allows('show_blog')) {
              abort(403); 
         } 
+        
+        /*dd(app()->make(iBlog::class)->withCriteria([ 
+            [new Status(),'status',1],
+            [new Status(),'slug','branding'],
+            [new Status(),'id','1'],
+            ])->get()) ;*/
     }
 
     public function getInterface() {

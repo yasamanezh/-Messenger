@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'coinbase::charge:created' => [
+        App\Listeners\ChargeCreatedListener::class,
+    ],
     ];
 
     /**

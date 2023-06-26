@@ -21,7 +21,6 @@ class Add extends Component
     public $status,$success;
 
     public function mount($language = null)  {
- 
         $language ? $this->multiLanguage = true : $this->multiLanguage = false;
     }
 
@@ -90,7 +89,7 @@ class Add extends Component
                     'download_file.*.mimes' => 'the file mimes is jpg,bmp,png,jpeg,gif,webp,svg . ',
                     'download_file.*.image' => 'the file must be a image.',
                 ]);
-                $directory = "photos/tickets";
+                $directory = "pubic/photos";
                 $name = $this->download_file[$key]->getClientOriginalName();
                 $this->download_file[$key]->storeAs($directory, $name);
 
@@ -100,7 +99,12 @@ class Add extends Component
         }
         $this->getInterface()->createAttach($data,$downloads);
         $this->success ="success !";
-        $this->reset(['subject','message','part_id']);
+        if($this->multiLanguage){
+             return redirect(route('front.ticket.language',app()->getLocale()));
+        }else{
+             return redirect(route('front.ticket'));
+        }
+      
 
     }
     

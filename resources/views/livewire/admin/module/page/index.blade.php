@@ -50,25 +50,21 @@
                                     <a href="{{route('admin.page.pack')}}" class="btn ripple btn-light btn-lg btn-block"><i class="fe fe-edit-2"></i>packages </a>
                                     @foreach($pages as $page)
                                     @if($page->translateable->slug == 'faq' || $page->translateable->slug == 'feature' || $page->translateable->slug == 'how-to-work'|| $page->translateable->slug == 'pack' || $page->translateable->slug == 'about' || $page->translateable->slug == 'contact'   ) @continue   @endif
-
                                     <div  class="btn ripple btn-light btn-lg btn-block">
                                         <a href="{{route('admin.page.edit',$page->translateable_id)}}"><i class="fe fe-edit-2"></i></a>
                                         <a  wire:click.prevent="confirmRemoval({{$page->translateable->id }})" >
                                             <i class="fe fe-trash text-danger"></i>
                                         </a>
+                                        <a target="_blank" href="{{route('front.page',$page->translateable->slug)}}"><i class="fa fa-eye"></i></a>
                                         {{$page->title}}
-
                                     </div>
-
                                     @endforeach
-
                                 </div>
                             </div>
                             <br>
                             <div>
                                 <a class="btn btn-primary" href="{{route('admin.page.add')}}">
                                     <i class="fa fa-plus-circle"></i>
-
                                 </a>
                             </div>
                         </div>
@@ -86,10 +82,8 @@
                     <h4>Are you sure you want delete this item ?</h4>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" wire:click.prevent='cancelDelete()' data-bs-dismiss="modal"><i class="fa fa-times ml-1"></i> Cancell
-                    </button>
-                    <button type="button"  wire:click.prevent="delete" class="btn btn-danger"><i
-                            class="fa fa-trash ml-1"></i>ok
+                    <button type="button" class="btn btn-secondary" wire:click.prevent='cancelDelete()' data-bs-dismiss="modal"><i class="fa fa-times ml-1"></i> Cancell  </button>
+                    <button type="button"  wire:click.prevent="delete" class="btn btn-danger"><i  class="fa fa-trash ml-1"></i>ok
                     </button>
                 </div>
             </div>

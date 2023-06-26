@@ -31,7 +31,7 @@ class Add extends Component
     protected $rules = [
         'name'     => 'required|string|min:3',
         'email'    => 'required|email|unique:users,email',
-        'password' => 'required|string|min:6|confirmed',
+        'password' => [  'confirmed','string','min:8','regex:/[a-z]/','regex:/[A-Z]/','regex:/[0-9]/','regex:/[@$!%*#?&]/']
     ];
 
     public function saveInfo() {

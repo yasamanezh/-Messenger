@@ -111,7 +111,6 @@ class Add extends Component
     {
         $parts    = $this->getParts()->get();
         $users    = $this->getUsers()->all('id','')->get();
-
         return view('livewire.admin.ticket.add',compact('users','parts'))->layout('layouts.admin');
     }
 }

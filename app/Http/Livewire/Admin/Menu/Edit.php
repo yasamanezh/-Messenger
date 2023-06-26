@@ -17,7 +17,7 @@ class Edit extends Component {
 
     use UpdateSettinges;
 
-    public $module_id, $slug, $status, $type, $image, $title, $sort, $languages, $parent,$show_in_footer,$show_in_header;
+    public $module_id, $slug, $status, $type, $image, $title,$customelink, $sort, $languages, $parent,$show_in_footer,$show_in_header;
     public $typePage = 'menus';
     public $Translateparams = ['title'];
     public $IndexRoute = 'admin.menus';
@@ -32,14 +32,35 @@ class Edit extends Component {
     ];
 
     public function getItems() {
+        if($this->type == 'page' ||$this->type == 'post' ||$this->type == 'blog' ){
+         
+            $this->validate([
+                'slug'=>'required'
+            ]);
+        }
+        if($this->type == 'link'){
+            $this->validate([
+                'customelink'=>'required'
+            ]); 
+            $link =1;
+            $type ='page';
+            $slug = $this->customelink;
+            
+        }else{
+            $link =null;
+            $type = $this->type;
+            $slug = $this->slug;
+        }
+        
         return [
-            'slug' => $this->slug,
+            'slug' => $slug,
             'show_in_footer' => $this->show_in_footer,
             'show_in_header' => $this->show_in_header,
             'status' => $this->status,
-            'type' => $this->type,
+             'type' => $type,
             'sort' => $this->sort,
             'parent' => $this->parent,
+            'link' => $link,
         ];
     }
 
@@ -58,6 +79,10 @@ class Edit extends Component {
             $this->type = $data->type;
             $this->sort = $data->sort;
             $this->parent = $data->parent;
+            if($data->link){
+                $this->type ='link';
+                $this->customelink = $this->slug;
+            }
         }
        
     }

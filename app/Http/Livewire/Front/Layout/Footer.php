@@ -3,9 +3,9 @@
 namespace App\Http\Livewire\Front\Layout;
 
 use Livewire\Component;
-use App\Models\Language;
-use App\Repositories\Contract\{IFooter,ISetting,ISocial};
-use \App\Repositories\Contract\IMenu;
+use App\Models\{Language,Translation};
+use App\Repositories\Contract\{IFooter,ISetting,ISocial,IMenu,IPage,iBlog,IPost};
+use Illuminate\Support\Facades\Request;
 use App\Traits\{
 
     Translate
@@ -14,15 +14,35 @@ use App\Traits\{
 class Footer extends Component
 {
     use Translate;
-    public $multiLanguage,$Company_links,$Support_links,$Useful,$defaultLanguage,$setting,$email,$success;
+    public $multiLanguage,$Company_links,$Support_links,$Useful,$defaultLanguage,$setting,$email,$success,$translations;
     public function mount($language ) {
         
         $this->multiLanguage = $language;
         $this->lang = app()->getLocale();
         $this->setting = app()->make(ISetting::class)->first();
         $this->defaultLanguage = Language::findOrFail($this->setting->daf_lang);
+        $this->translations = Translation::get();
     }
-    
+       public function getUrl($param) {
+        $current_uri = request()->segments();
+        if($this->multiLanguage){
+            if (count($current_uri) == 1){
+                return str_replace('/'.app()->getlocale(), '/'.$param, Request::url());
+            }else{
+
+                return str_replace('/'.app()->getlocale().'/', '/'.$param.'/', Request::url());
+            }
+        }else{
+            if($_SERVER['REQUEST_URI'] != '/'){
+                return str_replace($_SERVER['REQUEST_URI'],'/'.$param.$_SERVER['REQUEST_URI'],Request::url());
+            }else{
+               return Request::url().'/'.$param;
+            }
+
+        }
+
+    }
+
      public function getHref($param) {
 
 
@@ -44,11 +64,15 @@ class Footer extends Component
                 $menuRoute = ['front.post', $post->slug];
             }
         } elseif ($type == 'page') {
-            $page = app()->make(IPage::class)->find($param->slug);
+            if($param->link ==1){
+                 $menuRoute =[1,2,3,4];
+            }else{
+               $page = app()->make(IPage::class)->find($param->slug);
             if ($this->multiLanguage) {
                 $menuRoute = ['front.page.language',[ 'language'=>app()->getLocale(),'id'=>$page->slug]];
             } else {
                 $menuRoute = ['front.page', $page->slug];
+            } 
             }
         } elseif ($type == 'weblog') {
             if ($this->multiLanguage) {
@@ -100,8 +124,9 @@ class Footer extends Component
                 $this->Useful = app()->make(IMenu::class)->Menus($Useful);
             }
         }
+        $user =auth()->user();
 
-        return view('livewire.front.layout.footer', compact('footer','social'));
+        return view('livewire.front.layout.footer', compact('footer','social','user'));
 
     }
 }

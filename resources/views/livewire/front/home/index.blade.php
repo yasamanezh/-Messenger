@@ -9,7 +9,7 @@
     <livewire:front.module.counter />
     <livewire:front.module.download :setting="$setting"/>
     <livewire:front.module.customer />
-    <livewire:front.module.pack :setting="$setting" />
+     <livewire:front.module.pack :setting="[$multiLanguage,$setting]"/>
     <livewire:front.module.blog :lang="$multiLanguage" />
     <livewire:front.layout.footer :language="$multiLanguage">
 </div>

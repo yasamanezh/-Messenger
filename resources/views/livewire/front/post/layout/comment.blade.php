@@ -27,7 +27,7 @@
             <div class="comment-body">
                 <footer class="comment-meta">
                     <div class="comment-author vcard">
-                        <img src="{{asset('front/ltr/assets/img/user/user1.jpg')}}" class="avatar" alt="{{$item->name}}">
+                        <img src="@if($post->user->profile_photo_path)  /storage/{{$post->user->profile_photo_path }} @else {{asset('admin/img/svgs/user.svg')}} @endif" class="avatar" alt="{{$item->name}}">
                         <b class="fn">{{$item->name}}</b>
                     </div>
                     <div class="comment-metadata">
@@ -50,7 +50,7 @@
                     <div class="comment-body">
                         <footer class="comment-meta">
                             <div class="comment-author vcard">
-                                <img src="{{asset('front/ltr/assets/img/user/user2.jpg')}}" class="avatar" alt="{{$item->name}}">
+                                <img src="@if($post->user->profile_photo_path)  /storage/{{$post->user->profile_photo_path }} @else {{asset('admin/img/svgs/user.svg')}} @endif" class="avatar" alt="{{$item->name}}">
                                 <b class="fn">{{$item->name}}</b>
                             </div>
                             <div class="comment-metadata">
@@ -77,11 +77,11 @@
     </div>
 
     <div class="comment-respond">
-        <h3 class="comment-reply-title">{{__('message.Leave A Reply')}}</h3>
+        <h3 class="comment-reply-title">{{__('Leave A Reply')}}</h3>
         <div class="comment-form">
             <p class="comment-notes">
-                <span id="email-notes">{{__('message.Your email address will not be published')}}.</span>
-                {{__('message. Required fields are marked')}} <span class="required">*</span>
+                <span id="email-notes">{{__('Your email address will not be published')}}.</span>
+                {{__('Required fields are marked')}} <span class="required">*</span>
             </p>
             @if($errors->any())
             <div class="alert alert-danger">
@@ -125,7 +125,7 @@
             </p>
 
             <p class="form-submit">
-                <button wire:click.prevent="saveComment()" wire:loading.remove   id="submit" class="submit" type="button" >{{__('message.send comment')}}</button>
+                <button wire:click.prevent="saveComment()" wire:loading.remove   id="submit" class="submit" type="button" >{{__('send comment')}}</button>
             <div  wire:loading  class="spinner-border text-danger" role="status">
                 <span class="visually-hidden">{{__('Loading')}}..</span>
             </div>

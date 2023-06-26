@@ -6,7 +6,7 @@
                 <div class="page-title-content">
                     <h2>{{__('Blog')}}</h2>
                     <ul>
-                        <li><a href="{{$multiLanguage ? route('front.home.language',app()->getlocale()) : route('front.home')}}">{{__('message.Home')}}</a></li>
+                        <li><a href="{{$multiLanguage ? route('front.home.language',app()->getlocale()) : route('front.home')}}">{{__('Home')}}</a></li>
 
                         <li>{{__('Blog')}}</li>
                     </ul>

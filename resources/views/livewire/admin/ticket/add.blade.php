@@ -92,17 +92,12 @@
 
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <label for="inputAttachments">attachments</label>
-
-
-
-                                                </div>
+                                                    <label for="inputAttachments">attachments</label> </div>
                                                 <br>
                                                 <div  class="col-sm-12" >
                                                     <div  class="row" >
 
                                                         @foreach($inputdownload as $key => $value)
-
                                                         <div class="col-sm-6">
                                                             <input type="file" class="form-control" wire:model="download_file.{{ $key }}" >
                                                             <br>
@@ -126,12 +121,8 @@
                                                     </div>
                                                 </div>
                                                 <br>
-
                                             </div>
-
-
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

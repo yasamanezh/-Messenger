@@ -22,8 +22,7 @@ class Edit extends Component {
         "icon" => "required|string",
         "short_content" => "required|array|min:1",
         "short_content.en" => "required|integer",
-        "content"    => "required|array|min:1",
-        "content.en" => "required|string",
+
         "title" => "required|array|min:1",
         "title.en" => "required|string|min:3",
     ];
@@ -45,6 +44,7 @@ class Edit extends Component {
     }
 
     public function getItems() {
+    
         return [
             'type' => 'counter',
             'sort' => $this->sort,

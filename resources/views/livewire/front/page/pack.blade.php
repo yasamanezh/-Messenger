@@ -1,5 +1,5 @@
 <div>
-       @if($page)
+    @if($page)
     <livewire:front.layout.menu :lang="$multiLanguage">
         <!-- Start Page Title Area -->
         <div class="page-title-area">
@@ -25,7 +25,7 @@
             </div>
         </div> 
 
- <!-- Start Pricing Area -->
+        <!-- Start Pricing Area -->
         <div class="pricing-area pt-100 pb-75">
             <div class="container">
                 <div class="section-title">
@@ -33,23 +33,38 @@
                     <h2>{{$this->getTranslate('short_content',$module)}}</h2>
                 </div>
                 <div class="row align-items-center justify-content-center">
-                      @foreach($packs as $pack)
+                    @foreach($packs as $pack)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="single-pricing-box">
                             <div class="title">
                                 <h3>{{$this->getTranslate('title',$pack)}}</h3>
-                                <p>{{$this->getTranslate('short_content',$pack)}}</p>
+                                <p>{{$this->getTranslate('content',$pack)}}</p>
                             </div>
+                            @if($pack->most_popular)
+                            <span class="popular">{{__('Most Popular')}}</span>
+                            @endif
+
+                            @if(!$pack->is_free)
                             <div class="price">
                                 ${{$pack->price}} <span>{{$this->getTranslate('month_text',$pack,'true')}}</span>
                             </div>
-                            <a href="{{$setting->app_link}}" class="default-btn">{{__('Purchase Plan')}}</a>
-                            <ul class="features-list">
+                            @else
+                            <div class="price">
+                                <span>{{__('free')}}</span>
+                            </div>
+
+                            @endif
+                            @if($setting->is_payment)
+                            <a href=""   wire:click.prevent="addToCart({{$pack->id}})" class="default-btn">{{__('Purchase Plan')}}</a>
+                            @else
+                            <a href="{{$setting->payment_url}}"   class="default-btn">{{__('Purchase Plan')}}</a>
+
+                            @endif                            <ul class="features-list">
                                 @foreach($pack->options as $option)
                                 <li><i class="ri-check-line"></i>{{$this->getTranslate('title',$option)}}</li>
-                                
+
                                 @endforeach
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -60,7 +75,7 @@
             <div class="shape13"><img src="{{asset('front/ltr/assets/img/shape/shape15.png')}}" alt="{{$this->getTranslate('title',$page)}}"></div>
         </div>
         <!-- End Pricing Area -->
-    <livewire:front.layout.footer :language="$multiLanguage">
-@endif
+        <livewire:front.layout.footer :language="$multiLanguage">
+            @endif
 
-</div>
+            </div>

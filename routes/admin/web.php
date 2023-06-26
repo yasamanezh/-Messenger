@@ -9,6 +9,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin'], 'as' => 'admi
     });
 });
 Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
+    
+    
     Route::get('mySiteMapGenerate',[\App\Http\Controllers\Smpe::class,'index'])->name('admin.siteMap');
 
     //======================================= > //language//
@@ -19,8 +21,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
         Route::get('/edit/{id}', App\Http\Livewire\Admin\Language\Edit::class)->name('admin.language.edit');
     });
 
-    //======================================= > //dashboard//
+    //======================================= > //ordrs//
+    Route::get('/orders', App\Http\Livewire\Admin\Order\Index::class)->name('admin.order');
+     //======================================= > //dashboard//
     Route::get('/dashboard', App\Http\Livewire\Admin\Home\Index::class)->name('Dashboard');
+   Route::get('/testhhgh', [App\Http\Controllers\DahboardController::class,'test'])->name('test');
 
     //======================================= > //blogs//
     Route::group(['prefix' => 'blogs'], function() {
@@ -152,6 +157,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     });
 
     Route::group(['prefix' => 'pages'], function() {
+        Route::get('/pageBuilder', App\Http\Livewire\Admin\Design\Add::class)->name('admin.pagebuilder');
         Route::get('/list', App\Http\Livewire\Admin\Module\Page\Index::class)->name('admin.pages');
         Route::get('/custome/add', App\Http\Livewire\Admin\Module\Page\All\Add::class)->name('admin.page.add');
         Route::get('/custome/edit/{id}', App\Http\Livewire\Admin\Module\Page\All\Edit::class)->name('admin.page.edit');
@@ -164,4 +170,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth.admin']], function() {
     });
 
     Route::get('/footer', App\Http\Livewire\Admin\Footer\Index::class)->name('admin.footer');
+    
+    Route::get('/image/manager', App\Http\Livewire\Admin\PageBuilder\Image::class)->name('admin.images');
+
 });

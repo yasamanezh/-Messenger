@@ -8,13 +8,14 @@ use App\Repositories\Contract\ISetting;
 use App\Traits\Admin\UpdateSettinges;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Sitemap\SitemapGenerator;
+use Image;
 
 class Index extends Component {
 
     use WithFileUploads;
     use UpdateSettinges;
 
-    public $module_id, $title, $meta_keyword, $meta_title, $meta_description, $languages, $content;
+    public $module_id,$is_payment,$payment_url, $title, $meta_keyword, $meta_title, $meta_description, $languages, $content;
     public $data = [], $uploadLogo, $uploadIcon, $success = false;
     public $typePage = 'setting';
     public $Translateparams = ['title', 'content', 'meta_keyword', 'meta_title', 'meta_description'];
@@ -22,6 +23,8 @@ class Index extends Component {
     public $gate = 'setting';
     protected $rules = [
         'data.logo' => 'nullable',
+        'data.is_payment' => 'nullable',
+        'data.payment_url' => 'nullable',
         'data.app_store_link' => 'nullable',
         'data.google_play_link' => 'nullable',
         'data.free_trial' => 'nullable',
@@ -69,11 +72,13 @@ class Index extends Component {
 
     public function getItems() {
 
-        $this->uploadLogo ? $logo = $this->uploadImage($this->uploadLogo) : $logo = $this->data['logo'];
+        $this->uploadLogo ? $logo = $this->uploadLogo() : $logo = $this->data['logo'];
         $this->uploadIcon ? $icon = $this->uploadImage($this->uploadIcon) : $icon = $this->data['icon'];
 
         return [
             'logo' => $logo,
+            'payment_url'=>$this->data['payment_url'],
+            'is_payment'=>$this->data['is_payment'],
             'icon' => $icon,
             'app_store_link' => $this->data['app_store_link'],
             'google_play_link' => $this->data['google_play_link'],
@@ -106,10 +111,10 @@ class Index extends Component {
             'id' => '',
             'logo' => '',
             'icon' => '',
-            'data.app_store_link' => '',
-            'data.google_play_link' => '',
-            'data.free_trial' => '',
-            'data.app_link' => '',
+            'app_store_link' => '',
+            'google_play_link' => '',
+            'free_trial' => '',
+            'app_link' => '',
             'location' => '',
             'email1' => '',
             'email2' => '',
@@ -123,6 +128,8 @@ class Index extends Component {
             'mail_host' =>'',
             'mail_port' =>'',
             'mail_encription' => '',
+             'payment_url'=>'',
+            'is_payment'=>0,
         ];
 
         if ($data) {
@@ -137,6 +144,14 @@ class Index extends Component {
         $directory = "public/photos/setting";
         $name = $img->getClientOriginalName();
         $img->storeAs($directory, $name);
+
+        return("photos/setting/" . "$name");
+    }  
+    public function uploadLogo() {
+        $directory = "public/photos/setting";
+        $name = $this->uploadLogo->getClientOriginalName();
+        Image::make($this->uploadLogo->getRealPath())->resize(138, 44)->save();
+        $this->uploadLogo->storeAs($directory, $name);
         return("photos/setting/" . "$name");
     }
 

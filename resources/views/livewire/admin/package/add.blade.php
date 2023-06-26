@@ -73,6 +73,7 @@
                                                     @error('price') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-label">options :</label>
                                                 <div class="col-sm-9">
@@ -91,6 +92,30 @@
 
                                                 </div>
                                             </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-label">free :</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" wire:model.defer="is_free" >
+                                                       
+                                                        <option value="1">yes</option>
+                                                        <option value="0">no</option>
+                                                    </select>
+                                                </div>
+                                                @error('is_free') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 form-label"> Most Popular :</label>
+                                                <div class="col-sm-9">
+                                                    <select class="form-control" wire:model.defer="most_popular" >
+                                                       
+                                                        <option value="1">yes</option>
+                                                        <option value="0">no</option>
+                                                    </select>
+                                                </div>
+                                                @error('most_popular') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
+
+
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-label">status:</label>
                                                 <div class="col-sm-9">

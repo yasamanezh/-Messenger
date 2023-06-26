@@ -10,9 +10,11 @@ use App\Repositories\Contract\{
     IPost,
     iBlog
 };
+use Livewire\WithFileUploads;
 
 class Edit extends Component {
 
+    use WithFileUploads;
     public $post_id, $slug, $related = [], $description, $uploadImage, $img, $status, $title, $meta_keyword, $meta_title, $meta_description, $languages;
     public $typePage = 'posts';
     protected $rules = [

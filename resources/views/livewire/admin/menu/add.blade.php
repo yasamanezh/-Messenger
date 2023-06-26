@@ -85,6 +85,7 @@
                                                 <div class="col-sm-9">
                                                     <select class="form-control" wire:model="type" >
                                                         <option value="">select</option>
+                                                        <option value="link">custome link</option>
                                                         <option value="blog">blog category</option>
                                                         <option value="weblog">Weblog</option>
                                                         <option value="post">posts</option>
@@ -112,7 +113,7 @@
                                                 @error('status') <div class="invalid-feedback">  {{ $message }} </div> @enderror
                                             </div>
                                             @if($type)
-                                            @if($type == 'blog' || $type == 'post' )
+                                            @if($type == 'blog' || $type == 'post' || $type == 'page' )
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-label">link:<span class="tx-danger">*</span></label>
                                                 <div class="col-sm-9">
@@ -140,6 +141,16 @@
                                             </div>
                                             
                                             @endif
+                                            @if($type == 'link')
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> link: <span class="tx-danger">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input placeholder="link"  class="form-control @error('customelink') is-invalid @enderror"  wire:model.defer="customelink">
+                                                    @error('customelink')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
+                                                </div>
+                                            </div>
+                                            @endif
+                                            
                                             @endif
                                             <div class="form-group row">
                                                 <label class="col-sm-3 form-label">show in header :</label>

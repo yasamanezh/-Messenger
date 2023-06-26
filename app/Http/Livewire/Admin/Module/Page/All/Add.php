@@ -15,12 +15,11 @@ class Add extends Component {
 
     use WithFileUploads;
 
-    public $slug,$use_app_module, $status,$meta_keyword = [], $title = [], $meta_description = [],$description = [], $languages;
+    public $slug,$name,$use_app_module, $status,$meta_keyword = [], $title = [],$css = [], $meta_description = [],$description = [], $languages;
     public $typePage = 'page';
     protected $rules = [
         'slug'               => 'required|string|min:2|max:199|unique:pages,slug',
-        "description"        => "required|array|min:1",
-        "description.en"     => "required|string",
+        'name'               => 'required|string|min:2|max:199',
         "title"              => "required|array|min:1",
         "title.en"           => "required|string|min:3",
         "meta_keyword.en"     => "nullable|string|min:3",
@@ -40,6 +39,7 @@ class Add extends Component {
             $meta_keyword = '';
             $meta_description = '';
             $content='';
+            $css='';
 
             $this->title[$lan->language->code] ? $title = $this->title[$lan->language->code] : $title = '';
             $this->description[$lan->language->code] ? $content = $this->description[$lan->language->code] : $content = '';
@@ -50,10 +50,16 @@ class Add extends Component {
             if ($this->meta_description && $this->meta_description[$lan->language->code]) {
                 $meta_description = $this->meta_description[$lan->language->code];
             }
+            if ($this->css && $this->css[$lan->language->code]) {
+                $css = $this->css[$lan->language->code];
+            }
+            
+            
 
             $translations[] = [
                 'title' => $title,
                 'content' => $content,
+                'short_content' => $css,
                 'meta_keyword' => $meta_keyword,
                 'meta_description' => $meta_description,
                 'language_id' => $lan->language->id
@@ -66,6 +72,7 @@ class Add extends Component {
     
         return [
             'slug' => $this->slug,
+            'name' => $this->name,
             'use_app_module' => $this->use_app_module,
         ];
     }
@@ -105,6 +112,7 @@ class Add extends Component {
             $this->description[$value->language->code] = '';
             $this->meta_keyword[$value->language->code] = '';
             $this->meta_description[$value->language->code] = '';
+            $this->css[$value->language->code] = '';
         }
     }
 

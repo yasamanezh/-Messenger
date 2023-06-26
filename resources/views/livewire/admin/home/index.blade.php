@@ -5,11 +5,8 @@
             <div class="page-header">
                 <div>
                     <h2 class="main-content-title tx-24 mg-b-5">Welcome To Dashboard</h2>
-
                 </div>
-
             </div>
-
             <div class="row" style="overflow: hidden">
                 <div class="col-12 margin-left-10 margin-bottom-15 border-radius-3">
                     <div class="">
@@ -17,8 +14,7 @@
                             <div class="col-sm-12 col-lg-12 col-xl-12">
                                 <!--Row-->
                                 <div class="row row-sm">
-
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                         <div class="card custom-card">
                                             <div class="card-body">
                                                 <div class="card-item">
@@ -33,8 +29,6 @@
                                                         <div class="card-item-stat">
                                                             <h4 class="font-weight-bold" wire:loading.delay.remove
                                                                 wire:target="getUsersCount">{{$usersCount}} </h4>
-
-
                                                             <div wire:loading.delay wire:target="getUsersCount">
                                                                 <div class="spinner-border text-primary" role="status">
                                                                     <span class="sr-only">Loading...</span>
@@ -47,15 +41,15 @@
                                                                         <option value="MTD">Monthly</option>
                                                                         <option value="YTD">Yearly</option>
                                                                     </select>
-
-                                                                </span></p>                                                        </div>
+                                                                </span>
+                                                            </p>                                                        
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                         <div class="card custom-card">
                                             <div class="card-body">
                                                 <div class="card-item">
@@ -91,13 +85,12 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                         <div class="card custom-card">
                                             <div class="card-body">
                                                 <div class="card-item">
                                                     <div class="card-item-icon card-icon">
-<svg class="text-primary" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect height="14" opacity=".3" width="14" x="5" y="5"></rect><g><rect fill="none" height="24" width="24"></rect><g><path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z"></path><rect height="5" width="2" x="7" y="12"></rect><rect height="10" width="2" x="15" y="7"></rect><rect height="3" width="2" x="11" y="14"></rect><rect height="2" width="2" x="11" y="10"></rect></g></g></g></svg>                                                    </div>
+                                                        <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect height="14" opacity=".3" width="14" x="5" y="5"></rect><g><rect fill="none" height="24" width="24"></rect><g><path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z"></path><rect height="5" width="2" x="7" y="12"></rect><rect height="10" width="2" x="15" y="7"></rect><rect height="3" width="2" x="11" y="14"></rect><rect height="2" width="2" x="11" y="10"></rect></g></g></g></svg>                                                    </div>
                                                     <div class="card-item-title mb-2">
                                                         <label class="main-content-label tx-13 font-weight-bold mb-1">New Massage</label>
                                                         <span class="d-block tx-12 mb-0 text-muted">usrs send the massage</span>
@@ -127,21 +120,48 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                                        <div class="card custom-card">
+                                            <div class="card-body">
+                                                <div class="card-item">
+                                                    <div class="card-item-icon card-icon">
+                                                        <svg class="text-primary" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24" viewBox="0 0 24 24" width="24"><g><rect height="14" opacity=".3" width="14" x="5" y="5"></rect><g><rect fill="none" height="24" width="24"></rect><g><path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M19,19H5V5h14V19z"></path><rect height="5" width="2" x="7" y="12"></rect><rect height="10" width="2" x="15" y="7"></rect><rect height="3" width="2" x="11" y="14"></rect><rect height="2" width="2" x="11" y="10"></rect></g></g></g></svg>                                                    </div>
+                                                    <div class="card-item-title mb-2">
+                                                        <label class="main-content-label tx-13 font-weight-bold mb-1">New Tickets</label>
+                                                        <span class="d-block tx-12 mb-0 text-muted">usrs send the ticket</span>
+                                                    </div>
+                                                    <div class="card-item-body">
+                                                        <div class="card-item-stat">
+                                                            <h4 class="font-weight-bold" wire:loading.delay.remove
+                                                                wire:target="getcontactCount">{{$ticketCount}} </h4>
 
 
+                                                            <div wire:loading.delay wire:target="getTicketCount">
+                                                                <div class="spinner-border text-primary" role="status">
+                                                                    <span class="sr-only">Loading...</span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="mb-0 mt-4 text-muted">
+                                                                <span class="float-right">
+                                                                    <select class="form-control" wire:change="getTicketCount($event.target.value)">
+                                                                        <option value="TODAY">Today</option>
+                                                                        <option value="MTD">Monthly</option>
+                                                                        <option value="YTD">Yearly</option>
+                                                                    </select>
+
+                                                                </span></p>                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--End row-->
-
-
                             </div><!-- col end -->
-                           
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

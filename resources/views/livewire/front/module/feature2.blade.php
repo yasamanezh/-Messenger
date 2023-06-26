@@ -26,7 +26,7 @@
             </div>
             @endif
             <div class="key-features-btn">
-                <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Start Free Trial')}}</a>
+                <a href="{{$this->getUrl($setting->free_trial)}}" class="default-btn">{{__('Download Free')}}</a>
             </div>
         </div>
     </div>

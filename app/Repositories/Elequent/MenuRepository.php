@@ -21,6 +21,7 @@ class MenuRepository extends BaseRepository implements IMenu {
         return true;
     }
     public function Menus($ids) {
-        return $this->getModelClass()->where('status',1)->whereIn('id',$ids)->get(); 
+        return $this->getModelClass()->where('status',1)->whereIn('id',$ids)->
+                where('show_in_footer',1)->get(); 
     }
 }

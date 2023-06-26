@@ -63,7 +63,7 @@ trait Translate {
     }
    public function seo($page) {
         
-        $this->getMeta($page,'meta_title') ? $title = $this->getMeta($page,'title') : $title = $this->getMeta($page,'title') ;
+        $title = $this->getMeta($page,'title') ;
         $description = $this->getMeta($page,'meta_description');
         $keys = explode(',', $this->getMeta($page,'meta_keyword'));
         $options = \App\Models\Setting::first();

@@ -12,7 +12,7 @@
                 </ol>
             </div>
             <div>
-                <a data-toggle="tooltip" href="{{route('admin.pack.option.add')}}" class="btn btn-warning text-white"  data-original-title="back">
+                <a data-toggle="tooltip" href="{{route('admin.pack.options')}}" class="btn btn-warning text-white"  data-original-title="back">
                    <i class="fa fa-backward"></i>
                 </a>
                 <button class="btn btn-primary my-2 btn-icon-text"  form="formInfo"  wire:loading.attr="disabled"  wire:loading.remove wire:target="saveInfo"> 

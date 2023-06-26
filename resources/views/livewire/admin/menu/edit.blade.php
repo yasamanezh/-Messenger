@@ -84,6 +84,7 @@
                                                 <div class="col-sm-9">
                                                     <select class="form-control" wire:model="type" >
                                                         <option value="">select</option>
+                                                        <option value="link">custome link</option>
                                                         <option value="blog">blog category</option>
                                                         <option value="weblog">Weblog</option>
                                                         <option value="post">posts</option>
@@ -137,6 +138,15 @@
                                                     </select>
                                                 </div>
                                                 @error('slug') <div class="invalid-feedback">  {{ $message }} </div> @enderror
+                                            </div>
+                                            @endif
+                                             @if($type == 'link')
+                                            <div class="form-group row">
+                                                <label class="col-md-3 form-label"> link: <span class="tx-danger">*</span></label>
+                                                <div class="col-md-9">
+                                                    <input placeholder="link"  class="form-control @error('customelink') is-invalid @enderror"  wire:model.defer="customelink">
+                                                    @error('customelink')  <div class="invalid-feedback"> {{ $message }}  </div> @enderror
+                                                </div>
                                             </div>
                                             @endif
                                             @endif

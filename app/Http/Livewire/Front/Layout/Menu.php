@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Front\Layout;
 
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use App\Models\Menu as MenuModels;
 use App\Repositories\Contract\{
@@ -26,7 +27,7 @@ class Menu extends Component {
     public $multiLanguage, $setting, $translations, $defaultLanguag;
 
     public function haveChild($param) {
-        $menus = MenuModels::where('parent', $param)->get();
+        $menus = MenuModels::where('parent', $param) ->where('show_in_header',1)->get();
         return $menus;
     }
 
@@ -51,12 +52,17 @@ class Menu extends Component {
                 $menuRoute = ['front.post', $post->slug];
             }
         } elseif ($type == 'page') {
-            $page = app()->make(IPage::class)->find($param->slug);
+            if($param->link ==1){
+                 $menuRoute =[1,2,3,4];
+            }else{
+               $page = app()->make(IPage::class)->find($param->slug);
             if ($this->multiLanguage) {
                 $menuRoute = ['front.page.language',[ 'language'=>app()->getLocale(),'id'=>$page->slug]];
             } else {
                 $menuRoute = ['front.page', $page->slug];
+            } 
             }
+            
         } elseif ($type == 'weblog') {
             if ($this->multiLanguage) {
                 $menuRoute = ['front.blog.language',[ 'language'=>app()->getLocale()]];
@@ -74,17 +80,23 @@ class Menu extends Component {
     }
 
     public function getUrl($param) {
+        $current_uri = request()->segments();
         if($this->multiLanguage){
-            return str_replace(app()->getlocale(), $param, Request::url());
+            if (count($current_uri) == 1){
+                return str_replace('/'.app()->getlocale(), '/'.$param, Request::url());
+            }else{
+
+                return str_replace('/'.app()->getlocale().'/', '/'.$param.'/', Request::url());
+            }
         }else{
             if($_SERVER['REQUEST_URI'] != '/'){
-                return str_replace($_SERVER['REQUEST_URI'],'/'.$param.$_SERVER['REQUEST_URI'],Request::url()); 
+                return str_replace($_SERVER['REQUEST_URI'],'/'.$param.$_SERVER['REQUEST_URI'],Request::url());
             }else{
-               return Request::url().'/'.$param; 
+               return Request::url().'/'.$param;
             }
-            
+
         }
-       
+
     }
 
     public function mount($lang) {
@@ -97,8 +109,13 @@ class Menu extends Component {
 
     public function render() {
 
-        $menus = MenuModels::where('parent', 0)->where('status', 1)->get();
-        return view('livewire.front.layout.menu', compact('menus'));
+        $menus = MenuModels::where('parent', 0)
+                ->where('status', 1)
+                ->where('show_in_header',1)
+                ->orderBy('sort')
+                ->get();
+        $user  =auth()->user();
+        return view('livewire.front.layout.menu', compact('menus','user'));
     }
 
 }
