@@ -31,18 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-/*'recaptcha' => [
-        'site_key' => '6LcD1NQkAAAAACaoFylOcZle2q8-hkbjq_SyqkPh',
-        'secret_key' => '6LcD1NQkAAAAAE6j2Ja1mfe6nqaHN5H3Dum-Tucq',
-        'min_score' => .5,
-    ],*/
-    
-    'recaptcha' => [
-        'site_key' => '6Lea19QkAAAAAIjHQ4zLdjnM_1u8HakJS2pqV4rj',
-        'secret_key' => '6Lea19QkAAAAAL72B6nlpPKa54Iq4PCHdwx-XAQK',
-        'min_score' => .5,
-    ],
-    
-    
-    
+
+
+
 ];
